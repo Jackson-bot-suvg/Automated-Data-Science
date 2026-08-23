@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cs33-app:latest
+    env_file:
+      - .env
+    environment:
+      # matplotlib cache (writable in container)
+      MPLCONFIGDIR: /tmp/mpl-cache
+      # main.py CLI (override as needed)
+      MAIN_TASK: "predict customer churn"
+      MAIN_DATASET: "data/bank_churn"
+      MAIN_ENV_FILE: ".env"
+      # Set to 0 to require confirmation (use `docker compose run -it` for TTY)
+      MAIN_YES: "1"
+    volumes:
+      # Host datasets and outputs (matches local paths in main.py)
+      - ./data:/app/data:ro
+      - ./artifacts:/app/artifacts
+    stdin_open: true
+    tty: true
+    restart: "no"

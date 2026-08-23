@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-05-15 09:06:55 UTC",
+  "datasets": [
+    "spaceship_titanic"
+  ],
+  "frameworks": [
+    "main",
+    "aide",
+    "lightautods_lama",
+    "autokaggle"
+  ],
+  "repeats": 1,
+  "aggregated": {
+    "spaceship_titanic": {
+      "main": {
+        "dataset": "spaceship_titanic",
+        "framework": "main",
+        "metric_name": "",
+        "score_mean": null,
+        "reproducibility_std": null,
+        "runtime_mean_sec": null,
+        "runtime_std": null,
+        "input_token_cost": 0.0,
+        "output_token_cost": 0.0,
+        "token_total": 0.0,
+        "llm_call_count": 0.0,
+        "success_rate": "0/0",
+        "valid_output_rate": "0/0",
+        "prediction_file": "",
+        "run_dir": "",
+        "runs": []
+      },
+      "aide": {
+        "dataset": "spaceship_titanic",
+        "framework": "aide",
+        "metric_name": "",
+        "score_mean": null,
+        "reproducibility_std": null,
+        "runtime_mean_sec": null,
+        "runtime_std": null,
+        "input_token_cost": 0.0,
+        "output_token_cost": 0.0,
+        "token_total": 0.0,
+        "llm_call_count": 0.0,
+        "success_rate": "0/0",
+        "valid_output_rate": "0/0",
+        "prediction_file": "",
+        "run_dir": "",
+        "runs": []
+      },
+      "lightautods_lama": {
+        "dataset": "spaceship_titanic",
+        "framework": "lightautods_lama",
+        "metric_name": "accuracy",
+        "score_mean": 0.7964347326049454,
+        "reproducibility_std": 0.0,
+        "runtime_mean_sec": 28.7601,
+        "runtime_std": 0.0,
+        "input_token_cost": 816,
+        "output_token_cost": 241,
+        "token_total": 1057,
+        "llm_call_count": 1,
+        "success_rate": "1/1",
+        "valid_output_rate": "1/1",
+        "prediction_file": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/lads-lama-spaceship_titanic-20260515-090624-312541/models/submission.csv",
+        "run_dir": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/lads-lama-spaceship_titanic-20260515-090624-312541",
+        "runs": [
+          {
+            "framework": "lightautods_lama",
+            "status": "PASS",
+            "metric_name": "accuracy",
+            "metric_value": 0.7964347326049454,
+            "runtime_sec": 28.7601,
+            "valid_output": true,
+            "prediction_file": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/lads-lama-spaceship_titanic-20260515-090624-312541/models/submission.csv",
+            "run_dir": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/lads-lama-spaceship_titanic-20260515-090624-312541",
+            "stdout_tail": "LADS_LAMA_RESULT_JSON::/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/lads-lama-spaceship_titanic-20260515-090624-312541.json\n",
+            "stderr_tail": "",
+            "usage_log": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/usage_logs/lightautods_lama-spaceship_titanic-r1.jsonl",
+            "input_token_cost": 816,
+            "output_token_cost": 241,
+            "token_total": 1057,
+            "llm_call_count": 1,
+            "internal_config": {
+              "task_type": "binary",
+              "target": "Transported",
+              "task_metric": "accuracy"
+            },
+            "error": "",
+            "dataset": "spaceship_titanic",
+            "repeat": 1,
+            "generated_at": "2026-05-15 09:06:55 UTC"
+          }
+        ]
+      },
+      "autokaggle": {
+        "dataset": "spaceship_titanic",
+        "framework": "autokaggle",
+        "metric_name": "",
+        "score_mean": null,
+        "reproducibility_std": null,
+        "runtime_mean_sec": null,
+        "runtime_std": null,
+        "input_token_cost": 0.0,
+        "output_token_cost": 0.0,
+        "token_total": 0.0,
+        "llm_call_count": 0.0,
+        "success_rate": "0/0",
+        "valid_output_rate": "0/0",
+        "prediction_file": "",
+        "run_dir": "",
+        "runs": []
+      }
+    }
+  },
+  "raw_results_count": 1,
+  "raw_results_path": "/Users/a99/Downloads/5703-CS33-2/tests/system_reports/tmp/smoke-lads-extended-runs.jsonl"
+}

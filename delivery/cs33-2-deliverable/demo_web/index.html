@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS33-2 Agent Analysis Command Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260522b" />
+  </head>
+  <body>
+    <main class="deck-shell">
+      <header class="top-bar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">CS33-2 Multi-Agent Workflow</p>
+            <h1>Analysis Command Deck</h1>
+          </div>
+        </div>
+        <div class="run-strip" aria-label="Run status">
+          <div class="strip-item">
+            <span>Task</span>
+            <strong id="activeTaskName">Bank Churn Prediction</strong>
+          </div>
+          <div class="strip-item">
+            <span>Status</span>
+            <strong id="runStatus">Ready</strong>
+          </div>
+          <div class="strip-item">
+            <span>Elapsed</span>
+            <strong id="elapsedTime">00:00</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Demo workspace">
+        <section class="left-stack" aria-label="Task and results column">
+          <section class="panel task-panel" aria-labelledby="taskPanelTitle">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Task Set</p>
+                <h2 id="taskPanelTitle">Select Analysis Run</h2>
+              </div>
+              <button class="icon-button" id="resetButton" type="button" title="Reset run">
+                <span aria-hidden="true">R</span>
+              </button>
+            </div>
+
+            <div class="task-layout">
+              <div class="task-list" id="taskList" aria-label="Available task sets"></div>
+              <aside class="task-detail" id="taskDetail" aria-label="Selected task detail"></aside>
+            </div>
+          </section>
+
+          <section class="panel result-panel" aria-labelledby="resultPanelTitle">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Local Output</p>
+                <h2 id="resultPanelTitle">Analysis Results</h2>
+              </div>
+              <div class="status-pill" id="reportPill">Report pending</div>
+            </div>
+
+            <div class="result-grid">
+              <div class="summary-rail">
+                <div class="metric-tile">
+                  <span>Rows analyzed</span>
+                  <strong id="metricRows">--</strong>
+                  <small id="metricRowsTrend">Waiting for Reader</small>
+                </div>
+                <div class="metric-tile">
+                  <span>Time used</span>
+                  <strong id="metricQuality">--</strong>
+                  <small id="metricQualityTrend">Waiting for workflow events</small>
+                </div>
+                <div class="metric-tile">
+                  <span>Validation score</span>
+                  <strong id="metricScore">--</strong>
+                  <small id="metricScoreTrend">Waiting for Model</small>
+                </div>
+                <div class="metric-tile">
+                  <span>Tokens used</span>
+                  <strong id="metricSignal">--</strong>
+                  <small id="metricSignalTrend">Waiting for LLM usage</small>
+                </div>
+              </div>
+
+              <div class="chart-panel" aria-label="Visual analysis result">
+                <div class="chart-header">
+                  <span>Model and insight pipeline</span>
+                  <strong id="chartStatus">Standby</strong>
+                </div>
+                <div class="mini-chart" id="miniChart">
+                  <span style="--h: 32%"></span>
+                  <span style="--h: 48%"></span>
+                  <span style="--h: 38%"></span>
+                  <span style="--h: 61%"></span>
+                  <span style="--h: 46%"></span>
+                  <span style="--h: 70%"></span>
+                  <span style="--h: 58%"></span>
+                  <span style="--h: 78%"></span>
+                </div>
+                <div class="insight-box" id="insightBox">
+                  Select a task and start the run to populate local findings.
+                </div>
+                <div class="report-links" id="reportLinks">
+                  <a class="report-link disabled" data-report-kind="business" href="#">Business report</a>
+                  <a class="report-link disabled" data-report-kind="technical" href="#">Technical report</a>
+                  <a class="report-link disabled" data-report-kind="manifest" href="#">Run manifest</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="right-stack" aria-label="Agent orchestration column">
+          <section class="panel tree-panel" aria-labelledby="treePanelTitle">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Agent Orchestration</p>
+                <h2 id="treePanelTitle">Execution Tree</h2>
+              </div>
+              <div class="pulse-chip" id="activeAgentChip">No active agent</div>
+            </div>
+            <div class="tree-stage" id="treeStage">
+              <svg class="edge-layer" id="edgeLayer" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="agent-layer" id="agentLayer"></div>
+            </div>
+          </section>
+
+          <section class="panel log-panel" aria-labelledby="logPanelTitle">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Progress Stream</p>
+                <h2 id="logPanelTitle">Agent Log</h2>
+              </div>
+              <div class="log-actions">
+                <button class="text-button" id="scrollButton" type="button">Auto-scroll on</button>
+                <button class="text-button" id="clearLogButton" type="button">Clear</button>
+              </div>
+            </div>
+            <div class="log-feed" id="logFeed" aria-live="polite"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js?v=20260522b"></script>
+  </body>
+</html>
