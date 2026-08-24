@@ -1,5 +1,7 @@
 # 26S1_CS33-2
 
+> For the system architecture, engineering trade-offs, evaluation evidence, and productionization roadmap, see the [Industrial Architecture and Engineering Overview](INDUSTRIAL_OVERVIEW.md).
+
 ## Quick Start
 
 This project supports two runtime modes:
