@@ -1,0 +1,44 @@
+{
+  "base_commit": "b9dbebed269f62767e149b93a02f71051efc1027",
+  "budget": {
+    "llm_calls": 60,
+    "recursion_limit": 80,
+    "wall_seconds": 1800
+  },
+  "case_id": "DEV-REG-HOUSE:F05",
+  "condition": "c_post_planner_fit_target_drift",
+  "fork": {
+    "fork_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/forks/A2P__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102",
+    "gate_node": "reviewer",
+    "gate_phase": "model_building",
+    "mode": "continue"
+  },
+  "host_id": "host-macA-14c-24g",
+  "injection": {
+    "template_id": "F05",
+    "wrong_target_columns": [
+      "GrLivArea"
+    ]
+  },
+  "lane": "A",
+  "llm_mode": "live",
+  "method_id": "F0_ORIGINAL",
+  "mode": "continue",
+  "model_id": "deepseek/deepseek-flash",
+  "observers": true,
+  "pair_id": "A2P__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102",
+  "plan_cell_id": "A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102__F0_ORIGINAL",
+  "run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102__F0_ORIGINAL",
+  "run_id": "A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102__F0_ORIGINAL",
+  "seed_block": 1102,
+  "stage": "A2-PILOT",
+  "task": {
+    "dataset": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/packages/DEV-REG-HOUSE/C00",
+    "metric_hint": "neg_root_mean_squared_error",
+    "target": "SalePrice",
+    "task": "predict house sale price"
+  },
+  "task_id": "DEV-REG-HOUSE",
+  "technical_only": true,
+  "template_id": "F05"
+}

@@ -1,0 +1,14 @@
+{
+  "error": {
+    "message": "Recursion limit of 80 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT",
+    "traceback_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-MC-GHOULS__C00__M0_NAIVE_GATE_REMOVAL__sb1101__r1/errors/run_exception.txt",
+    "type": "GraphRecursionError"
+  },
+  "fit_seconds_total": 0.0,
+  "injections_applied": [],
+  "llm_calls": 40,
+  "llm_errors": 0,
+  "outcome": "recursion_limit",
+  "run_id": "A0S__DEV-MC-GHOULS__C00__M0_NAIVE_GATE_REMOVAL__sb1101__r1",
+  "wall_seconds": 169.43
+}

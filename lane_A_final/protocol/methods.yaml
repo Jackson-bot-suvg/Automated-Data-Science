@@ -1,0 +1,48 @@
+# Lane-A method dictionary (RTS-TAI-PARALLEL-v4.0 §5), as actually implemented.
+# Registered 2026-10-19 before any experimental (LLM-live) lane-A run.  Version laneA-methods-1.0.
+# All variants run the SAME base source tree (base_commit b9dbebe) and the SAME deterministic
+# check functions; variants are runtime wrappers selected by `method_id`
+# (src/adapters/lane_a/methods.py).  No shared source file is edited.
+base_commit: b9dbebed269f62767e149b93a02f71051efc1027
+failure_classes:
+  S: "semantic target/submission-contract failure: message (paths stripped) matches /target|submission/i"
+  E: "execution/structural failure: everything else (missing artifact, unreadable CSV, empty model list, row count, nulls, feature mismatch, plan health)"
+retry_semantics:
+  N_max_attempts_per_phase: 3          # ReviewerAgent.max_retries_per_phase = 3
+  status_rule: "attempt = retry_count_by_phase[phase] + 1; approved if no enforced failure; fatal if attempt >= 3 (or hard_fatal at intake); else retry"
+  max_retries_per_phase: 2             # i.e. the manuscript's 'retry budget N_max = 3' counts ATTEMPTS, not retries
+  intake_hard_fatal: "training file missing/unreadable only"
+methods:
+  F0_ORIGINAL:
+    status: implemented
+    definition: "unmodified b9dbebe workflow (technical-only graph, as in manuscript Table 2) + read-only observers"
+    is_original_code: "b9dbebe is the public release of the manuscript code base; whether it is byte-identical to the code that produced the manuscript tables is NOT verifiable (no manuscript code SHA is given) -> F0 = 'public-release F0'"
+    gates: {background_reviewer: enforce S+E, reviewer: enforce S+E}
+  M0_NO_SEMANTIC_ENFORCEMENT:
+    status: implemented
+    definition: "reader, state updates, routing, retry budget unchanged; S failures are computed and logged but not enforced at any gate; E failures still enforced (keeps the graph from breaking)"
+  M0_NAIVE_GATE_REMOVAL:
+    status: implemented (A0 only)
+    definition: "reconstruction of the manuscript's 'No reviewer gates' ablation: reviewer and background_reviewer nodes replaced by pass-through nodes returning {}; edges/routing unchanged"
+    caveat: "the manuscript's ablation code is not in b9dbebe; this is a hypothesis used to explain Table 3 (interface breakage), never as a method"
+  M1_STRUCTURAL_STRONG:
+    status: not_used_by_lane_A
+  M2_INTAKE_ONLY_STRONG:
+    status: implemented
+    definition: "identical to F0 at the intake gate (same reader, same intake rules, same frozen target_spec); after intake, S failures are logged but not enforced, E failures enforced"
+  M3_SHADOW:
+    status: implemented
+    definition: "every gate computes the identical F0 checks; verdicts are written only to the lane-private event log; the agent sees an 'approved' review record without failures (no diagnostic leakage); execution never changes"
+  M4_END_ONLY:
+    status: implemented
+    definition: "all intermediate gates shadowed (as M3).  At the model_building gate, the same F0 rules for intake + every phase are applied once to the final state.  Earliest failing phase P: P=reader -> fatal (no edge back to reader); P in {preliminary_eda..feature_engineering} -> route back to P (end remediation); P=model_building -> retry model_building.  End-remediation budget = the same 3 attempts, counted under retry_count_by_phase['model_building']"
+  M5_BLOCK_ONLY:
+    status: implemented
+    definition: "same enforced checks as F0; any enforced failure -> fatal immediately (no retry, no repair)"
+  G_GENERIC_RETRY:
+    status: implemented
+    definition: "F0 verdicts and retry counts; on retry the planner's retry_context has blocking_failures and warnings removed (attempt number and previous plan kept)"
+    applicability: "only where F0's retry carries field-level diagnostics to an LLM planner (feature_engineering, model_building). Intake retries re-run the deterministic reader with no diagnostic channel -> G == F0 by construction -> pre-registered N/A for A2 contexts a and b"
+  F1_EXTENDED:
+    status: not_implemented
+    note: "no F1 batch in this package; nothing here may be reported as F1"

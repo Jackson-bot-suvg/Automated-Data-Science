@@ -1,0 +1,85 @@
+=== run A0C__DEV-BIN-TITANIC__C00__F0_ORIGINAL__sb1101__r1
+   2 node_start   reader               phase= contract=eb7be6bc43
+   5 node_start   background_reviewer  phase=reader contract=ef4017c599
+   6 gate_check   background_reviewer  phase=reader f0_status=approved failures=-
+   7 gate_verdict background_reviewer  phase=reader verdict=approved -> planner
+  10 node_start   planner              phase=reader contract=ef4017c599
+  12 node_start   preliminary_eda      phase=preliminary_eda contract=ef4017c599
+  14 node_start   reviewer             phase=preliminary_eda contract=ef4017c599
+  15 gate_check   reviewer             phase=preliminary_eda f0_status=approved failures=-
+  16 gate_verdict reviewer             phase=preliminary_eda verdict=approved -> planner(next_phase)
+  19 node_start   planner              phase=preliminary_eda contract=ef4017c599
+  21 node_start   data_cleaning        phase=data_cleaning contract=ef4017c599
+  23 node_start   reviewer             phase=data_cleaning contract=ef4017c599
+  24 gate_check   reviewer             phase=data_cleaning f0_status=approved failures=-
+  25 gate_verdict reviewer             phase=data_cleaning verdict=approved -> planner(next_phase)
+  28 node_start   planner              phase=data_cleaning contract=ef4017c599
+  30 node_start   indepth_eda          phase=indepth_eda contract=ef4017c599
+  32 node_start   reviewer             phase=indepth_eda contract=ef4017c599
+  33 gate_check   reviewer             phase=indepth_eda f0_status=approved failures=-
+  34 gate_verdict reviewer             phase=indepth_eda verdict=approved -> planner(next_phase)
+  37 node_start   planner              phase=indepth_eda contract=ef4017c599
+  40 node_start   feature_engineering  phase=feature_engineering contract=ef4017c599
+  42 node_start   reviewer             phase=feature_engineering contract=ef4017c599
+  43 gate_check   reviewer             phase=feature_engineering f0_status=approved failures=-
+  44 gate_verdict reviewer             phase=feature_engineering verdict=approved -> planner(next_phase)
+  47 node_start   planner              phase=feature_engineering contract=ef4017c599
+  50 node_start   model_building       phase=model_building contract=ef4017c599
+  51 fit          y=['Survived'] family=binary_classification metric=roc_auc hash=1187fe96bd
+  54 serialize    provenance={'PassengerId': 'test_id', 'Survived': 'prediction'}
+  55 write        shape=[418, 2] cols=['PassengerId', 'Survived']
+  57 node_start   reviewer             phase=model_building contract=ef4017c599
+  58 gate_check   reviewer             phase=model_building f0_status=approved failures=-
+  59 gate_verdict reviewer             phase=model_building verdict=approved -> summarizer
+  62 node_start   summarizer           phase=model_building contract=ef4017c599
+  64 run_end      outcome=completed_graph review=approved completed=True
+=== run A1__DEV-BIN-SPACESHIP__F03__F0_ORIGINAL__sb1101
+   2 node_start   reader               phase= contract=eb7be6bc43
+   5 node_start   background_reviewer  phase=reader contract=e8fb824036
+   6 gate_check   background_reviewer  phase=reader f0_status=retry failures=[S] target leakage: test dataset contains target columns Age
+   7 gate_verdict background_reviewer  phase=reader verdict=retry -> reader(retry)
+  10 node_start   reader               phase=reader contract=e8fb824036
+  13 node_start   background_reviewer  phase=reader contract=e8fb824036
+  14 gate_check   background_reviewer  phase=reader f0_status=retry failures=[S] target leakage: test dataset contains target columns Age
+  15 gate_verdict background_reviewer  phase=reader verdict=retry -> reader(retry)
+  18 node_start   reader               phase=reader contract=e8fb824036
+  21 node_start   background_reviewer  phase=reader contract=e8fb824036
+  22 gate_check   background_reviewer  phase=reader f0_status=fatal failures=[S] target leakage: test dataset contains target columns Age
+  23 gate_verdict background_reviewer  phase=reader verdict=fatal -> END(aborted)
+  26 run_end      outcome=completed_graph review=fatal completed=False
+=== run A1__DEV-BIN-SPACESHIP__F05__F0_ORIGINAL__sb1101
+   2 node_start   reader               phase= contract=eb7be6bc43
+   5 node_start   background_reviewer  phase=reader contract=aa472065b3
+   6 gate_check   background_reviewer  phase=reader f0_status=approved failures=-
+   7 gate_verdict background_reviewer  phase=reader verdict=approved -> planner
+  10 node_start   planner              phase=reader contract=aa472065b3
+  12 node_start   preliminary_eda      phase=preliminary_eda contract=aa472065b3
+  14 node_start   reviewer             phase=preliminary_eda contract=aa472065b3
+  15 gate_check   reviewer             phase=preliminary_eda f0_status=approved failures=-
+  16 gate_verdict reviewer             phase=preliminary_eda verdict=approved -> planner(next_phase)
+  19 node_start   planner              phase=preliminary_eda contract=aa472065b3
+  21 node_start   data_cleaning        phase=data_cleaning contract=aa472065b3
+  23 node_start   reviewer             phase=data_cleaning contract=aa472065b3
+  24 gate_check   reviewer             phase=data_cleaning f0_status=approved failures=-
+  25 gate_verdict reviewer             phase=data_cleaning verdict=approved -> planner(next_phase)
+  28 node_start   planner              phase=data_cleaning contract=aa472065b3
+  30 node_start   indepth_eda          phase=indepth_eda contract=aa472065b3
+  32 node_start   reviewer             phase=indepth_eda contract=aa472065b3
+  33 gate_check   reviewer             phase=indepth_eda f0_status=approved failures=-
+  34 gate_verdict reviewer             phase=indepth_eda verdict=approved -> planner(next_phase)
+  37 node_start   planner              phase=indepth_eda contract=aa472065b3
+  40 node_start   feature_engineering  phase=feature_engineering contract=aa472065b3
+  42 node_start   reviewer             phase=feature_engineering contract=aa472065b3
+  43 gate_check   reviewer             phase=feature_engineering f0_status=approved failures=-
+  44 gate_verdict reviewer             phase=feature_engineering verdict=approved -> planner(next_phase)
+  47 node_start   planner              phase=feature_engineering contract=aa472065b3
+  49 INJECTION    F05 {"before_target_columns": ["Transported"], "after_target_columns": ["CryoSleep"]}
+  51 node_start   model_building       phase=model_building contract=a7f08697b4
+  52 fit          y=['CryoSleep'] family=binary_classification metric=accuracy hash=c59154d4b1
+  55 serialize    provenance={'PassengerId': 'test_id', 'Transported': 'prediction'}
+  56 write        shape=[1739, 2] cols=['PassengerId', 'Transported']
+  58 node_start   reviewer             phase=model_building contract=a7f08697b4
+  59 gate_check   reviewer             phase=model_building f0_status=approved failures=-
+  60 gate_verdict reviewer             phase=model_building verdict=approved -> summarizer
+  63 node_start   summarizer           phase=model_building contract=a7f08697b4
+  65 run_end      outcome=completed_graph review=approved completed=True

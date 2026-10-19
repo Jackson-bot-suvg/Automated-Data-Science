@@ -1,0 +1,21 @@
+{
+  "candidate_hash": "ab575613c42595db9e95b2bfeb5402ed19e30a854595def3056f059365125c2b",
+  "contract_digest": "e7c824c3f9b2b9b0b0b1daf9e8d7725565d787fa4e808311abd5ac55830e1784",
+  "fit_seconds_prefix": 0.0,
+  "gate_node": "background_reviewer",
+  "gate_phase": "reader",
+  "injections_applied": [],
+  "llm_calls_prefix": 1,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-REG-HOUSE__a_recoverable_intake_conflict__sb1102",
+  "prefix_run_id": "A2P__DEV-REG-HOUSE__a_recoverable_intake_conflict__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 1,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "20c630e87ab0e081a31a10e9fabaa28300ca7346e7a57451138f5ec81ec6d06f",
+  "state_hash": "a7ba95912f3da0758df7a1e9b3d08289c85d3ac0c925cf3c2dbaf553782b0de9",
+  "visible_evidence_hash": "21c92751bc0614cce801135caa9bd9c8b8ed2476a204a873774829099c01707b"
+}

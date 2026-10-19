@@ -1,0 +1,66 @@
+{
+  "candidate_models": [
+    "MultiOutput_LogisticRegression",
+    "MultiOutput_RandomForest",
+    "MultiOutput_ExtraTrees"
+  ],
+  "best_model_name": "MultiOutput_RandomForest",
+  "best_params": {
+    "max_depth": 8,
+    "min_samples_leaf": 1,
+    "n_estimators": 400
+  },
+  "validation_metrics": {
+    "MultiOutput_LogisticRegression": {
+      "val_roc_auc_macro_ovr": 0.8581,
+      "val_per_target_auc_mean": 0.8581,
+      "_selection": "holdout"
+    },
+    "MultiOutput_RandomForest": {
+      "val_roc_auc_macro_ovr": 0.8787,
+      "val_per_target_auc_mean": 0.8787,
+      "_selection": "holdout"
+    },
+    "MultiOutput_ExtraTrees": {
+      "val_roc_auc_macro_ovr": 0.8785,
+      "val_per_target_auc_mean": 0.8785,
+      "_selection": "holdout"
+    }
+  },
+  "cv_results": {
+    "MultiOutput_LogisticRegression": {
+      "best_params": {
+        "C": 0.3,
+        "penalty": "l2"
+      },
+      "val_roc_auc_macro_ovr": 0.8581,
+      "val_per_target_auc_mean": 0.8581,
+      "_selection": "holdout"
+    },
+    "MultiOutput_RandomForest": {
+      "best_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 1,
+        "n_estimators": 400
+      },
+      "val_roc_auc_macro_ovr": 0.8787,
+      "val_per_target_auc_mean": 0.8787,
+      "_selection": "holdout"
+    },
+    "MultiOutput_ExtraTrees": {
+      "best_params": {
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "n_estimators": 300
+      },
+      "val_roc_auc_macro_ovr": 0.8785,
+      "val_per_target_auc_mean": 0.8785,
+      "_selection": "holdout"
+    }
+  },
+  "_meta": {
+    "task_family": "multilabel_classification",
+    "target_mode": "multi_label",
+    "primary_metric": "roc_auc_macro_ovr"
+  }
+}

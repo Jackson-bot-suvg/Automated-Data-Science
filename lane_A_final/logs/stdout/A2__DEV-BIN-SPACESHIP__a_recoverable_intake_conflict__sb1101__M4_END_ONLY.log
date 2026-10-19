@@ -1,0 +1,12 @@
+-------------------------------- preliminary_eda --------------------------------
+/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/app/agents/preliminary_eda.py:72: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(x=missing.index.tolist(), y=missing.values.tolist(), ax=ax, palette="viridis")
+-------------------------------- data_cleaning --------------------------------
+-------------------------------- indepth_eda --------------------------------
+-------------------------------- feature_engineering --------------------------------
+-------------------------------- model_building --------------------------------
+-------------------------------- model_building --------------------------------
+-------------------------------- model_building --------------------------------

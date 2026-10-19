@@ -1,0 +1,41 @@
+{
+  "base_commit": "b9dbebed269f62767e149b93a02f71051efc1027",
+  "budget": {
+    "llm_calls": 60,
+    "recursion_limit": 80,
+    "wall_seconds": 1800
+  },
+  "case_id": "DEV-BIN-SPACESHIP:F03",
+  "condition": "a_recoverable_intake_conflict",
+  "fork": {
+    "fork_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/forks/A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1102",
+    "gate_node": "background_reviewer",
+    "gate_phase": "reader",
+    "mode": "prefix",
+    "occurrence": 1,
+    "visible_evidence_hash": "bfc739b2194d142d66a7acc5e2ac29ef003bb7c9dc9c57ce3e9b2ae497784334"
+  },
+  "host_id": "host-macA-14c-24g",
+  "injection": {},
+  "lane": "A",
+  "llm_mode": "live",
+  "method_id": "F0_ORIGINAL",
+  "mode": "prefix",
+  "model_id": "deepseek/deepseek-flash",
+  "observers": true,
+  "pair_id": "A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1102",
+  "plan_cell_id": "A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1102",
+  "run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1102",
+  "run_id": "A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1102",
+  "seed_block": 1102,
+  "stage": "A2-PREFIX",
+  "task": {
+    "dataset": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/packages/DEV-BIN-SPACESHIP/F03",
+    "metric_hint": "accuracy",
+    "target": "Age",
+    "task": "predict whether transported"
+  },
+  "task_id": "DEV-BIN-SPACESHIP",
+  "technical_only": true,
+  "template_id": "F03"
+}

@@ -1,0 +1,10 @@
+source,variant,clean_completion,clean_valid,stop,fn,fp,time_s,terminals
+manuscript Table 3,Full RTS-MA-DS,4/4,4/4,2/2,0/2,0/4,70.84,
+manuscript Table 3,No target-spec,4/4,4/4,0/2,2/2,0/4,123.56,
+manuscript Table 3,Schema-only,4/4,4/4,0/2,2/2,0/4,131.83,
+manuscript Table 3,No semantic align.,4/4,4/4,0/2,2/2,0/4,132.82,
+manuscript Table 3,No reviewer gates,0/4,0/4,2/2,0/2,4/4,8.4,
+"lane A DEV (2 clean tasks: Titanic, Ghouls)",F0 public release (current),2/2,2/2,not run (manuscript fault packages unavailable),NA,0/2,42.78,S1|S1
+"lane A DEV (2 clean tasks: Titanic, Ghouls)","M0 corrected: semantic verdicts not enforced, state/routing kept",2/2,2/2,not run (manuscript fault packages unavailable),NA,0/2,39.22,S1|S1
+"lane A DEV (2 clean tasks: Titanic, Ghouls)","M3 shadow: all verdicts computed, none enforced",2/2,2/2,not run (manuscript fault packages unavailable),NA,0/2,51.93,S1|S1
+"lane A DEV (2 clean tasks: Titanic, Ghouls)","reconstruction of 'No reviewer gates': gate nodes removed, routing kept",0/2,0/2,not run (manuscript fault packages unavailable),NA,2/2,172.43,S7|S7

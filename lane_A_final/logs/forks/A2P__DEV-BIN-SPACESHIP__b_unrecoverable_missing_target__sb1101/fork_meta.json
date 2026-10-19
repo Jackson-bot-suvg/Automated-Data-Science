@@ -1,0 +1,21 @@
+{
+  "candidate_hash": "a8de1e91e026d2ffc8c140750c290b52d5978c9f48c6d5e1fba1a56c7212fbd2",
+  "contract_digest": "aa472065b3f5d0a619a54aed8446740b87f61b57780ed60714b70396682c4736",
+  "fit_seconds_prefix": 0.0,
+  "gate_node": "background_reviewer",
+  "gate_phase": "reader",
+  "injections_applied": [],
+  "llm_calls_prefix": 1,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-BIN-SPACESHIP__b_unrecoverable_missing_target__sb1101",
+  "prefix_run_id": "A2P__DEV-BIN-SPACESHIP__b_unrecoverable_missing_target__sb1101",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 1,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "43c56e1438b7b2386d7b56943fc12ea1f28a11d3967d141b428404c80e7f9c34",
+  "state_hash": "2c04f412d08d0386c280074f029087fba5702a38d2d36699a76815ea5cecf04b",
+  "visible_evidence_hash": "7a3f1a57bd90ff81b3c75ca98685b9e034bb465136974a13ac18f97c13950c85"
+}

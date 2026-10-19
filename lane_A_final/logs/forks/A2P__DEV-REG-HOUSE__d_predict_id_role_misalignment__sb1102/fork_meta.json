@@ -1,0 +1,37 @@
+{
+  "candidate_hash": "844a7b8ce3415917ce66633044b457b58f687878ab5b63ed4983097f10732f3e",
+  "contract_digest": "82356d399ebc77c7b5ad50ccd4904125a0f239d3d2a1d425fe473b5f25fdd9a3",
+  "fit_seconds_prefix": 23.511,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_pairing_digest": "4d40eb85f757dbb3f5c2cca725007fcf7d2369d20c2752a9f934b44a5d3fc25b",
+      "before_pairing_digest": "8af555a492b12737f9d938c3f8e8efc5f78baac52193065d0605bfff2feb43ba",
+      "fixed_points": 0,
+      "id_columns": [
+        "Id"
+      ],
+      "n_rows": 292,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1102,
+      "template_id": "F10",
+      "value_columns": [
+        "SalePrice"
+      ]
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-REG-HOUSE__d_predict_id_role_misalignment__sb1102",
+  "prefix_run_id": "A2P__DEV-REG-HOUSE__d_predict_id_role_misalignment__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "80551957fda4fc05a54982c4b1011371b8f887dabdc63969e1246e09891d6bab",
+  "state_hash": "577de0843e4e60e88e0343357363aad4578aa26a88592a1952c4c4f72c6ce339",
+  "visible_evidence_hash": "3e54f5574563891a8cfed352cd597e3447be49456d31c28690af80cd19d5d1e9"
+}

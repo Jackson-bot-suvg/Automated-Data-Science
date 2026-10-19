@@ -1,0 +1,1068 @@
+{
+  "task_config": {
+    "task_id": "A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1-run-ca91815b",
+    "task_type": "",
+    "target_column": "",
+    "target_columns": [],
+    "raw_task": "predict survival",
+    "dataset_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle",
+    "target_hint": "Survived",
+    "metric_hint": "roc_auc",
+    "dataset_paths": {
+      "train": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/train.csv",
+      "test": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/test.csv",
+      "submission": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/sample_submission.csv"
+    },
+    "business_context": "predict survival",
+    "constraints": {
+      "max_runtime_min": null,
+      "max_tokens": null,
+      "interpretability_required": true,
+      "business_translation_required": true
+    }
+  },
+  "problem_understanding": {
+    "task_summary": "Binary classification predicting passenger survival (Survived) on the Titanic dataset.",
+    "predicted_task_type": "binary_classification",
+    "target_column": "",
+    "target_columns": [],
+    "candidate_metrics": [
+      "roc_auc"
+    ],
+    "data_overview": {
+      "n_rows": 891,
+      "n_cols": 12,
+      "column_types": {
+        "PassengerId": "int64",
+        "Survived": "int64",
+        "Pclass": "int64",
+        "Name": "str",
+        "Sex": "str",
+        "Age": "float64",
+        "SibSp": "int64",
+        "Parch": "int64",
+        "Ticket": "str",
+        "Fare": "float64",
+        "Cabin": "str",
+        "Embarked": "str"
+      },
+      "missingness_summary": {
+        "Age": 177,
+        "Cabin": 687,
+        "Embarked": 2
+      }
+    },
+    "risks": [
+      "Missing values in train Age (177), Cabin (687), and Embarked (2)",
+      "Missing values in test Age (86), Fare (1), and Cabin (327)",
+      "Small dataset size: 891 training rows and 418 test rows",
+      "High-cardinality categorical/text columns such as Name, Ticket, and Cabin may require feature handling"
+    ],
+    "business_goal_summary": "Predict which Titanic passengers survived using passenger attributes such as name, age, gender, and socio-economic class. The goal is to identify patterns associated with survival and generate the required Survived predictions for the test passengers."
+  },
+  "target_spec": {
+    "status": "resolved",
+    "target_columns": [
+      "Survived"
+    ],
+    "target_mode": "single_target",
+    "task_family": "binary_classification",
+    "prediction_kind": "probability",
+    "user_target_hint": "Survived",
+    "user_task_family_hint": "",
+    "submission": {
+      "id_columns": [
+        "PassengerId"
+      ],
+      "output_columns": [
+        "Survived"
+      ],
+      "submission_columns": [
+        "PassengerId",
+        "Survived"
+      ],
+      "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/sample_submission.csv"
+    },
+    "evaluation": {
+      "metric_hint": "roc_auc",
+      "primary_metric": "roc_auc",
+      "candidate_metrics": [
+        "roc_auc"
+      ]
+    },
+    "evidence": [
+      {
+        "source": "compatibility_fields",
+        "detail": "Used explicit target columns provided in the incoming state.",
+        "columns": [
+          "Survived"
+        ]
+      }
+    ]
+  },
+  "execution_plan": {
+    "phases": [
+      "preliminary_eda",
+      "data_cleaning",
+      "indepth_eda",
+      "feature_engineering",
+      "model_building"
+    ],
+    "phase_objectives": {
+      "preliminary_eda": "Profile the dataset, summarize schema, and create EDA evidence for later planning.",
+      "data_cleaning": "Create cleaned train/test datasets and a traceable cleaning report.",
+      "indepth_eda": "Perform in-depth EDA to uncover hidden patterns and insights.",
+      "feature_engineering": "Create aligned engineered feature datasets and feature summary artifacts.",
+      "model_building": "Train candidate models, select the best model, and produce prediction artifacts with metric evidence."
+    },
+    "success_criteria": {
+      "preliminary_eda": {
+        "criteria": [
+          "artifacts.preliminary_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "profile_dataset",
+          "missingness_visualization",
+          "basic_distribution_visualization"
+        ],
+        "agent_plan": {
+          "plan_name": "preliminary_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "data_cleaning": {
+        "criteria": [
+          "artifacts.cleaned_train_data and artifacts.cleaned_test_data exist",
+          "data_state.current_train_path and current_test_path point to cleaned files"
+        ],
+        "allowed_tools": [
+          "drop_columns",
+          "fill_missing",
+          "clip_outliers"
+        ],
+        "agent_plan": {
+          "plan_name": "data_cleaning_pending_plan",
+          "steps": []
+        }
+      },
+      "indepth_eda": {
+        "criteria": [
+          "artifacts.indepth_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "target_analysis",
+          "feature_feature_relationships",
+          "outlier_analysis",
+          "segment_analysis"
+        ],
+        "agent_plan": {
+          "plan_name": "indepth_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "feature_engineering": {
+        "criteria": [
+          "feature_state.engineered_train_path and engineered_test_path exist",
+          "feature_state.selected_features is populated"
+        ],
+        "allowed_tools": [
+          "extract_regex",
+          "create_binning",
+          "create_interaction",
+          "group_rare_categories",
+          "encode_categorical"
+        ],
+        "agent_plan": {
+          "plan_name": "feature_engineering_pending_plan",
+          "steps": []
+        }
+      },
+      "model_building": {
+        "criteria": [
+          "artifacts.model_results, artifacts.best_model, and artifacts.prediction_file exist",
+          "model_state.best_model_name and validation metrics are populated"
+        ],
+        "allowed_tools": [
+          "detect_feature_types",
+          "build_preprocessor",
+          "get_candidate_models",
+          "fit_and_select_model",
+          "summarize_cv_results",
+          "compute_metric_bundle",
+          "build_submission",
+          "save_model_artifacts"
+        ],
+        "agent_plan": {
+          "plan_name": "model_building_tool_plan",
+          "steps": [
+            {
+              "tool": "configure_preprocessing",
+              "parameters": {
+                "numeric_impute": "median",
+                "scaler": "standard",
+                "cat_encode": "onehot",
+                "cat_impute": "most_frequent",
+                "onehot_max_cats": 20
+              },
+              "reasoning": "Prepare mixed numeric and categorical Titanic features for probability-based binary classification while handling residual missing values and limiting high-cardinality one-hot expansion."
+            },
+            {
+              "tool": "configure_candidate_models",
+              "parameters": {
+                "models": [
+                  {
+                    "name": "LogisticRegression"
+                  },
+                  {
+                    "name": "RandomForest"
+                  },
+                  {
+                    "name": "HistGradientBoosting"
+                  }
+                ]
+              },
+              "reasoning": "Use three conservative, task-compatible binary classifiers that provide probability outputs and offer complementary linear, bagged-tree, and boosted-tree baselines."
+            },
+            {
+              "tool": "configure_scoring",
+              "parameters": {
+                "primary_metric": "roc_auc"
+              },
+              "reasoning": "Align model selection with the resolved target contract, which specifies roc_auc as the primary metric for this binary probability task."
+            }
+          ]
+        }
+      }
+    },
+    "review_points": [
+      "Reviewer must validate required artifacts for the selected phase.",
+      "Reviewer must validate that phase-specific state fields are populated before advancing."
+    ],
+    "fallback_rules": [
+      "If reviewer requests retry, repeat the pending review phase.",
+      "If LLM output is unavailable or invalid, use deterministic phase order."
+    ]
+  },
+  "current_phase": "technical_summary",
+  "phase_history": [
+    "reader",
+    "preliminary_eda",
+    "preliminary_eda",
+    "data_cleaning",
+    "data_cleaning",
+    "indepth_eda",
+    "indepth_eda",
+    "feature_engineering",
+    "feature_engineering",
+    "model_building",
+    "model_building",
+    "technical_summary"
+  ],
+  "data_state": {
+    "raw_train_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/train.csv",
+    "raw_test_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/test.csv",
+    "current_train_path": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/data/cleaned_train.csv",
+    "current_test_path": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/data/cleaned_test.csv",
+    "schema_summary": {
+      "columns": [
+        "PassengerId",
+        "Survived",
+        "Pclass",
+        "Name",
+        "Sex",
+        "Age",
+        "SibSp",
+        "Parch",
+        "Ticket",
+        "Fare",
+        "Cabin",
+        "Embarked"
+      ]
+    },
+    "cleaning_summary": {
+      "Step: fill_missing": {
+        "reasoning": "Impute observed missing values with a conservative default strategy.",
+        "params": {
+          "column": "Embarked",
+          "strategy": "mode"
+        }
+      }
+    },
+    "eda_findings": {
+      "dataset_shape": {
+        "rows": 891,
+        "columns": 12
+      },
+      "target_variable": [
+        "Survived"
+      ],
+      "columns": {
+        "PassengerId": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 446.0,
+          "min": 1.0,
+          "max": 891.0,
+          "nunique": 891
+        },
+        "Survived": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.3838383838383838,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Pclass": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 2.308641975308642,
+          "min": 1.0,
+          "max": 3.0,
+          "nunique": 3
+        },
+        "Name": {
+          "dtype": "str",
+          "missing_rate": 0.0,
+          "type": "categorical",
+          "nunique": 891,
+          "top_values": {
+            "Braund, Mr. Owen Harris": 0.001122334455667789,
+            "Cumings, Mrs. John Bradley (Florence Briggs Thayer)": 0.001122334455667789,
+            "Heikkinen, Miss. Laina": 0.001122334455667789
+          }
+        },
+        "Sex": {
+          "dtype": "str",
+          "missing_rate": 0.0,
+          "type": "categorical",
+          "nunique": 2,
+          "top_values": {
+            "male": 0.6475869809203143,
+            "female": 0.35241301907968575
+          }
+        },
+        "Age": {
+          "dtype": "float64",
+          "missing_rate": 0.19865319865319866,
+          "type": "numeric",
+          "mean": 29.69911764705882,
+          "min": 0.42,
+          "max": 80.0,
+          "nunique": 88
+        },
+        "SibSp": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.5230078563411896,
+          "min": 0.0,
+          "max": 8.0,
+          "nunique": 7
+        },
+        "Parch": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.38159371492704824,
+          "min": 0.0,
+          "max": 6.0,
+          "nunique": 7
+        },
+        "Ticket": {
+          "dtype": "str",
+          "missing_rate": 0.0,
+          "type": "categorical",
+          "nunique": 681,
+          "top_values": {
+            "347082": 0.007856341189674524,
+            "1601": 0.007856341189674524,
+            "CA. 2343": 0.007856341189674524
+          }
+        },
+        "Fare": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 32.204207968574636,
+          "min": 0.0,
+          "max": 512.3292,
+          "nunique": 248
+        },
+        "Cabin": {
+          "dtype": "str",
+          "missing_rate": 0.7710437710437711,
+          "type": "categorical",
+          "nunique": 147,
+          "top_values": {
+            "G6": 0.0196078431372549,
+            "C23 C25 C27": 0.0196078431372549,
+            "B96 B98": 0.0196078431372549
+          }
+        },
+        "Embarked": {
+          "dtype": "str",
+          "missing_rate": 0.002244668911335578,
+          "type": "categorical",
+          "nunique": 3,
+          "top_values": {
+            "S": 0.7244094488188977,
+            "C": 0.1889763779527559,
+            "Q": 0.08661417322834646
+          }
+        }
+      },
+      "class_distribution": {
+        "Survived": {
+          "0": 0.6161616161616161,
+          "1": 0.3838383838383838
+        }
+      }
+    },
+    "indepth_eda_summary": {
+      "target_analysis": {
+        "Survived": {
+          "variable": "Survived",
+          "model_type": "binary_classification",
+          "summary": {
+            "count": 891.0,
+            "mean": 0.3838383838383838,
+            "std": 0.4865924542648575,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 1.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 549,
+            "1": 342
+          }
+        }
+      },
+      "feature_feature_relationships": {
+        "Pclass": {
+          "Pclass": 1.0,
+          "Age": -0.33989832839258594,
+          "SibSp": 0.08308136284568687,
+          "Parch": 0.018442671310748508,
+          "Fare": -0.5494996199439075
+        },
+        "Age": {
+          "Pclass": -0.33989832839258594,
+          "Age": 1.0,
+          "SibSp": -0.23329633125248897,
+          "Parch": -0.1724819540369487,
+          "Fare": 0.0966884221803649
+        },
+        "SibSp": {
+          "Pclass": 0.08308136284568687,
+          "Age": -0.23329633125248897,
+          "SibSp": 1.0,
+          "Parch": 0.41483769862015635,
+          "Fare": 0.159651043242161
+        },
+        "Parch": {
+          "Pclass": 0.018442671310748508,
+          "Age": -0.1724819540369487,
+          "SibSp": 0.41483769862015635,
+          "Parch": 1.0,
+          "Fare": 0.2162249447707645
+        },
+        "Fare": {
+          "Pclass": -0.5494996199439075,
+          "Age": 0.0966884221803649,
+          "SibSp": 0.159651043242161,
+          "Parch": 0.2162249447707645,
+          "Fare": 1.0
+        }
+      },
+      "outlier_analysis": {
+        "Pclass": {
+          "lower_bound": 0.5,
+          "upper_bound": 4.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Age": {
+          "lower_bound": 2.5,
+          "upper_bound": 54.5,
+          "outlier_count": 66,
+          "outlier_rate": 0.07407407407407407
+        },
+        "SibSp": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 46,
+          "outlier_rate": 0.051627384960718295
+        },
+        "Parch": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 213,
+          "outlier_rate": 0.23905723905723905
+        },
+        "Fare": {
+          "lower_bound": -26.724,
+          "upper_bound": 65.6344,
+          "outlier_count": 116,
+          "outlier_rate": 0.13019079685746351
+        }
+      },
+      "segment_analysis": {
+        "Survived": {
+          "Sex_pct": {
+            "female|1": 0.7420382165605095,
+            "female|0": 0.25796178343949044,
+            "male|0": 0.8110918544194108,
+            "male|1": 0.18890814558058924
+          }
+        }
+      }
+    },
+    "data_quality_flags": [],
+    "target_column": "",
+    "target_columns": [],
+    "train_shape": [
+      891,
+      12
+    ],
+    "test_shape": [
+      418,
+      11
+    ]
+  },
+  "feature_state": {
+    "engineered_train_path": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/features/engineered_train.csv",
+    "engineered_test_path": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/features/engineered_test.csv",
+    "selected_features": [
+      "Pclass",
+      "Name",
+      "Sex",
+      "Age",
+      "SibSp",
+      "Parch",
+      "Ticket",
+      "Fare",
+      "Cabin",
+      "Embarked",
+      "Title",
+      "FamilySize"
+    ],
+    "dropped_features": [],
+    "feature_transform_summary": {
+      "Step: extract_regex": {
+        "reasoning": "Extract passenger title from Name, a string column with a clear title pattern, to capture social status and demographic signal.",
+        "params": {
+          "column": "Name",
+          "pattern": "([A-Za-z]+)[.]",
+          "new_col": "Title"
+        }
+      },
+      "Step: create_interaction": {
+        "reasoning": "Combine sibling/spouse and parent/child counts into a numeric family-size feature.",
+        "params": {
+          "cols": [
+            "SibSp",
+            "Parch"
+          ],
+          "operator": "+",
+          "new_col": "FamilySize"
+        }
+      },
+      "Step: encode_categorical": {
+        "reasoning": "Encode the low-cardinality Embarked category into numeric form.",
+        "params": {
+          "column": "Embarked",
+          "method": "label"
+        }
+      }
+    },
+    "feature_importance_summary": {},
+    "leakage_checks": [
+      "PASS: target columns excluded from selected_features",
+      "PASS: id columns excluded from selected_features",
+      "PASS: train/test feature schema aligned"
+    ]
+  },
+  "model_state": {
+    "candidate_models": [
+      "LogisticRegression",
+      "RandomForest",
+      "HistGradientBoosting"
+    ],
+    "best_model_name": "HistGradientBoosting",
+    "best_params": {
+      "l2_regularization": 0.0,
+      "learning_rate": 0.05,
+      "max_depth": 6,
+      "max_iter": 100
+    },
+    "validation_metrics": {
+      "LogisticRegression": {
+        "cv_roc_auc_mean": 0.8736
+      },
+      "RandomForest": {
+        "cv_roc_auc_mean": 0.8751
+      },
+      "HistGradientBoosting": {
+        "cv_roc_auc_mean": 0.881
+      },
+      "_meta": {
+        "task_family": "binary_classification",
+        "target_mode": "single_target",
+        "prediction_kind": "probability",
+        "primary_metric": "roc_auc",
+        "metric_direction": "maximize",
+        "plan_name": "model_building_tool_plan",
+        "plan_applied": true,
+        "n_samples_train": 891,
+        "n_features_train": 13
+      }
+    },
+    "cv_results": {
+      "LogisticRegression": {
+        "best_params": {
+          "C": 1.0,
+          "penalty": "l2"
+        },
+        "cv_roc_auc_mean": 0.8736
+      },
+      "RandomForest": {
+        "best_params": {
+          "max_depth": 8,
+          "min_samples_leaf": 1,
+          "n_estimators": 200
+        },
+        "cv_roc_auc_mean": 0.8751
+      },
+      "HistGradientBoosting": {
+        "best_params": {
+          "l2_regularization": 0.0,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "max_iter": 100
+        },
+        "cv_roc_auc_mean": 0.881
+      }
+    },
+    "prediction_path": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/predictions/submission.csv",
+    "model_explanations": {},
+    "baseline_metrics": {
+      "accuracy": 0.6162,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "roc_auc": 0.5,
+      "average_precision": 0.3838,
+      "_meta": {
+        "source": "out_of_fold_dummy_baseline",
+        "strategy": "most_frequent"
+      }
+    }
+  },
+  "review_state": {
+    "latest_review_status": "approved",
+    "review_history": [
+      {
+        "phase": "reader",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [],
+        "checked_state_fields": [
+          "problem_understanding.task_summary",
+          "problem_understanding.candidate_metrics",
+          "problem_understanding.data_overview",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.submission.submission_columns",
+          "data_state.current_train_path",
+          "data_state.current_test_path"
+        ],
+        "comment": "Reader output approved with no blocking issues; proceed to planning.",
+        "details": {
+          "train_columns": [
+            "PassengerId",
+            "Survived",
+            "Pclass",
+            "Name",
+            "Sex",
+            "Age",
+            "SibSp",
+            "Parch",
+            "Ticket",
+            "Fare",
+            "Cabin",
+            "Embarked"
+          ],
+          "test_columns": [
+            "PassengerId",
+            "Pclass",
+            "Name",
+            "Sex",
+            "Age",
+            "SibSp",
+            "Parch",
+            "Ticket",
+            "Fare",
+            "Cabin",
+            "Embarked"
+          ],
+          "sample_submission_columns": [
+            "PassengerId",
+            "Survived"
+          ],
+          "target_spec": {
+            "status": "resolved",
+            "target_columns": [
+              "Survived"
+            ],
+            "target_mode": "single_target",
+            "task_family": "binary_classification",
+            "prediction_kind": "probability",
+            "user_target_hint": "Survived",
+            "user_task_family_hint": "",
+            "submission": {
+              "id_columns": [
+                "PassengerId"
+              ],
+              "output_columns": [
+                "Survived"
+              ],
+              "submission_columns": [
+                "PassengerId",
+                "Survived"
+              ],
+              "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/titanic_autokaggle/sample_submission.csv"
+            },
+            "evaluation": {
+              "metric_hint": "roc_auc",
+              "primary_metric": "roc_auc",
+              "candidate_metrics": [
+                "roc_auc"
+              ]
+            },
+            "evidence": [
+              {
+                "source": "compatibility_fields",
+                "detail": "Used explicit target columns provided in the incoming state.",
+                "columns": [
+                  "Survived"
+                ]
+              }
+            ]
+          },
+          "target_columns": [
+            "Survived"
+          ]
+        }
+      },
+      {
+        "phase": "preliminary_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "preliminary_eda_report"
+        ],
+        "checked_state_fields": [
+          "data_state.schema_summary",
+          "data_state.eda_findings",
+          "artifacts.figures"
+        ],
+        "comment": "- **Status: approved** — no blocking failures or warnings; `preliminary_eda_report` present and consistent with the recorded state.\n- `data_state.schema_summary` is populated, giving downstream phases a clear view of column types and structure.\n- `data_state.eda_findings` records the key distribution/quality observations needed to inform feature engineering.\n- `artifacts.figures` contains the supporting visualizations referenced by the report; no missing-figure gaps flagged.\n- EDA coverage is sufficient to proceed to the next phase; no remediation required.",
+        "details": {
+          "current_train_path_shape": [
+            891,
+            12
+          ]
+        }
+      },
+      {
+        "phase": "data_cleaning",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [
+          "data_state.data_quality_flags is empty; no quality notes were recorded"
+        ],
+        "checked_artifacts": [
+          "cleaned_train_data",
+          "phase_plan_records.data_cleaning",
+          "cleaned_test_data",
+          "cleaning_report"
+        ],
+        "checked_state_fields": [
+          "data_state.current_train_path",
+          "data_state.current_test_path",
+          "data_state.cleaning_summary",
+          "data_state.data_quality_flags",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "- Approved for data_cleaning: `cleaned_train_data`, `cleaned_test_data`, phase plan, and `cleaning_report` are present.\n- `data_state.current_train_path`, `current_test_path`, and `cleaning_summary` are populated and align with the cleaning phase outputs.\n- Target specification remains valid: `target_spec.status`, target columns/mode/task family, and submission column settings are recorded.\n- Warning: `data_state.data_quality_flags` is empty, so no quality notes were captured; add meaningful cleaning/quality observations to the cleaning report or flags for auditability.\n- No retry action required.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Survived"
+            ],
+            "id_columns": [
+              "PassengerId"
+            ],
+            "output_columns": [
+              "Survived"
+            ],
+            "submission_columns": [
+              "PassengerId",
+              "Survived"
+            ],
+            "target_mode": "single_target",
+            "task_family": "binary_classification",
+            "prediction_kind": "probability"
+          },
+          "cleaned_train_data_shape": [
+            891,
+            12
+          ],
+          "cleaned_test_data_shape": [
+            418,
+            11
+          ]
+        }
+      },
+      {
+        "phase": "indepth_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "indepth_eda_report",
+          "phase_plan_records.indepth_eda"
+        ],
+        "checked_state_fields": [
+          "data_state.indepth_eda_summary",
+          "artifacts.indepth_eda_report",
+          "artifacts.figures"
+        ],
+        "comment": "- Approved: `indepth_eda_report` and `phase_plan_records.indepth_eda` are present and consistent with completed in-depth EDA.\n- `data_state.indepth_eda_summary` is populated and aligns with the report artifact.\n- `artifacts.indepth_eda_report` and `artifacts.figures` are recorded; no missing artifact evidence was detected.\n- No blocking failures or warnings; no retry or fatal action is needed.\n- Proceed to the next phase.",
+        "details": {
+          "current_train_path_shape": [
+            891,
+            12
+          ]
+        }
+      },
+      {
+        "phase": "feature_engineering",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "feature_summary",
+          "phase_plan_records.feature_engineering"
+        ],
+        "checked_state_fields": [
+          "feature_state.engineered_train_path",
+          "feature_state.engineered_test_path",
+          "feature_state.selected_features",
+          "feature_state.feature_transform_summary",
+          "feature_state.leakage_checks",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns"
+        ],
+        "comment": "- Approved for `feature_engineering`: no blocking failures or warnings in the deterministic review.\n- `feature_summary` and `phase_plan_records.feature_engineering` are present and align with the phase plan.\n- `feature_state.engineered_train_path` and `engineered_test_path` are recorded, with `selected_features` and `feature_transform_summary` available for downstream modeling.\n- `feature_state.leakage_checks` is recorded with no leakage warning, and `target_spec` fields are populated and consistent.\n- No retry or remediation action required; proceed",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Survived"
+            ],
+            "id_columns": [
+              "PassengerId"
+            ],
+            "output_columns": [
+              "Survived"
+            ],
+            "submission_columns": [
+              "PassengerId",
+              "Survived"
+            ],
+            "target_mode": "single_target",
+            "task_family": "binary_classification",
+            "prediction_kind": "probability"
+          },
+          "engineered_train_path_shape": [
+            891,
+            14
+          ],
+          "engineered_test_path_shape": [
+            418,
+            13
+          ]
+        }
+      },
+      {
+        "phase": "model_building",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "model_results",
+          "phase_plan_records.model_building",
+          "best_model",
+          "prediction_file"
+        ],
+        "checked_state_fields": [
+          "model_state.candidate_models",
+          "model_state.best_model_name",
+          "model_state.validation_metrics",
+          "model_state.cv_results",
+          "model_state.prediction_path",
+          "model_state.baseline_metrics",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "- Model-building phase is approved: `model_results`, `phase_plan_records.model_building`, `best_model`, and `prediction_file` are present and checked.\n- Candidate models are recorded in `model_state.candidate_models`, and the selected model is reflected in `model_state.best_model_name` / `best_model`.\n- Validation evidence is documented via `model_state.validation_metrics`, `model_state.cv_results`, and `model_state.baseline_metrics`, supporting the selected model.\n- Predictions are tracked through `model_state.prediction_path",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Survived"
+            ],
+            "id_columns": [
+              "PassengerId"
+            ],
+            "output_columns": [
+              "Survived"
+            ],
+            "submission_columns": [
+              "PassengerId",
+              "Survived"
+            ],
+            "target_mode": "single_target",
+            "task_family": "binary_classification",
+            "prediction_kind": "probability"
+          },
+          "prediction_file_shape": [
+            418,
+            2
+          ],
+          "prediction_columns": [
+            "PassengerId",
+            "Survived"
+          ],
+          "expected_submission_columns": [
+            "PassengerId",
+            "Survived"
+          ]
+        }
+      }
+    ],
+    "retry_count_by_phase": {},
+    "fatal_errors": [],
+    "last_review_comment": "- Model-building phase is approved: `model_results`, `phase_plan_records.model_building`, `best_model`, and `prediction_file` are present and checked.\n- Candidate models are recorded in `model_state.candidate_models`, and the selected model is reflected in `model_state.best_model_name` / `best_model`.\n- Validation evidence is documented via `model_state.validation_metrics`, `model_state.cv_results`, and `model_state.baseline_metrics`, supporting the selected model.\n- Predictions are tracked through `model_state.prediction_path",
+    "pending_review_phase": "model_building"
+  },
+  "report_state": {
+    "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/reports/technical_report.md",
+    "business_report_path": "",
+    "executive_summary": "This workflow trained a binary_classification solution for target `Survived`. The selected model is HistGradientBoosting, evaluated primarily with roc_auc=0.881.",
+    "limitations": [
+      "Feature importance is unavailable, so driver-level interpretation is limited."
+    ],
+    "recommended_actions": []
+  },
+  "artifacts": {
+    "preliminary_eda_report": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/eda/preliminary_eda.md",
+    "cleaned_train_data": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/data/cleaned_train.csv",
+    "cleaned_test_data": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/data/cleaned_test.csv",
+    "cleaning_report": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/data/cleaning_report.md",
+    "indepth_eda_report": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/eda/in_depth_eda.md",
+    "feature_summary": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/features/feature_summary.json",
+    "engineered_train_data": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/features/engineered_train.csv",
+    "engineered_test_data": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/features/engineered_test.csv",
+    "model_results": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/models/model_results.json",
+    "best_model": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/models/best_model.pkl",
+    "prediction_file": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/predictions/submission.csv",
+    "technical_report": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/reports/technical_report.md",
+    "business_report": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/reports/business_report.md",
+    "run_manifest": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/reports/run_manifest.json",
+    "figures": [
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/figures/eda_missingness.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/figures/target_analysis_Survived_A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1-run-ca91815b.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/figures/correlation_matrix_A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1-run-ca91815b.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/figures/outlier_analysis_A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1-run-ca91815b.png"
+    ],
+    "phase_review_records": {
+      "preliminary_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_reviews/preliminary_eda.json",
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_reviews/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_reviews/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_reviews/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_reviews/model_building.json"
+    },
+    "phase_plan_records": {
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_plans/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_plans/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_plans/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1/artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b/phase_plans/model_building.json"
+    }
+  },
+  "runtime_state": {
+    "thread_id": "A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1",
+    "run_id": "A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1-run-ca91815b",
+    "artifact_root": "artifacts/runs/titanic_autokaggle_20261019_141444_ca91815b",
+    "checkpoint_namespace": "default",
+    "token_usage": {},
+    "llm_calls": 0,
+    "phase_runtime_sec": {
+      "reader": 4.1746,
+      "planner": 36.2292,
+      "preliminary_eda": 0.0467,
+      "data_cleaning": 0.006,
+      "indepth_eda": 0.0936,
+      "feature_engineering": 0.01,
+      "model_building": 6.0329,
+      "summarizer": 0.0019
+    },
+    "total_runtime_sec": 46.5949,
+    "cost_estimate": null,
+    "workspace_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-BIN-TITANIC__C00__M3_SHADOW__sb1101__r1",
+    "interrupted": false,
+    "last_reviewed_phase": "model_building"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "name": "reader",
+      "content": "Initialized problem understanding and dataset paths."
+    },
+    {
+      "role": "system",
+      "name": "technical_summarizer",
+      "content": "Generated final technical report."
+    }
+  ]
+}

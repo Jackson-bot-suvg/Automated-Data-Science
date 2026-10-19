@@ -1,0 +1,81 @@
+{
+  "candidate_models": [
+    "LogisticRegression",
+    "RandomForest",
+    "ExtraTrees",
+    "HistGradientBoosting",
+    "LightGBM"
+  ],
+  "best_model_name": "HistGradientBoosting",
+  "best_params": {
+    "l2_regularization": 0.0,
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "max_iter": 200
+  },
+  "validation_metrics": {
+    "LogisticRegression": {
+      "cv_f1_macro_mean": 0.8528
+    },
+    "RandomForest": {
+      "cv_f1_macro_mean": 0.8466
+    },
+    "ExtraTrees": {
+      "cv_f1_macro_mean": 0.8449
+    },
+    "HistGradientBoosting": {
+      "cv_f1_macro_mean": 0.8941
+    },
+    "LightGBM": {
+      "cv_f1_macro_mean": 0.8932
+    }
+  },
+  "cv_results": {
+    "LogisticRegression": {
+      "best_params": {
+        "C": 3.0,
+        "penalty": "l2"
+      },
+      "cv_f1_macro_mean": 0.8528
+    },
+    "RandomForest": {
+      "best_params": {
+        "max_depth": 8,
+        "min_samples_leaf": 1,
+        "n_estimators": 200
+      },
+      "cv_f1_macro_mean": 0.8466
+    },
+    "ExtraTrees": {
+      "best_params": {
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "n_estimators": 300
+      },
+      "cv_f1_macro_mean": 0.8449
+    },
+    "HistGradientBoosting": {
+      "best_params": {
+        "l2_regularization": 0.0,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "max_iter": 200
+      },
+      "cv_f1_macro_mean": 0.8941
+    },
+    "LightGBM": {
+      "best_params": {
+        "learning_rate": 0.03,
+        "min_child_samples": 20,
+        "n_estimators": 200,
+        "num_leaves": 63
+      },
+      "cv_f1_macro_mean": 0.8932
+    }
+  },
+  "_meta": {
+    "task_family": "multiclass_classification",
+    "target_mode": "single_target",
+    "primary_metric": "f1_macro"
+  }
+}

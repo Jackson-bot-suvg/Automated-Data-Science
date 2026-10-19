@@ -1,0 +1,28 @@
+{
+  "error": {
+    "message": "fork point reached before reviewer@model_building"
+  },
+  "fit_seconds_total": 24.503,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "5147fe928eeee64089b9c40cd8d1638147191d600d1159c278503a60590553aa",
+      "before_pairing_digest": "8b67f65ef75448a84af971ae69bf58661eda94ad0b8e29d1f79758eb94964aeb",
+      "fixed_points": 0,
+      "id_columns": [
+        "Id"
+      ],
+      "n_rows": 292,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "SalePrice"
+      ]
+    }
+  ],
+  "llm_calls": 8,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-REG-HOUSE__d_predict_id_role_misalignment__sb1101",
+  "wall_seconds": 60.597
+}

@@ -1,0 +1,25 @@
+{
+  "error": {
+    "message": "fork point reached before reviewer@model_building"
+  },
+  "fit_seconds_total": 22.698,
+  "injections_applied": [
+    {
+      "after_sha256": "550dcda4ddf69f8c627ef8d579fb68c6711d241cd1e473e982174c2444cf7121",
+      "after_target_columns": [
+        "GrLivArea"
+      ],
+      "before_sha256": "54d1dfedb7b588acd080a5bbeb0721bc067a03a4f0915fb834f93261d974471f",
+      "before_target_columns": [
+        "SalePrice"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "llm_calls": 8,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102",
+  "wall_seconds": 54.025
+}

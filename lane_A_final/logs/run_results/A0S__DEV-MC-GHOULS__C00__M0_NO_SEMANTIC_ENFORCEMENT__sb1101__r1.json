@@ -1,0 +1,60 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 8.189,
+  "injections_applied": [],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/ghouls_goblins_and_ghosts_boo_20261019_141408_2eb63dce/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-MC-GHOULS__C00__M0_NO_SEMANTIC_ENFORCEMENT__sb1101__r1/artifacts/runs/ghouls_goblins_and_ghosts_boo_20261019_141408_2eb63dce/predictions/submission.csv",
+  "prediction_sha256": "1f4874d50d1b9b33fc12b64bd638bbd95117fadb7b6eb722468b63ea058500ce",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A0S__DEV-MC-GHOULS__C00__M0_NO_SEMANTIC_ENFORCEMENT__sb1101__r1",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0S__DEV-MC-GHOULS__C00__M0_NO_SEMANTIC_ENFORCEMENT__sb1101__r1/artifacts/runs/ghouls_goblins_and_ghosts_boo_20261019_141408_2eb63dce/reports/technical_report.md",
+  "wall_seconds": 35.354,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

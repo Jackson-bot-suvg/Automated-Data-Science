@@ -1,0 +1,12 @@
+{
+  "error": {
+    "message": "fork point reached before background_reviewer@reader"
+  },
+  "fit_seconds_total": 0.0,
+  "injections_applied": [],
+  "llm_calls": 1,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-BIN-SPACESHIP__a_recoverable_intake_conflict__sb1101",
+  "wall_seconds": 9.939
+}

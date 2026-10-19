@@ -1,0 +1,25 @@
+{
+  "error": {
+    "message": "fork point reached before reviewer@model_building"
+  },
+  "fit_seconds_total": 0.0,
+  "injections_applied": [
+    {
+      "after_sha256": "b1d0314e3a32057d198ea2904e2e20dbdf685c7ffcd1f5b3d0d818c6669b4d3d",
+      "after_target_columns": [
+        "color"
+      ],
+      "before_sha256": "75362b4dd8fd688d953808348156f2ee7e7ab0571d32f039e5d7539aa399fd32",
+      "before_target_columns": [
+        "type"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "llm_calls": 8,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-MC-GHOULS__c_post_planner_fit_target_drift__sb1101",
+  "wall_seconds": 27.96
+}

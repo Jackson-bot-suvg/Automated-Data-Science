@@ -1,0 +1,28 @@
+{
+  "error": {
+    "message": "fork point reached before reviewer@model_building"
+  },
+  "fit_seconds_total": 18.827,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "59e77ccce30ada0edecd76498d3a2e3395167b9e4a222bf8c38019997e2dad2d",
+      "before_pairing_digest": "9088610328f313d7919a2555ed1c51825b0cc5ab79d24d02c6251a402aeff667",
+      "fixed_points": 0,
+      "id_columns": [
+        "PassengerId"
+      ],
+      "n_rows": 1739,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1102,
+      "template_id": "F10",
+      "value_columns": [
+        "Transported"
+      ]
+    }
+  ],
+  "llm_calls": 8,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-BIN-SPACESHIP__d_predict_id_role_misalignment__sb1102",
+  "wall_seconds": 71.353
+}

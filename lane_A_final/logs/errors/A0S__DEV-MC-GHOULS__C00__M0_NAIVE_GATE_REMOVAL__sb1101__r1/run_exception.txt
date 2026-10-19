@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/lane_A_final/src/adapters/lane_a/runner.py", line 262, in main
+    final_values = asyncio.run(
+        asyncio.wait_for(
+    ...<2 lines>...
+        )
+    )
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/lane_A_final/src/adapters/lane_a/runner.py", line 125, in _drive
+    async for values in graph.astream(state, stream_mode="values", config={"recursion_limit": recursion_limit}):
+        holder["last"] = values
+  File "/Users/jacksonzhang/Desktop/26S1_CS33-2/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3160, in astream
+    raise GraphRecursionError(msg)
+langgraph.errors.GraphRecursionError: Recursion limit of 80 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT

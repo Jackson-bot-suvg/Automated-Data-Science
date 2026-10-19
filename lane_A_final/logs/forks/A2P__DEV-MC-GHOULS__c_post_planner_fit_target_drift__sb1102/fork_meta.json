@@ -1,0 +1,34 @@
+{
+  "candidate_hash": "10ac5f136112113f8439d32e3c1de5857638faebb1859f09437da14145712f7d",
+  "contract_digest": "b7e8866f4c13f39e70180175188d743556bb7b786c594206d2db0fc7cfe9d628",
+  "fit_seconds_prefix": 0.0,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_sha256": "b1d0314e3a32057d198ea2904e2e20dbdf685c7ffcd1f5b3d0d818c6669b4d3d",
+      "after_target_columns": [
+        "color"
+      ],
+      "before_sha256": "75362b4dd8fd688d953808348156f2ee7e7ab0571d32f039e5d7539aa399fd32",
+      "before_target_columns": [
+        "type"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-MC-GHOULS__c_post_planner_fit_target_drift__sb1102",
+  "prefix_run_id": "A2P__DEV-MC-GHOULS__c_post_planner_fit_target_drift__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "80551957fda4fc05a54982c4b1011371b8f887dabdc63969e1246e09891d6bab",
+  "state_hash": "ac6e72d64404fb258dc1ddf3dd721a8f176b3cfad02d4a617bb08683ffd7f601",
+  "visible_evidence_hash": "200d346b8454cac3bc1dd1f9647cb939fb480bf7619d141fb7458e37ec6ad337"
+}

@@ -1,0 +1,68 @@
+{
+  "candidate_models": [
+    "LogisticRegression",
+    "RandomForest",
+    "ExtraTrees",
+    "HistGradientBoosting"
+  ],
+  "best_model_name": "HistGradientBoosting",
+  "best_params": {
+    "l2_regularization": 0.1,
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "max_iter": 200
+  },
+  "validation_metrics": {
+    "LogisticRegression": {
+      "cv_accuracy_mean": 0.9221
+    },
+    "RandomForest": {
+      "cv_accuracy_mean": 0.9375
+    },
+    "ExtraTrees": {
+      "cv_accuracy_mean": 0.9237
+    },
+    "HistGradientBoosting": {
+      "cv_accuracy_mean": 0.9383
+    }
+  },
+  "cv_results": {
+    "LogisticRegression": {
+      "best_params": {
+        "C": 3.0,
+        "penalty": "l2"
+      },
+      "cv_accuracy_mean": 0.9221
+    },
+    "RandomForest": {
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "n_estimators": 400
+      },
+      "cv_accuracy_mean": 0.9375
+    },
+    "ExtraTrees": {
+      "best_params": {
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "n_estimators": 600
+      },
+      "cv_accuracy_mean": 0.9237
+    },
+    "HistGradientBoosting": {
+      "best_params": {
+        "l2_regularization": 0.1,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "max_iter": 200
+      },
+      "cv_accuracy_mean": 0.9383
+    }
+  },
+  "_meta": {
+    "task_family": "binary_classification",
+    "target_mode": "single_target",
+    "primary_metric": "accuracy"
+  }
+}

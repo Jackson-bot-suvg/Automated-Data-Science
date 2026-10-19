@@ -1,0 +1,76 @@
+{
+  "candidate_models": [
+    "Ridge",
+    "RandomForest",
+    "ExtraTrees",
+    "GradientBoosting",
+    "LightGBM"
+  ],
+  "best_model_name": "Ridge",
+  "best_params": {
+    "alpha": 0.1
+  },
+  "validation_metrics": {
+    "Ridge": {
+      "cv_neg_root_mean_squared_error_mean": -1.3117
+    },
+    "ExtraTrees": {
+      "cv_neg_root_mean_squared_error_mean": -162.5673
+    },
+    "RandomForest": {
+      "cv_neg_root_mean_squared_error_mean": -96.5241
+    },
+    "GradientBoosting": {
+      "cv_neg_root_mean_squared_error_mean": -68.1396
+    },
+    "LightGBM": {
+      "cv_neg_root_mean_squared_error_mean": -89.9221
+    }
+  },
+  "cv_results": {
+    "Ridge": {
+      "best_params": {
+        "alpha": 0.1
+      },
+      "cv_neg_root_mean_squared_error_mean": -1.3117
+    },
+    "ExtraTrees": {
+      "best_params": {
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "n_estimators": 300
+      },
+      "cv_neg_root_mean_squared_error_mean": -162.5673
+    },
+    "RandomForest": {
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "n_estimators": 400
+      },
+      "cv_neg_root_mean_squared_error_mean": -96.5241
+    },
+    "GradientBoosting": {
+      "best_params": {
+        "learning_rate": 0.07,
+        "max_depth": 2,
+        "n_estimators": 400
+      },
+      "cv_neg_root_mean_squared_error_mean": -68.1396
+    },
+    "LightGBM": {
+      "best_params": {
+        "learning_rate": 0.07,
+        "min_child_samples": 20,
+        "n_estimators": 200,
+        "num_leaves": 31
+      },
+      "cv_neg_root_mean_squared_error_mean": -89.9221
+    }
+  },
+  "_meta": {
+    "task_family": "regression",
+    "target_mode": "single_target",
+    "primary_metric": "neg_root_mean_squared_error"
+  }
+}

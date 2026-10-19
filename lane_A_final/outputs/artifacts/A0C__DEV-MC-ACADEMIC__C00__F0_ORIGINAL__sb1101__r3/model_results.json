@@ -1,0 +1,44 @@
+{
+  "candidate_models": [
+    "LogisticRegression",
+    "HistGradientBoosting"
+  ],
+  "best_model_name": "HistGradientBoosting",
+  "best_params": {
+    "l2_regularization": 0.0,
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "max_iter": 200
+  },
+  "validation_metrics": {
+    "LogisticRegression": {
+      "cv_f1_macro_mean": 0.7773
+    },
+    "HistGradientBoosting": {
+      "cv_f1_macro_mean": 0.7922
+    }
+  },
+  "cv_results": {
+    "LogisticRegression": {
+      "best_params": {
+        "C": 3.0,
+        "penalty": "l2"
+      },
+      "cv_f1_macro_mean": 0.7773
+    },
+    "HistGradientBoosting": {
+      "best_params": {
+        "l2_regularization": 0.0,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "max_iter": 200
+      },
+      "cv_f1_macro_mean": 0.7922
+    }
+  },
+  "_meta": {
+    "task_family": "multiclass_classification",
+    "target_mode": "single_target",
+    "primary_metric": "f1_macro"
+  }
+}

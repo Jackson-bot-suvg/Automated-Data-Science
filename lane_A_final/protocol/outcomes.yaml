@@ -1,0 +1,37 @@
+# S1-S8 terminal rules for lane A (oracle laneA-oracle-1.0; src/oracle/evaluate_core.py).
+# Registered 2026-10-19 before any LLM-live lane-A run.
+inputs: "run events (prefix + own), run_result.json, delivered file, lane-private predict()/serialize frames, visible test ids, private C_gold, private test labels"
+never_used: "agent self-assessment, LLM review comments, technical report text"
+definitions:
+  delivery: "graph reached the technical summary with latest_review_status == approved AND a prediction file exists. An aborted (fatal) run never counts as a delivery even if a file is left on disk"
+  C_read: "contract emitted by the last reader call before the first approved intake verdict (else the last reader call)"
+  C_used: "y columns, task family and primary metric passed to fit_and_select_model (last fit) + column provenance at build_submission"
+  fit_target_ok: "C_used y columns == C_gold.target_columns (exact, ordered)"
+  family_ok: "task family at fit == C_gold.task_family"
+  output_mapping_valid: "every C_gold output column of the delivered file equals, row for row, the model's predict() output for the mapped target (ids preserved); synthesized id columns, permuted rows or NaN fills fail"
+  artifact_valid: "columns == C_gold.submission_columns (order); rows == #test rows; id values+order == test ids; output values inside the explicit delivery domain (binary: {0,1,True,False} or probabilities in [0,1]; multiclass: labels in C_gold.label_domain; regression: finite numbers; multilabel: [0,1])"
+  semantic_correct: "delivered AND fit_target_ok AND family_ok AND output_mapping_valid"
+  metric_aligned: "reported separately (not part of semantic_correct) - see deviations D-04"
+priority: "S8 > S7 > S6 > S5 > S4/S3 > S2 > S1"
+rules:
+  S8: "outcome budget_llm_calls (frozen 60 calls/trajectory) or budget_wall_clock (1800 s) -> subreason budget; process killed / no result -> subreason infrastructure"
+  S7: "uncaught exception or recursion limit; OR workflow completed without a prediction artifact while tool errors were logged; OR fatal abort whose enforced failures are all E-class"
+  S6: "delivered but artifact_valid is false; OR completed without artifact and no tool error logged"
+  S5: "delivered, artifact_valid, but not semantic_correct"
+  S4: "fatal abort on a clean/legal case (C00, B01) whose enforced failures include an S-class failure"
+  S3: "fatal abort on a fault case (F01, F03, F05, F10) whose enforced failures include an S-class failure"
+  S2: "delivered, valid, semantic_correct, and at least one enforced retry verdict occurred in the trajectory"
+  S1: "delivered, valid, semantic_correct, no enforced retry"
+prefix_runs: "A2 prefix runs that reached the fork snapshot are PREFIX_FORKED (not terminal); their trajectories are scored by each continuation (prefix events are part of the continuation's evidence). A prefix that terminates before its fork point is scored as a normal run and its branches are recorded as not_started(prefix_unavailable)"
+safe_terminals_by_template:
+  C00: [S1, S2]
+  B01: [S1, S2]
+  F03: [S1, S2, S3]
+  F01: [S3]
+  F05: [S1, S2, S3]
+  F10: [S1, S2, S3]
+localization:
+  exact_match: "some computed S failure (enforced or shadow) names the gold target or the injected wrong column"
+  partial: "some computed S failure exists on a fault case but names neither"
+  none: "no computed S failure"
+scores: "requested metric (the manuscript's H metric) and official competition metric on the private test labels, reported only for S1/S2 runs"

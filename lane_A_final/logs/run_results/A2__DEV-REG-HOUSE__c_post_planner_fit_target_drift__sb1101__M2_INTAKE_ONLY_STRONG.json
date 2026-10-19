@@ -1,0 +1,73 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 0.0,
+  "injections_applied": [
+    {
+      "after_sha256": "550dcda4ddf69f8c627ef8d579fb68c6711d241cd1e473e982174c2444cf7121",
+      "after_target_columns": [
+        "GrLivArea"
+      ],
+      "before_sha256": "54d1dfedb7b588acd080a5bbeb0721bc067a03a4f0915fb834f93261d974471f",
+      "before_target_columns": [
+        "SalePrice"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/c00_20261019_143519_0c8a72dc/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1101__M2_INTAKE_ONLY_STRONG/artifacts/runs/c00_20261019_143519_0c8a72dc/predictions/submission.csv",
+  "prediction_sha256": "57a68b6b87e97c0731810bf4fb5e65afe1840f30663e1c194da0b1f0ebafa380",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1101__M2_INTAKE_ONLY_STRONG",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1101__M2_INTAKE_ONLY_STRONG/artifacts/runs/c00_20261019_143519_0c8a72dc/reports/technical_report.md",
+  "wall_seconds": 2.854,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

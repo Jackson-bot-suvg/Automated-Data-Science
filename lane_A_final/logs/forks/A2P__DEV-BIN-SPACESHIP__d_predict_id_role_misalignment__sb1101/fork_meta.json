@@ -1,0 +1,37 @@
+{
+  "candidate_hash": "0b85ee547404b337386b77128e7e864bb1d12af3f48138b8f49abe6edc25c9a9",
+  "contract_digest": "aa472065b3f5d0a619a54aed8446740b87f61b57780ed60714b70396682c4736",
+  "fit_seconds_prefix": 13.843,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_pairing_digest": "9629409511e364e5a720bf64c2a6be2d220ff9e3cd46f281d4277d32c6fe29d3",
+      "before_pairing_digest": "b899b2599500a3f2cca22a7926ebeaab6719cea2db8bee89c80b0d8d20d90b41",
+      "fixed_points": 0,
+      "id_columns": [
+        "PassengerId"
+      ],
+      "n_rows": 1739,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "Transported"
+      ]
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-BIN-SPACESHIP__d_predict_id_role_misalignment__sb1101",
+  "prefix_run_id": "A2P__DEV-BIN-SPACESHIP__d_predict_id_role_misalignment__sb1101",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "1b668dfd6a1a135332ae15f0596e9bf2b5b24a0691438c1bae6a176660865b91",
+  "state_hash": "c79cdd11efdc9c4ecdac09134bbac85cb4e33466774b3785f17a67ffa7ce92fa",
+  "visible_evidence_hash": "2f8ddfa44e8023b6d69acff3cfa5bd8892de19ae69313b07c554c4b612333d77"
+}

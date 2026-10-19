@@ -1,0 +1,20 @@
+{
+  "host_id": "host-macA-14c-24g",
+  "os": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "macos": "26.5",
+  "machine": "arm64",
+  "cpu_count": 14,
+  "cpu_brand": "Apple M4 Pro",
+  "memory_bytes": 25769803776,
+  "gpu": "not used (CPU-only sklearn/xgboost/lightgbm)",
+  "python": "3.13.1",
+  "llm_service": {
+    "provider": "DeepSeek (api.deepseek.com, OpenAI-compatible)",
+    "requested_model": "deepseek/deepseek-flash",
+    "returned_model_field": "deepseek-flash (from every logged response; see results/run_level.csv returned_model_ids)",
+    "provider_display_name": "DeepSeek-V4.1-Flash (GET /models on 2026-10-19)",
+    "dated_snapshot_id": "not exposed by the API"
+  },
+  "langsmith": "disabled for all lane-A runs",
+  "recorded_at": "2026-10-19"
+}

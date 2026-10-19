@@ -1,0 +1,5 @@
+base_repository: https://github.com/Jackson-bot-suvg/Automated-Data-Science.git
+base_commit: b9dbebed269f62767e149b93a02f71051efc1027   (2026-08-24 "docs: add industrial architecture overview")
+manuscript_code_sha: NOT GIVEN in the manuscript -> F0 = public-release F0 (deviation D-02)
+local_project_copy: /Users/jacksonzhang/Desktop/26S1_CS33-2 - every tracked runtime file (app/, main.py, run_multiagent.py, pyproject.toml, requirements.txt) is byte-identical to b9dbebe; uv.lock differs only because 'uv sync' re-locked it on 2026-10-19 (deviation D-10)
+lane_A_branch_sha: lane A ships no edit to the base tree; its code is the adapter tree under src/ (see logs/implementation_sha.json)
