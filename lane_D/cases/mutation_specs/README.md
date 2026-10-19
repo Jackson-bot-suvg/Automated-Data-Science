@@ -1,0 +1,1 @@
+No mutations are implemented or used in D0. P0/P1/P2 are semantically equivalent task wording variants. D1 unseen fault templates are deliberately not created: current work is natural-only and TRANSFER has not been frozen or unsealed.

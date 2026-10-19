@@ -1,0 +1,128 @@
+{
+  "DEV-SPACESHIP-TITANIC": {
+    "dataset": "data/spaceship_titanic",
+    "target_columns": [
+      "Transported"
+    ],
+    "id_columns": [
+      "PassengerId"
+    ],
+    "primary_metric": "accuracy",
+    "prediction_kind": "label",
+    "evidence": "data/spaceship_titanic/overview.txt",
+    "evidence_sha": "e72390805cdf89a4e023a8301aa722a1035558c21085ce94a42394acedad4856",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-ACADEMIC-SUCCESS": {
+    "dataset": "data/classification_with_an_academic_success_dataset",
+    "target_columns": [
+      "Target"
+    ],
+    "id_columns": [
+      "id"
+    ],
+    "primary_metric": "accuracy",
+    "prediction_kind": "label",
+    "evidence": "data/classification_with_an_academic_success_dataset/overview.txt",
+    "evidence_sha": "447fb35eca46132b817d60f44f2beeb686029c728ef450583d0caa426b4c3768",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-HOUSE-PRICES": {
+    "dataset": "data/house_prices",
+    "target_columns": [
+      "SalePrice"
+    ],
+    "id_columns": [
+      "Id"
+    ],
+    "primary_metric": "log_rmse",
+    "prediction_kind": "continuous",
+    "evidence": "data/house_prices/overview.txt",
+    "evidence_sha": "2fb3f73acca113090ecb8e3d0e4202dba7eb42116f35cdf3272f509beeef8929",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-PLATE-DEFECT": {
+    "dataset": "data/plate_defect",
+    "target_columns": [
+      "Pastry",
+      "Z_Scratch",
+      "K_Scatch",
+      "Stains",
+      "Dirtiness",
+      "Bumps",
+      "Other_Faults"
+    ],
+    "id_columns": [
+      "id"
+    ],
+    "primary_metric": "roc_auc_macro_ovr",
+    "prediction_kind": "probability",
+    "evidence": "data/plate_defect/overview.txt",
+    "evidence_sha": "c4b098f81a6771b783d0829a34ab63b13b6c71188b9819efc46245c44fa0a826",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-TITANIC-AUTOKAGGLE": {
+    "dataset": "data/titanic_autokaggle",
+    "target_columns": [
+      "Survived"
+    ],
+    "id_columns": [
+      "PassengerId"
+    ],
+    "primary_metric": "accuracy",
+    "prediction_kind": "label",
+    "evidence": "data/titanic_autokaggle/overview.txt",
+    "evidence_sha": "0bebd0c2c312335524fda9d2c73158604f89b83b536856e79dbb458c8bd24ace",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-BANK-CHURN": {
+    "dataset": "data/bank_churn",
+    "target_columns": [
+      "Exited"
+    ],
+    "id_columns": [
+      "id"
+    ],
+    "primary_metric": "roc_auc",
+    "prediction_kind": "probability",
+    "evidence": "data/bank_churn/overview.txt",
+    "evidence_sha": "37b3563a027bd09a99a7dee89a3829a24dc402c3981c458b4517ec78fafcae6c",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-GHOULS": {
+    "dataset": "data/ghouls_goblins_and_ghosts_boo",
+    "target_columns": [
+      "type"
+    ],
+    "id_columns": [
+      "id"
+    ],
+    "primary_metric": "accuracy",
+    "prediction_kind": "label",
+    "evidence": "data/ghouls_goblins_and_ghosts_boo/overview.txt",
+    "evidence_sha": "c4c82ebc3d35074f689f19b6bc1f8003610bc0868f8734ca6614af01000e5c83",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  },
+  "DEV-OBESITY-RISKS": {
+    "dataset": "data/obesity_risks",
+    "target_columns": [
+      "NObeyesdad"
+    ],
+    "id_columns": [
+      "id"
+    ],
+    "primary_metric": "accuracy",
+    "prediction_kind": "label",
+    "evidence": "data/obesity_risks/overview.txt",
+    "evidence_sha": "0dc6eb5817f0041ccdbf422d7f6474434e70810c949bbff39a415c238f7cbea8",
+    "private_test_score": "unavailable",
+    "scope": "original task intent; not private label oracle"
+  }
+}

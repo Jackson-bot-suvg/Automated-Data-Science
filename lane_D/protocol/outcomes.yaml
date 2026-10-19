@@ -1,0 +1,9 @@
+S1: direct correct delivery; requires valid artifact and positive action evidence
+S2: repaired correct delivery; requires actual semantic repair evidence; not inferred from retry count
+S3: justified stop or clarification; requires offline adjudication
+S4: unnecessary abort on an original solvable task
+S5: syntactically valid but positively evidenced semantic error
+S6: invalid schema, row, ID or value-domain artifact
+S7: visible execution failure without valid-looking semantic-error delivery
+S8: budget, API, hardware or observation infrastructure failure
+priority: S5 valid-looking error first; then S8 resource; S7 crash; justified/unjustified stop; S6 invalid artifact; verified S1/S2

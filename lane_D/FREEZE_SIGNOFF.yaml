@@ -1,0 +1,50 @@
+# FREEZE_SIGNOFF.yaml - RTS-TAI-PARALLEL-v4.0 shared sign-off snapshot.
+# STATUS: UNSIGNED.  This is the empty template carried by lane A, NOT a signed freeze.
+# Under protocol §9 G0 this means lane A may only run DEV.  Replace every [待填] with the
+# coordinator's signed snapshot (same file in all four lanes) before any CONF/TRANSFER run.
+protocol_id: RTS-TAI-PARALLEL-v4.0
+protocol_date: 2026-10-10
+status: PRE-FREEZE
+signed: false
+sha256_of_this_file_after_signing: "[待填]"
+section_11:
+  1_original_repo_and_base_commit:
+    repository: "[待填]  (lane A used https://github.com/Jackson-bot-suvg/Automated-Data-Science.git)"
+    base_commit: "[待填]  (lane A used b9dbebed269f62767e149b93a02f71051efc1027)"
+    old_fault_packages_available: "[待填]  (lane A found none in the base commit or project folder)"
+    method_adapter_owners: "[待填]"
+  2_conf_tasks:
+    task_registry_public_sha256: "[待填]"
+    CONF-BIN-01: "[具体数据待冻结]"
+    CONF-BIN-02: "[待冻结]"
+    CONF-BIN-03: "[待冻结]"
+    CONF-MC-01: "[具体数据待冻结]"
+    CONF-MC-02: "[待冻结]"
+    CONF-MC-03: "[待冻结]"
+    CONF-ML-01: "[具体数据待冻结]"
+    CONF-ML-02: "[待冻结]"
+    CONF-ML-03: "[待冻结]"
+    CONF-REG-01: "[具体数据待冻结]"
+    CONF-REG-02: "[待冻结]"
+    CONF-REG-03: "[待冻结]"
+    transfer_registry_sealed_commitment_sha256: "[待填]"
+  3_f0_m2_f1:
+    f0_switches: "[待填]  (lane A audit: see results/A0/A0_method_diff.md)"
+    m2_exists_and_differs_from_f0: "[待填]  (lane A finding: see A3 section of the evidence report)"
+    f1_planned: "[待填]"
+  4_run_budget:
+    wall_clock_per_run: "[待填]"
+    llm_quota: "[待填]"
+    machine: "[待填]"
+    concurrency: "[待填]"
+    api_model_id_version_temperature: "[待填]"
+    provider_limits: "[待填]"
+  5_statistics:
+    robustness_strata: "[待填]"
+    confirmatory_main_effect: "[待填]"
+    tolerance_5pp_20pct_approved: "[待填]"
+  6_hashes_and_signatures:
+    public_files_sha256: "[待填]"
+    signed_at: "[待填]"
+    signed_by: "[待填]"
+    transfer_unseal_time_and_owner: "[待填]"

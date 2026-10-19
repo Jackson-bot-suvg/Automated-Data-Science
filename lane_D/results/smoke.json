@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "type": "offline deterministic fallback; no model API",
+  "runs": [
+    {
+      "dataset": "titanic_autokaggle",
+      "observed": false,
+      "path": "tmp/smoke/titanic_autokaggle-False-722376",
+      "signature": {
+        "execution_status": "completed",
+        "target_columns": [
+          "Survived"
+        ],
+        "primary_metric": "roc_auc",
+        "review_status": "approved",
+        "artifact_sha": "3c56003b983d2c440735ce70104d5f039490c6d8b28c50d723ab0d79b9f9841c",
+        "best_model": "HistGradientBoosting"
+      }
+    },
+    {
+      "dataset": "titanic_autokaggle",
+      "observed": true,
+      "path": "tmp/smoke/titanic_autokaggle-True-45083b",
+      "signature": {
+        "execution_status": "completed",
+        "target_columns": [
+          "Survived"
+        ],
+        "primary_metric": "roc_auc",
+        "review_status": "approved",
+        "artifact_sha": "3c56003b983d2c440735ce70104d5f039490c6d8b28c50d723ab0d79b9f9841c",
+        "best_model": "HistGradientBoosting"
+      }
+    },
+    {
+      "dataset": "ghouls_goblins_and_ghosts_boo",
+      "observed": false,
+      "path": "tmp/smoke/ghouls_goblins_and_ghosts_boo-False-89ed20",
+      "signature": {
+        "execution_status": "completed",
+        "target_columns": [
+          "type"
+        ],
+        "primary_metric": "f1_macro",
+        "review_status": "approved",
+        "artifact_sha": "e88f2aff0fe13ef8d932ab5dcf0b1724932e13d47103308a96d367c76f4a87a7",
+        "best_model": "LogisticRegression"
+      }
+    },
+    {
+      "dataset": "ghouls_goblins_and_ghosts_boo",
+      "observed": true,
+      "path": "tmp/smoke/ghouls_goblins_and_ghosts_boo-True-f87ac6",
+      "signature": {
+        "execution_status": "completed",
+        "target_columns": [
+          "type"
+        ],
+        "primary_metric": "f1_macro",
+        "review_status": "approved",
+        "artifact_sha": "e88f2aff0fe13ef8d932ab5dcf0b1724932e13d47103308a96d367c76f4a87a7",
+        "best_model": "LogisticRegression"
+      }
+    }
+  ]
+}

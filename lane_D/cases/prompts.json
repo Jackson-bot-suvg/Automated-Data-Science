@@ -1,0 +1,218 @@
+[
+  {
+    "task_id": "DEV-SPACESHIP-TITANIC",
+    "prompt_id": "P0",
+    "task": "predict whether transported",
+    "prompt_sha": "be745daae1faa832529b7c9c6a83bddc4ce76300cf45e33b827a0b750c595845",
+    "dataset": "data/spaceship_titanic",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-SPACESHIP-TITANIC",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict whether transported. Produce predictions for the supplied test rows.",
+    "prompt_sha": "572df3fa510d6e1404292629eb65ef4b785154d04a02f4598ff1670f75588f4e",
+    "dataset": "data/spaceship_titanic",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-SPACESHIP-TITANIC",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict whether transported. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "c111380239ac6851db4799a5796c4a00227cb3774081cc990b6f6163b55136b6",
+    "dataset": "data/spaceship_titanic",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-ACADEMIC-SUCCESS",
+    "prompt_id": "P0",
+    "task": "predict academic success",
+    "prompt_sha": "0effcbfb99eb15bcc95fd99bcf733b0a87093fee92516afb15e7be184d1e5a42",
+    "dataset": "data/classification_with_an_academic_success_dataset",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-ACADEMIC-SUCCESS",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict academic success. Produce predictions for the supplied test rows.",
+    "prompt_sha": "3e464a1aaf25fed336cee6cd7ca2857b7300b77b6bc24f92d793a5c5c2526907",
+    "dataset": "data/classification_with_an_academic_success_dataset",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-ACADEMIC-SUCCESS",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict academic success. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "4b6599a0c8e1ccde315b7e8af956d15890905b26afd245843b1c81c78d7a1a08",
+    "dataset": "data/classification_with_an_academic_success_dataset",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-HOUSE-PRICES",
+    "prompt_id": "P0",
+    "task": "predict house sale price",
+    "prompt_sha": "278d5decd021bbfb00721e3130da41822108cf500d8b5f84da7bc93afdac8956",
+    "dataset": "data/house_prices",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-HOUSE-PRICES",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict house sale price. Produce predictions for the supplied test rows.",
+    "prompt_sha": "7009628785c1e606df6ed9597f9b353c0b7a174c03b69c7b1afcdcf57c416ef0",
+    "dataset": "data/house_prices",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-HOUSE-PRICES",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict house sale price. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "a578e0f49d2c46ef0edb97f0124c56299449718a086f9a62a39ffe3bbcbbd933",
+    "dataset": "data/house_prices",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-PLATE-DEFECT",
+    "prompt_id": "P0",
+    "task": "predict steel plate defect types",
+    "prompt_sha": "5e4d4af1d6d8aae7725ae8ed8479c4e75babb3436f388bb4f4e25dcfdf835e18",
+    "dataset": "data/plate_defect",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-PLATE-DEFECT",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict steel plate defect types. Produce predictions for the supplied test rows.",
+    "prompt_sha": "7fdf60e288518060beaf9e7d86bfcd6131b809baeebcfe6822de8f3a3cb2e210",
+    "dataset": "data/plate_defect",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-PLATE-DEFECT",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict steel plate defect types. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "7cf5913f89f9d8bb328b01867d16294faffd42c273e2a65a8b0e8efbd0b3cbe9",
+    "dataset": "data/plate_defect",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-TITANIC-AUTOKAGGLE",
+    "prompt_id": "P0",
+    "task": "predict survival",
+    "prompt_sha": "1423150da0f8f289018c0fc96952007a1b8346dbf2876e46d8541b3e25f4a39a",
+    "dataset": "data/titanic_autokaggle",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-TITANIC-AUTOKAGGLE",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict survival. Produce predictions for the supplied test rows.",
+    "prompt_sha": "8e760dcdc832a9050a8008bf250edc15913b28eb7108759ba24dbe229646a972",
+    "dataset": "data/titanic_autokaggle",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-TITANIC-AUTOKAGGLE",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict survival. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "20278c85236467934ecf03db4f343c086f30d22cc968e3f5398737b4a9bf69ef",
+    "dataset": "data/titanic_autokaggle",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-BANK-CHURN",
+    "prompt_id": "P0",
+    "task": "predict customer churn",
+    "prompt_sha": "0ad4c54410db786aa08393a0238d3d70fe3fb53fc0deae118d66cb28c81ae8fd",
+    "dataset": "data/bank_churn",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-BANK-CHURN",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict customer churn. Produce predictions for the supplied test rows.",
+    "prompt_sha": "fad76b4c680a41b9d74c85f431cba176cc71ab980a661519faa116cc3c59aec1",
+    "dataset": "data/bank_churn",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-BANK-CHURN",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict customer churn. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "e665ab1348f96fb2fa6e267ae91ab196ee6b94d036be8c82a5cfe5f7abf85cc6",
+    "dataset": "data/bank_churn",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-GHOULS",
+    "prompt_id": "P0",
+    "task": "classify creature type",
+    "prompt_sha": "706299bbcb666c4233fe2a8953350e1543730643ba5a815b2c88f4d6bdcfd071",
+    "dataset": "data/ghouls_goblins_and_ghosts_boo",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-GHOULS",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to classify creature type. Produce predictions for the supplied test rows.",
+    "prompt_sha": "5079d8e79ae43697991f1d89db85e89f8becd64dd4febbcefe0016daf5ea57e8",
+    "dataset": "data/ghouls_goblins_and_ghosts_boo",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-GHOULS",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: classify creature type. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "5b53b47a0382291d595ca1a273a3cba1a5a2212aed12ea55dd282e4dbe572209",
+    "dataset": "data/ghouls_goblins_and_ghosts_boo",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-OBESITY-RISKS",
+    "prompt_id": "P0",
+    "task": "predict obesity risk level",
+    "prompt_sha": "df81073cab8abf344b235fd5e2fbfdcb625ab890458bc4165751f8d9bf604a7f",
+    "dataset": "data/obesity_risks",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-OBESITY-RISKS",
+    "prompt_id": "P1",
+    "task": "Use the supplied training data to predict obesity risk level. Produce predictions for the supplied test rows.",
+    "prompt_sha": "73f07a3b19f2308f0abbeb6688a3b7253ac8d63cffe80514ac6c1911db24376d",
+    "dataset": "data/obesity_risks",
+    "target_hint": "",
+    "metric_hint": ""
+  },
+  {
+    "task_id": "DEV-OBESITY-RISKS",
+    "prompt_id": "P2",
+    "task": "Complete this data-science task: predict obesity risk level. Follow the original dataset documentation and sample submission when preparing the final CSV.",
+    "prompt_sha": "0771bbf09f4a8220972e1773d4b6e8ea90f86c135c3373fb18593cf70dc291c3",
+    "dataset": "data/obesity_risks",
+    "target_hint": "",
+    "metric_hint": ""
+  }
+]
