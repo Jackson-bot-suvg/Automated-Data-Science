@@ -1,0 +1,9 @@
+id,date,category,description,consequence
+D-01,2026-10-19,user_scope,"User requests original data without fault injection; API-free preparation first",No live execution until credentials supplied
+D-02,2026-10-19,protocol_gate,"Shared freeze unsigned; CONF and TRANSFER unavailable",DEV preparation only
+D-03,2026-10-19,method_overlap,"F0 and strong M2 retain same structural post-intake checks",No artificial superiority contrast
+D-04,2026-10-19,seeds,"Original estimator seeds retained; process seeds vary; API seed unsupported",Do not claim independent model randomness
+D-05,2026-10-19,oracle,"Original test truth unavailable; original files unchanged",Contract and artifact audit only; no private test score
+D-06,2026-10-19,environment,"Independent Python 3.13.15 environment resolves requirements; differs from lane A",Exact versions locked; no cross-lane numeric comparisons
+D-07,2026-10-19,transfer,"Second host/model not available and sealed tasks not opened",D1/D2 not tested
+D-08,2026-10-19,ablation,"M0 removes only intake target semantic failures while reader and structural checks remain",Reviewer-only ablation, not a fully unconstrained agent

@@ -1,0 +1,13 @@
+F0_ORIGINAL:
+  implementation: untouched original app; read-only hooks
+  qualification: offline hook equivalence required; live reproducibility pending
+M2_INTAKE_ONLY_STRONG:
+  implementation: same reader and intake; retain all structural phase checks
+  scope_overlap: later F0 checks compare current schema against current state, not a frozen semantic intent
+  executable_difference_from_F0: none
+M0_NO_SEMANTIC_ENFORCEMENT:
+  implementation: suppress intake failure prefixes 'target unresolved:' and 'target leakage:' only
+  retained: original reader resolution, missing file checks, submission schema checks, later structural reviewers, routing and resource limits
+  limitation: reviewer-only ablation; reader still resolves target contract; not an independent unguided agent
+F1_EXTENDED:
+  implemented: false

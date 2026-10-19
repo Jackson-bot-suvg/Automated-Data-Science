@@ -1,0 +1,5 @@
+Original reference commit: b9dbebed269f62767e149b93a02f71051efc1027
+Supplied base: Automated-Data-Science-main (source archive; no Git metadata)
+117 original app/data files matched the previous experiment base byte-for-byte.
+Runtime verification: protocol/base_code_files.csv and protocol/source_files.csv.
+No base files modified.

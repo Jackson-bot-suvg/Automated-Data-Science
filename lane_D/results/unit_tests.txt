@@ -1,0 +1,4 @@
+25 passed in 0.45s
+Validation: temporary copy against supplied Automated-Data-Science-main; original offline frames used for trajectory replay.
+Fresh submission without regenerated frames: 22 pass / 3 skip; --smoke regenerates the required frames.
+No live API calls or model experiments.

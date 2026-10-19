@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "base": "../Automated-Data-Science-main",
+  "base_is_git_checkout": false,
+  "matched_original_app_data_files": 117,
+  "dry_run": {
+    "dev_cells": 144,
+    "formal_cells": 504,
+    "real_runs_started": 0
+  },
+  "tests": {
+    "passed": 25,
+    "context": "Temporary copy; original offline smoke frames supplied for replay tests. No new API or workflow experiments."
+  },
+  "rebuild": "PASS in temporary directory; generated tables excluded from submission",
+  "runtime_base_validation": "exact app file set and SHA256; original data SHA256",
+  "original_main_source_changes": false,
+  "removed_from_submission": [
+    "duplicate repository and dataset",
+    "virtual environment",
+    "temporary runs and caches",
+    "duplicate archive/report",
+    "empty result tables",
+    "full duplicated taskbook",
+    "redundant full-state snapshots"
+  ]
+}

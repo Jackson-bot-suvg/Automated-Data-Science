@@ -1,0 +1,10 @@
+{
+  "run_id": "titanic_autokaggle-False-722376",
+  "run_dir": "/Users/ruoxuanchen/Documents/论文/lane_D/repo/experiments/lane_D_final/tmp/smoke/titanic_autokaggle-False-722376",
+  "task": "predict survival",
+  "dataset": "/Users/ruoxuanchen/Documents/论文/lane_D/repo/data/titanic_autokaggle",
+  "method_id": "F0_ORIGINAL",
+  "seed_block": 1101,
+  "observe": false,
+  "offline_smoke": true
+}

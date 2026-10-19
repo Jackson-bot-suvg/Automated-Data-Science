@@ -1,0 +1,26 @@
+protocol: RTS-TAI-PARALLEL-v4.0
+status: DEV_PLAN_ONLY_NO_LIVE_RUNS
+base_commit: b9dbebed269f62767e149b93a02f71051efc1027
+workflow: build_workflow(stop_after_technical_summary=True)
+model_requested: deepseek/deepseek-flash
+model_response_id: NOT_OBSERVED
+provider_base_url: https://api.deepseek.com
+model_display_name_requested_by_user: DeepSeek 4.1 Flash
+model_identity_verification: pending API response; do not equate marketing name with observed version
+seeds: [1101, 1102]
+seed_scope: Python random, numpy, PYTHONHASHSEED only; original estimator/CV random_state values retained
+llm_seed: unsupported by original ChatParams; process seed is a pairing identifier, not deterministic LLM control
+prompt_variants: 3
+dev_tasks: 8
+methods: [F0_ORIGINAL, M2_INTAKE_ONLY_STRONG, M0_NO_SEMANTIC_ENFORCEMENT]
+temperature: 0
+max_api_calls_per_run: 60
+hard_wall_seconds: 1800
+recursion_limit: 80
+concurrency: 1
+OMP_NUM_THREADS: 2
+original_max_attempts_per_phase: 3
+original_max_retries_per_phase: 2
+source_mutations: none
+private_test_labels: unavailable; no predictive accuracy claim
+formal_confirm_and_transfer: disabled until shared freeze and implementation complete

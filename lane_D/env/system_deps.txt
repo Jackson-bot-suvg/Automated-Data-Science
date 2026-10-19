@@ -1,0 +1,5 @@
+Python 3.13 (observed 3.13.15)
+Git
+OpenMP runtime (macOS: libomp)
+Poppler pdftoppm/pdfinfo (report visual verification only)
+ReportLab built-in STSong-Light CID font (Chinese PDF)
