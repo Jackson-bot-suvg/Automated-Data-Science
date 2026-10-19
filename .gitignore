@@ -1,0 +1,27 @@
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# local environments and secrets
+.venv/
+venv/
+.env
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# lane_B: task-book markdown is a local reading copy (the PDF is the committed artefact)
+lane_B/2.md
+
+# lane_B: per-case copies of the project's existing data are regenerable from data/ via `python -m lane_B.runner`
+lane_B/outputs/cases/*/data/train.csv
+lane_B/outputs/cases/*/data/test.csv
+lane_B/outputs/cases/*/data/sample_submission.csv
+lane_B/outputs/cases/*/data/overview.txt

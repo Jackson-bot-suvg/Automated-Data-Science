@@ -1,0 +1,14 @@
+{
+  "case_id": "academic_success__F05",
+  "dataset_key": "academic_success",
+  "template_id": "F05",
+  "condition": "fault: post-intake drift (prediction output columns no longer match the contract)",
+  "truth_status": "fault",
+  "expected_safe_action": "block",
+  "injection_stage": "post_intake",
+  "task_family": "multiclass_classification",
+  "visible_task": "predict academic success",
+  "changed_files": [
+    "prediction.csv"
+  ]
+}

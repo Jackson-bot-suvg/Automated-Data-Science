@@ -1,0 +1,14 @@
+{
+  "case_id": "house_prices__F05",
+  "dataset_key": "house_prices",
+  "template_id": "F05",
+  "condition": "fault: post-intake drift (prediction output columns no longer match the contract)",
+  "truth_status": "fault",
+  "expected_safe_action": "block",
+  "injection_stage": "post_intake",
+  "task_family": "regression",
+  "visible_task": "predict house sale price",
+  "changed_files": [
+    "prediction.csv"
+  ]
+}
