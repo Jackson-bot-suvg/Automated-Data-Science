@@ -1,0 +1,28 @@
+{
+  "error": {
+    "message": "fork point reached before reviewer@model_building"
+  },
+  "fit_seconds_total": 6.965,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "1e08705c41a378b3ba943fa49f8518cff8a1a1bcacaacff1d26c7dca13adbfc3",
+      "before_pairing_digest": "ae76c39a6187f2d0c32b4cb13987c690e21151353ca0a748ad14f4be7e360e7b",
+      "fixed_points": 0,
+      "id_columns": [
+        "id"
+      ],
+      "n_rows": 75,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "type"
+      ]
+    }
+  ],
+  "llm_calls": 8,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101",
+  "wall_seconds": 43.739
+}

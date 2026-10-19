@@ -1,0 +1,36 @@
+{
+  "error": {},
+  "fatal_errors": [
+    "[reader] target unresolved: training dataset is missing target column 'Transported'"
+  ],
+  "final_phase": "reader",
+  "fit_seconds_total": 0.0,
+  "injections_applied": [],
+  "latest_review_status": "fatal",
+  "llm_calls": 2,
+  "llm_errors": 0,
+  "model_state_prediction_path": "",
+  "outcome": "completed_graph",
+  "pending_review_phase": "reader",
+  "prediction_exists": false,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-BIN-SPACESHIP__b_unrecoverable_missing_target__sb1102__M5_BLOCK_ONLY/artifacts/runs/f01_20261019_143647_41348929/predictions/submission.csv",
+  "prediction_sha256": "",
+  "retry_count_by_phase": {
+    "reader": 1
+  },
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [
+        "target unresolved: training dataset is missing target column 'Transported'"
+      ],
+      "phase": "reader",
+      "status": "fatal"
+    }
+  ],
+  "run_id": "A2__DEV-BIN-SPACESHIP__b_unrecoverable_missing_target__sb1102__M5_BLOCK_ONLY",
+  "technical_report_path": "",
+  "wall_seconds": 2.06,
+  "workflow_aborted": true,
+  "workflow_completed": false
+}

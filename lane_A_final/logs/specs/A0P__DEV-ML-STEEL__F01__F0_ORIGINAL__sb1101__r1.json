@@ -1,0 +1,33 @@
+{
+  "base_commit": "b9dbebed269f62767e149b93a02f71051efc1027",
+  "budget": {
+    "llm_calls": 60,
+    "recursion_limit": 80,
+    "wall_seconds": 1800
+  },
+  "case_id": "DEV-ML-STEEL:F01",
+  "condition": "F01",
+  "host_id": "host-macA-14c-24g",
+  "injection": {},
+  "lane": "A",
+  "llm_mode": "live",
+  "method_id": "F0_ORIGINAL",
+  "mode": "full",
+  "model_id": "deepseek/deepseek-flash",
+  "observers": true,
+  "pair_id": "",
+  "plan_cell_id": "A0P__DEV-ML-STEEL__F01__F0_ORIGINAL__sb1101__r1",
+  "run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0P__DEV-ML-STEEL__F01__F0_ORIGINAL__sb1101__r1",
+  "run_id": "A0P__DEV-ML-STEEL__F01__F0_ORIGINAL__sb1101__r1",
+  "seed_block": 1101,
+  "stage": "A0-PROBE",
+  "task": {
+    "dataset": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/packages/DEV-ML-STEEL/F01",
+    "metric_hint": "roc_auc_macro_ovr",
+    "target": "Pastry,Z_Scratch,K_Scatch,Stains,Dirtiness,Bumps,Other_Faults",
+    "task": "predict steel plate defect types"
+  },
+  "task_id": "DEV-ML-STEEL",
+  "technical_only": true,
+  "template_id": "F01"
+}

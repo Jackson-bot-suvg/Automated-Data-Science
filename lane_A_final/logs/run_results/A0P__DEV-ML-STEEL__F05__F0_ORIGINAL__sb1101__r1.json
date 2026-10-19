@@ -1,0 +1,129 @@
+{
+  "error": {},
+  "fatal_errors": [
+    "[model_building] artifact 'model_results' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/model_results.json",
+    "[model_building] artifacts.phase_plan_records.model_building is empty",
+    "[model_building] artifact 'best_model' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/best_model.pkl",
+    "[model_building] artifact 'prediction_file' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv",
+    "[model_building] model_state.prediction_path does not point to artifacts.prediction_file",
+    "[model_building] model_state.candidate_models is empty",
+    "[model_building] model_state.best_model_name is empty",
+    "[model_building] prediction_file is not a readable CSV at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv"
+  ],
+  "final_phase": "model_building",
+  "fit_seconds_total": 0.189,
+  "injections_applied": [
+    {
+      "after_sha256": "3ec45ed451a55b74a0405c780d76611f24b15d4efb5141253a3786046b837d7b",
+      "after_target_columns": [
+        "Steel_Plate_Thickness"
+      ],
+      "before_sha256": "887eaf573e235de84f09362653a08da6b78f0fa3b0c81b392f40a0189b84a199",
+      "before_target_columns": [
+        "Pastry",
+        "Z_Scratch",
+        "K_Scatch",
+        "Stains",
+        "Dirtiness",
+        "Bumps",
+        "Other_Faults"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "latest_review_status": "fatal",
+  "llm_calls": 13,
+  "llm_errors": 0,
+  "model_state_prediction_path": "",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": false,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0P__DEV-ML-STEEL__F05__F0_ORIGINAL__sb1101__r1/artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv",
+  "prediction_sha256": "",
+  "retry_count_by_phase": {
+    "model_building": 3
+  },
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [
+        "artifact 'model_results' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/model_results.json",
+        "artifacts.phase_plan_records.model_building is empty",
+        "artifact 'best_model' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/best_model.pkl",
+        "artifact 'prediction_file' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv",
+        "model_state.prediction_path does not point to artifacts.prediction_file",
+        "model_state.candidate_models is empty",
+        "model_state.best_model_name is empty",
+        "prediction_file is not a readable CSV at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv"
+      ],
+      "phase": "model_building",
+      "status": "retry"
+    },
+    {
+      "attempt": 2,
+      "blocking_failures": [
+        "artifact 'model_results' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/model_results.json",
+        "artifacts.phase_plan_records.model_building is empty",
+        "artifact 'best_model' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/best_model.pkl",
+        "artifact 'prediction_file' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv",
+        "model_state.prediction_path does not point to artifacts.prediction_file",
+        "model_state.candidate_models is empty",
+        "model_state.best_model_name is empty",
+        "prediction_file is not a readable CSV at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv"
+      ],
+      "phase": "model_building",
+      "status": "retry"
+    },
+    {
+      "attempt": 3,
+      "blocking_failures": [
+        "artifact 'model_results' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/model_results.json",
+        "artifacts.phase_plan_records.model_building is empty",
+        "artifact 'best_model' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/models/best_model.pkl",
+        "artifact 'prediction_file' does not exist at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv",
+        "model_state.prediction_path does not point to artifacts.prediction_file",
+        "model_state.candidate_models is empty",
+        "model_state.best_model_name is empty",
+        "prediction_file is not a readable CSV at artifacts/runs/c00_20261019_142856_c8fe16cb/predictions/submission.csv"
+      ],
+      "phase": "model_building",
+      "status": "fatal"
+    }
+  ],
+  "run_id": "A0P__DEV-ML-STEEL__F05__F0_ORIGINAL__sb1101__r1",
+  "technical_report_path": "",
+  "wall_seconds": 55.597,
+  "workflow_aborted": true,
+  "workflow_completed": false
+}

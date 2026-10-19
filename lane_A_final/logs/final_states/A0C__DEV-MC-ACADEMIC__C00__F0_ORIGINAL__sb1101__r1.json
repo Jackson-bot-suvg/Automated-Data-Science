@@ -1,0 +1,2919 @@
+{
+  "task_config": {
+    "task_id": "A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1-run-b61d33ea",
+    "task_type": "",
+    "target_column": "",
+    "target_columns": [],
+    "raw_task": "predict academic success",
+    "dataset_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset",
+    "target_hint": "Target",
+    "metric_hint": "f1_macro",
+    "dataset_paths": {
+      "train": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/train.csv",
+      "test": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/test.csv",
+      "submission": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/sample_submission.csv"
+    },
+    "business_context": "predict academic success",
+    "constraints": {
+      "max_runtime_min": null,
+      "max_tokens": null,
+      "interpretability_required": true,
+      "business_translation_required": true
+    }
+  },
+  "problem_understanding": {
+    "task_summary": "Multiclass classification of higher-education academic outcomes, predicting whether each student is Dropout, Enrolled, or Graduate.",
+    "predicted_task_type": "multiclass_classification",
+    "target_column": "",
+    "target_columns": [],
+    "candidate_metrics": [
+      "f1_macro"
+    ],
+    "data_overview": {
+      "n_rows": 76518,
+      "n_cols": 38,
+      "column_types": {
+        "id": "int64",
+        "Marital status": "int64",
+        "Application mode": "int64",
+        "Application order": "int64",
+        "Course": "int64",
+        "Daytime/evening attendance": "int64",
+        "Previous qualification": "int64",
+        "Previous qualification (grade)": "float64",
+        "Nacionality": "int64",
+        "Mother's qualification": "int64",
+        "Father's qualification": "int64",
+        "Mother's occupation": "int64",
+        "Father's occupation": "int64",
+        "Admission grade": "float64",
+        "Displaced": "int64",
+        "Educational special needs": "int64",
+        "Debtor": "int64",
+        "Tuition fees up to date": "int64",
+        "Gender": "int64",
+        "Scholarship holder": "int64",
+        "Age at enrollment": "int64",
+        "International": "int64",
+        "Curricular units 1st sem (credited)": "int64",
+        "Curricular units 1st sem (enrolled)": "int64",
+        "Curricular units 1st sem (evaluations)": "int64",
+        "Curricular units 1st sem (approved)": "int64",
+        "Curricular units 1st sem (grade)": "float64",
+        "Curricular units 1st sem (without evaluations)": "int64",
+        "Curricular units 2nd sem (credited)": "int64",
+        "Curricular units 2nd sem (enrolled)": "int64",
+        "Curricular units 2nd sem (evaluations)": "int64",
+        "Curricular units 2nd sem (approved)": "int64",
+        "Curricular units 2nd sem (grade)": "float64",
+        "Curricular units 2nd sem (without evaluations)": "int64",
+        "Unemployment rate": "float64",
+        "Inflation rate": "float64",
+        "GDP": "float64",
+        "Target": "str"
+      },
+      "missingness_summary": {}
+    },
+    "risks": [
+      "Class distribution is not summarized in the provided metadata; macro-F1 may be sensitive to class imbalance if present.",
+      "The overview states accuracy as the evaluation metric, while resolved workflow metadata specifies f1_macro; metric choice should be confirmed.",
+      "The dataset is synthetically generated and may contain artifacts or distribution differences from the original UCI dataset.",
+      "Coded categorical features with many levels, such as Course and Application mode, require careful encoding to limit overfitting.",
+      "The id column should be excluded from model features to avoid leakage."
+    ],
+    "business_goal_summary": "The goal is to predict academic risk and success for students in higher education by classifying outcomes as Dropout, Enrolled, or Graduate. This can support timely identification of students who may need academic or retention-focused support."
+  },
+  "target_spec": {
+    "status": "resolved",
+    "target_columns": [
+      "Target"
+    ],
+    "target_mode": "single_target",
+    "task_family": "multiclass_classification",
+    "prediction_kind": "label",
+    "user_target_hint": "Target",
+    "user_task_family_hint": "",
+    "submission": {
+      "id_columns": [
+        "id"
+      ],
+      "output_columns": [
+        "Target"
+      ],
+      "submission_columns": [
+        "id",
+        "Target"
+      ],
+      "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/sample_submission.csv"
+    },
+    "evaluation": {
+      "metric_hint": "f1_macro",
+      "primary_metric": "f1_macro",
+      "candidate_metrics": [
+        "f1_macro"
+      ]
+    },
+    "evidence": [
+      {
+        "source": "compatibility_fields",
+        "detail": "Used explicit target columns provided in the incoming state.",
+        "columns": [
+          "Target"
+        ]
+      }
+    ]
+  },
+  "execution_plan": {
+    "phases": [
+      "preliminary_eda",
+      "data_cleaning",
+      "indepth_eda",
+      "feature_engineering",
+      "model_building"
+    ],
+    "phase_objectives": {
+      "preliminary_eda": "Profile the dataset, summarize schema, and create EDA evidence for later planning.",
+      "data_cleaning": "Create cleaned train/test datasets and a traceable cleaning report.",
+      "indepth_eda": "Perform in-depth EDA to uncover hidden patterns and insights.",
+      "feature_engineering": "Create aligned engineered feature datasets and feature summary artifacts.",
+      "model_building": "Train candidate models, select the best model, and produce prediction artifacts with metric evidence."
+    },
+    "success_criteria": {
+      "preliminary_eda": {
+        "criteria": [
+          "artifacts.preliminary_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "profile_dataset",
+          "missingness_visualization",
+          "basic_distribution_visualization"
+        ],
+        "agent_plan": {
+          "plan_name": "preliminary_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "data_cleaning": {
+        "criteria": [
+          "artifacts.cleaned_train_data and artifacts.cleaned_test_data exist",
+          "data_state.current_train_path and current_test_path point to cleaned files"
+        ],
+        "allowed_tools": [
+          "drop_columns",
+          "fill_missing",
+          "clip_outliers"
+        ],
+        "agent_plan": {
+          "plan_name": "data_cleaning_pending_plan",
+          "steps": []
+        }
+      },
+      "indepth_eda": {
+        "criteria": [
+          "artifacts.indepth_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "target_analysis",
+          "feature_feature_relationships",
+          "outlier_analysis",
+          "segment_analysis"
+        ],
+        "agent_plan": {
+          "plan_name": "indepth_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "feature_engineering": {
+        "criteria": [
+          "feature_state.engineered_train_path and engineered_test_path exist",
+          "feature_state.selected_features is populated"
+        ],
+        "allowed_tools": [
+          "extract_regex",
+          "create_binning",
+          "create_interaction",
+          "group_rare_categories",
+          "encode_categorical"
+        ],
+        "agent_plan": {
+          "plan_name": "feature_engineering_pending_plan",
+          "steps": []
+        }
+      },
+      "model_building": {
+        "criteria": [
+          "artifacts.model_results, artifacts.best_model, and artifacts.prediction_file exist",
+          "model_state.best_model_name and validation metrics are populated"
+        ],
+        "allowed_tools": [
+          "detect_feature_types",
+          "build_preprocessor",
+          "get_candidate_models",
+          "fit_and_select_model",
+          "summarize_cv_results",
+          "compute_metric_bundle",
+          "build_submission",
+          "save_model_artifacts"
+        ],
+        "agent_plan": {
+          "plan_name": "model_building_tool_plan",
+          "steps": [
+            {
+              "tool": "configure_preprocessing",
+              "parameters": {
+                "numeric_impute": "median",
+                "scaler": "standard",
+                "cat_encode": "onehot",
+                "cat_impute": "most_frequent",
+                "onehot_max_cats": 20
+              },
+              "reasoning": "Set up a safe preprocessing pipeline for the engineered numeric feature matrix, with categorical handling available if needed, without touching protected Target or id columns."
+            },
+            {
+              "tool": "configure_candidate_models",
+              "parameters": {
+                "models": [
+                  {
+                    "name": "LogisticRegression"
+                  },
+                  {
+                    "name": "RandomForest"
+                  },
+                  {
+                    "name": "ExtraTrees"
+                  },
+                  {
+                    "name": "HistGradientBoosting"
+                  }
+                ]
+              },
+              "reasoning": "Use conservative, multiclass-compatible baseline models that are suitable for a 3-class classification task and keep the candidate set limited."
+            },
+            {
+              "tool": "configure_scoring",
+              "parameters": {
+                "primary_metric": "f1_macro"
+              },
+              "reasoning": "Align model selection with the resolved target contract, which specifies f1_macro as the primary metric for multiclass classification."
+            }
+          ]
+        }
+      }
+    },
+    "review_points": [
+      "Reviewer must validate required artifacts for the selected phase.",
+      "Reviewer must validate that phase-specific state fields are populated before advancing."
+    ],
+    "fallback_rules": [
+      "If reviewer requests retry, repeat the pending review phase.",
+      "If LLM output is unavailable or invalid, use deterministic phase order."
+    ]
+  },
+  "current_phase": "technical_summary",
+  "phase_history": [
+    "reader",
+    "preliminary_eda",
+    "preliminary_eda",
+    "data_cleaning",
+    "data_cleaning",
+    "indepth_eda",
+    "indepth_eda",
+    "feature_engineering",
+    "feature_engineering",
+    "model_building",
+    "model_building",
+    "technical_summary"
+  ],
+  "data_state": {
+    "raw_train_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/train.csv",
+    "raw_test_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/test.csv",
+    "current_train_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/data/cleaned_train.csv",
+    "current_test_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/data/cleaned_test.csv",
+    "schema_summary": {
+      "columns": [
+        "id",
+        "Marital status",
+        "Application mode",
+        "Application order",
+        "Course",
+        "Daytime/evening attendance",
+        "Previous qualification",
+        "Previous qualification (grade)",
+        "Nacionality",
+        "Mother's qualification",
+        "Father's qualification",
+        "Mother's occupation",
+        "Father's occupation",
+        "Admission grade",
+        "Displaced",
+        "Educational special needs",
+        "Debtor",
+        "Tuition fees up to date",
+        "Gender",
+        "Scholarship holder",
+        "Age at enrollment",
+        "International",
+        "Curricular units 1st sem (credited)",
+        "Curricular units 1st sem (enrolled)",
+        "Curricular units 1st sem (evaluations)",
+        "Curricular units 1st sem (approved)",
+        "Curricular units 1st sem (grade)",
+        "Curricular units 1st sem (without evaluations)",
+        "Curricular units 2nd sem (credited)",
+        "Curricular units 2nd sem (enrolled)",
+        "Curricular units 2nd sem (evaluations)",
+        "Curricular units 2nd sem (approved)",
+        "Curricular units 2nd sem (grade)",
+        "Curricular units 2nd sem (without evaluations)",
+        "Unemployment rate",
+        "Inflation rate",
+        "GDP",
+        "Target"
+      ]
+    },
+    "cleaning_summary": {
+      "no_action_needed": {
+        "reason": "Planner determined no cleaning action was required for the current dataset snapshot.",
+        "plan_name": "data_cleaning_no_action_needed"
+      }
+    },
+    "eda_findings": {
+      "dataset_shape": {
+        "rows": 76518,
+        "columns": 38
+      },
+      "target_variable": [
+        "Target"
+      ],
+      "columns": {
+        "id": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 38258.5,
+          "min": 0.0,
+          "max": 76517.0,
+          "nunique": 76518
+        },
+        "Marital status": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.1119344467968322,
+          "min": 1.0,
+          "max": 6.0,
+          "nunique": 6
+        },
+        "Application mode": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 16.054418568180036,
+          "min": 1.0,
+          "max": 53.0,
+          "nunique": 22
+        },
+        "Application order": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.644410465511383,
+          "min": 0.0,
+          "max": 9.0,
+          "nunique": 8
+        },
+        "Course": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 9001.286377061606,
+          "min": 33.0,
+          "max": 9991.0,
+          "nunique": 19
+        },
+        "Daytime/evening attendance": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.9153140437544107,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Previous qualification": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 3.6587600303196632,
+          "min": 1.0,
+          "max": 43.0,
+          "nunique": 21
+        },
+        "Previous qualification (grade)": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 132.37876578060065,
+          "min": 95.0,
+          "max": 190.0,
+          "nunique": 110
+        },
+        "Nacionality": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.2266002770589925,
+          "min": 1.0,
+          "max": 109.0,
+          "nunique": 18
+        },
+        "Mother's qualification": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 19.837632975247654,
+          "min": 1.0,
+          "max": 44.0,
+          "nunique": 35
+        },
+        "Father's qualification": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 23.425076452599388,
+          "min": 1.0,
+          "max": 44.0,
+          "nunique": 39
+        },
+        "Mother's occupation": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 8.583196110719047,
+          "min": 0.0,
+          "max": 194.0,
+          "nunique": 40
+        },
+        "Father's occupation": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 8.882171515199039,
+          "min": 0.0,
+          "max": 195.0,
+          "nunique": 56
+        },
+        "Admission grade": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 125.3639713928189,
+          "min": 95.0,
+          "max": 190.0,
+          "nunique": 668
+        },
+        "Displaced": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.5692647481638308,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Educational special needs": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.0037376826367652057,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Debtor": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.07138189706997046,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Tuition fees up to date": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.8936459395174992,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Gender": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.3158211139862516,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Scholarship holder": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.24739277032855014,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Age at enrollment": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 22.27865338874513,
+          "min": 17.0,
+          "max": 70.0,
+          "nunique": 46
+        },
+        "International": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.006625891946992864,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Curricular units 1st sem (credited)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.18887059254031732,
+          "min": 0.0,
+          "max": 20.0,
+          "nunique": 21
+        },
+        "Curricular units 1st sem (enrolled)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 5.8915157217909515,
+          "min": 0.0,
+          "max": 26.0,
+          "nunique": 24
+        },
+        "Curricular units 1st sem (evaluations)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 7.352361535847774,
+          "min": 0.0,
+          "max": 45.0,
+          "nunique": 36
+        },
+        "Curricular units 1st sem (approved)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 4.178520086776968,
+          "min": 0.0,
+          "max": 26.0,
+          "nunique": 23
+        },
+        "Curricular units 1st sem (grade)": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 9.995861915127637,
+          "min": 0.0,
+          "max": 18.875,
+          "nunique": 1206
+        },
+        "Curricular units 1st sem (without evaluations)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.057960218510677224,
+          "min": 0.0,
+          "max": 12.0,
+          "nunique": 12
+        },
+        "Curricular units 2nd sem (credited)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.13705271962152696,
+          "min": 0.0,
+          "max": 19.0,
+          "nunique": 20
+        },
+        "Curricular units 2nd sem (enrolled)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 5.9334143600198646,
+          "min": 0.0,
+          "max": 23.0,
+          "nunique": 22
+        },
+        "Curricular units 2nd sem (evaluations)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 7.234467706944772,
+          "min": 0.0,
+          "max": 33.0,
+          "nunique": 31
+        },
+        "Curricular units 2nd sem (approved)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 4.007200920044957,
+          "min": 0.0,
+          "max": 20.0,
+          "nunique": 21
+        },
+        "Curricular units 2nd sem (grade)": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 9.62608535073743,
+          "min": 0.0,
+          "max": 18.0,
+          "nunique": 1234
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.06244282391071382,
+          "min": 0.0,
+          "max": 12.0,
+          "nunique": 11
+        },
+        "Unemployment rate": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 11.520340312083434,
+          "min": 7.6,
+          "max": 16.2,
+          "nunique": 11
+        },
+        "Inflation rate": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.2282181970255364,
+          "min": -0.8,
+          "max": 3.7,
+          "nunique": 13
+        },
+        "GDP": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": -0.08092109046237485,
+          "min": -4.06,
+          "max": 3.51,
+          "nunique": 11
+        },
+        "Target": {
+          "dtype": "str",
+          "missing_rate": 0.0,
+          "type": "categorical",
+          "nunique": 3,
+          "top_values": {
+            "Graduate": 0.4741629420528503,
+            "Dropout": 0.33058888104759665,
+            "Enrolled": 0.19524817689955304
+          }
+        }
+      },
+      "class_distribution": {
+        "Target": {
+          "Graduate": 0.4741629420528503,
+          "Dropout": 0.33058888104759665,
+          "Enrolled": 0.19524817689955304
+        }
+      }
+    },
+    "indepth_eda_summary": {
+      "target_analysis": {
+        "Target": {
+          "variable": "Target",
+          "model_type": "multiclass_classification",
+          "summary": {
+            "count": 76518,
+            "unique": 3,
+            "top": "Graduate",
+            "freq": 36282
+          },
+          "value_counts": {
+            "Graduate": 36282,
+            "Dropout": 25296,
+            "Enrolled": 14940
+          }
+        }
+      },
+      "feature_feature_relationships": {
+        "Marital status": {
+          "Marital status": 1.0,
+          "Application mode": 0.3073239636901511,
+          "Application order": -0.11395145954629543,
+          "Course": 0.023141497800655993,
+          "Daytime/evening attendance": -0.32358702921036453,
+          "Previous qualification": 0.08406379607804379,
+          "Previous qualification (grade)": -0.037717276294622515,
+          "Nacionality": 0.004659553486982047,
+          "Mother's qualification": 0.19837285483528325,
+          "Father's qualification": 0.1448195794899415,
+          "Mother's occupation": 0.06969521049285277,
+          "Father's occupation": 0.054670940173503005,
+          "Admission grade": -0.03738777216461501,
+          "Displaced": -0.2161219246548748,
+          "Educational special needs": -0.011644083005156108,
+          "Debtor": 0.04914527094128707,
+          "Tuition fees up to date": -0.11019294643731624,
+          "Gender": 0.0317000152923378,
+          "Scholarship holder": -0.07563247904160736,
+          "Age at enrollment": 0.552403540155024,
+          "International": -0.004285780380623677,
+          "Curricular units 1st sem (credited)": 0.039837617259094266,
+          "Curricular units 1st sem (enrolled)": 0.007967856753525593,
+          "Curricular units 1st sem (evaluations)": 0.008847788555745188,
+          "Curricular units 1st sem (approved)": -0.10719825014888537,
+          "Curricular units 1st sem (grade)": -0.1046841840531484,
+          "Curricular units 1st sem (without evaluations)": 0.02351110336752483,
+          "Curricular units 2nd sem (credited)": 0.03726814894197051,
+          "Curricular units 2nd sem (enrolled)": -0.00517710925227244,
+          "Curricular units 2nd sem (evaluations)": -0.021254357755813618,
+          "Curricular units 2nd sem (approved)": -0.11136902876600208,
+          "Curricular units 2nd sem (grade)": -0.11121551647291963,
+          "Curricular units 2nd sem (without evaluations)": 0.025688520546485155,
+          "Unemployment rate": -0.03448054013194454,
+          "Inflation rate": 0.01952290367204533,
+          "GDP": -0.04616549618026289
+        },
+        "Application mode": {
+          "Marital status": 0.3073239636901511,
+          "Application mode": 1.0,
+          "Application order": -0.23849675031186204,
+          "Course": 0.04045230008909224,
+          "Daytime/evening attendance": -0.35483393540243413,
+          "Previous qualification": 0.45125163382355266,
+          "Previous qualification (grade)": -0.06063630992669815,
+          "Nacionality": 0.005936736253794672,
+          "Mother's qualification": 0.16358966413619896,
+          "Father's qualification": 0.10208607632815034,
+          "Mother's occupation": 0.06306198416981725,
+          "Father's occupation": 0.04562823584830501,
+          "Admission grade": -0.07124322843600266,
+          "Displaced": -0.3233430392964111,
+          "Educational special needs": -0.012460008010769626,
+          "Debtor": 0.153215137671861,
+          "Tuition fees up to date": -0.21676421211629113,
+          "Gender": 0.24031168407460732,
+          "Scholarship holder": -0.20932963793728737,
+          "Age at enrollment": 0.5936643955505715,
+          "International": 0.005971454077350469,
+          "Curricular units 1st sem (credited)": 0.17430865993902117,
+          "Curricular units 1st sem (enrolled)": 0.04574088444835381,
+          "Curricular units 1st sem (evaluations)": 0.10174565724567342,
+          "Curricular units 1st sem (approved)": -0.24601475783853874,
+          "Curricular units 1st sem (grade)": -0.2481519704731862,
+          "Curricular units 1st sem (without evaluations)": 0.03310250450106228,
+          "Curricular units 2nd sem (credited)": 0.15997698144159322,
+          "Curricular units 2nd sem (enrolled)": 0.013383405391144056,
+          "Curricular units 2nd sem (evaluations)": 0.04799202771258173,
+          "Curricular units 2nd sem (approved)": -0.27472818173378283,
+          "Curricular units 2nd sem (grade)": -0.27166447848765657,
+          "Curricular units 2nd sem (without evaluations)": 0.043297565773978995,
+          "Unemployment rate": 0.09843882665326045,
+          "Inflation rate": 0.005130030215819844,
+          "GDP": -0.06596395093357685
+        },
+        "Application order": {
+          "Marital status": -0.11395145954629543,
+          "Application mode": -0.23849675031186204,
+          "Application order": 1.0,
+          "Course": 0.0541679841942926,
+          "Daytime/evening attendance": 0.14715271545948927,
+          "Previous qualification": -0.15528073208968593,
+          "Previous qualification (grade)": -0.013955679244789293,
+          "Nacionality": -0.016600855130341624,
+          "Mother's qualification": -0.062138087437494605,
+          "Father's qualification": -0.04607412553802371,
+          "Mother's occupation": -0.03719238198503137,
+          "Father's occupation": -0.02915635382346755,
+          "Admission grade": -0.03571407512464043,
+          "Displaced": 0.3479661857494343,
+          "Educational special needs": 0.006565936873663895,
+          "Debtor": -0.05918699994232705,
+          "Tuition fees up to date": 0.06485411086745617,
+          "Gender": -0.12243319868953974,
+          "Scholarship holder": 0.09276792032400977,
+          "Age at enrollment": -0.24025779096715322,
+          "International": -0.016731178830477974,
+          "Curricular units 1st sem (credited)": -0.07349309306586105,
+          "Curricular units 1st sem (enrolled)": 0.10971241009338173,
+          "Curricular units 1st sem (evaluations)": -0.029602751639601584,
+          "Curricular units 1st sem (approved)": 0.14306016405734528,
+          "Curricular units 1st sem (grade)": 0.09729103063832899,
+          "Curricular units 1st sem (without evaluations)": -0.018315930317604333,
+          "Curricular units 2nd sem (credited)": -0.06685341007186756,
+          "Curricular units 2nd sem (enrolled)": 0.15022429882711605,
+          "Curricular units 2nd sem (evaluations)": -0.0050800515951330396,
+          "Curricular units 2nd sem (approved)": 0.1664326171021289,
+          "Curricular units 2nd sem (grade)": 0.10632607855764749,
+          "Curricular units 2nd sem (without evaluations)": -0.019871481466183935,
+          "Unemployment rate": -0.06602194383422705,
+          "Inflation rate": -0.004206359400070153,
+          "GDP": 0.031860116604942895
+        },
+        "Course": {
+          "Marital status": 0.023141497800655993,
+          "Application mode": 0.04045230008909224,
+          "Application order": 0.0541679841942926,
+          "Course": 1.0,
+          "Daytime/evening attendance": -0.041557203497471516,
+          "Previous qualification": -0.011348901529047477,
+          "Previous qualification (grade)": -0.06948795184039426,
+          "Nacionality": -0.018785964219067138,
+          "Mother's qualification": 0.018063143037863563,
+          "Father's qualification": 0.022938849959022237,
+          "Mother's occupation": 0.01582735238523936,
+          "Father's occupation": 0.0156455849854901,
+          "Admission grade": -0.08996933621149651,
+          "Displaced": -0.07057492164757759,
+          "Educational special needs": -0.014631484410140602,
+          "Debtor": -0.02076453625806097,
+          "Tuition fees up to date": 0.016521556868847816,
+          "Gender": -0.10651212583700724,
+          "Scholarship holder": 0.04196064247306154,
+          "Age at enrollment": 0.023750720443602574,
+          "International": -0.015162724468235852,
+          "Curricular units 1st sem (credited)": -0.06778969405450475,
+          "Curricular units 1st sem (enrolled)": 0.576324027877121,
+          "Curricular units 1st sem (evaluations)": 0.32716827807697385,
+          "Curricular units 1st sem (approved)": 0.25998125066849165,
+          "Curricular units 1st sem (grade)": 0.3447058761673807,
+          "Curricular units 1st sem (without evaluations)": 0.012659885479004245,
+          "Curricular units 2nd sem (credited)": -0.06645327353679267,
+          "Curricular units 2nd sem (enrolled)": 0.613657573127587,
+          "Curricular units 2nd sem (evaluations)": 0.3283031384338997,
+          "Curricular units 2nd sem (approved)": 0.2494840938796461,
+          "Curricular units 2nd sem (grade)": 0.31689560087344576,
+          "Curricular units 2nd sem (without evaluations)": 0.018006612853031463,
+          "Unemployment rate": -0.0019818750035831244,
+          "Inflation rate": 0.007152411148999256,
+          "GDP": 0.024719434999183
+        },
+        "Daytime/evening attendance": {
+          "Marital status": -0.32358702921036453,
+          "Application mode": -0.35483393540243413,
+          "Application order": 0.14715271545948927,
+          "Course": -0.041557203497471516,
+          "Daytime/evening attendance": 1.0,
+          "Previous qualification": -0.057774981754355366,
+          "Previous qualification (grade)": 0.06733201320142901,
+          "Nacionality": 0.0063566984169861306,
+          "Mother's qualification": -0.19959333304958032,
+          "Father's qualification": -0.147777382156164,
+          "Mother's occupation": -0.04020587597989258,
+          "Father's occupation": -0.028312859890184346,
+          "Admission grade": 0.01664727160513254,
+          "Displaced": 0.24379594271639443,
+          "Educational special needs": 0.013246322987702078,
+          "Debtor": -0.02834070361354998,
+          "Tuition fees up to date": 0.0995515044775929,
+          "Gender": -0.07699600730558744,
+          "Scholarship holder": 0.10542384131031292,
+          "Age at enrollment": -0.4913927464764705,
+          "International": 0.009798785146437498,
+          "Curricular units 1st sem (credited)": -0.07928441179035776,
+          "Curricular units 1st sem (enrolled)": 0.03125172524774314,
+          "Curricular units 1st sem (evaluations)": -0.007956988249930078,
+          "Curricular units 1st sem (approved)": 0.11554968178162649,
+          "Curricular units 1st sem (grade)": 0.11027282175882441,
+          "Curricular units 1st sem (without evaluations)": 0.023853771346768287,
+          "Curricular units 2nd sem (credited)": -0.07157473821956827,
+          "Curricular units 2nd sem (enrolled)": 0.05932616529742672,
+          "Curricular units 2nd sem (evaluations)": 0.02361542007866517,
+          "Curricular units 2nd sem (approved)": 0.12097864721371597,
+          "Curricular units 2nd sem (grade)": 0.11083707684992568,
+          "Curricular units 2nd sem (without evaluations)": -0.014665083739557834,
+          "Unemployment rate": 0.0638606835019786,
+          "Inflation rate": -0.04527042326360356,
+          "GDP": 0.03790766294777148
+        },
+        "Previous qualification": {
+          "Marital status": 0.08406379607804379,
+          "Application mode": 0.45125163382355266,
+          "Application order": -0.15528073208968593,
+          "Course": -0.011348901529047477,
+          "Daytime/evening attendance": -0.057774981754355366,
+          "Previous qualification": 1.0,
+          "Previous qualification (grade)": 0.10528382126520666,
+          "Nacionality": -0.010346411039507624,
+          "Mother's qualification": 0.0012519166487290616,
+          "Father's qualification": -0.002975924537356542,
+          "Mother's occupation": 0.011863914103448293,
+          "Father's occupation": 0.005875577282774803,
+          "Admission grade": 0.14338215069861376,
+          "Displaced": -0.12759742870683477,
+          "Educational special needs": -0.009546479844444622,
+          "Debtor": 0.09498348461623794,
+          "Tuition fees up to date": -0.07769210653055275,
+          "Gender": 0.112779399370711,
+          "Scholarship holder": -0.08135141836574904,
+          "Age at enrollment": 0.18688744480701197,
+          "International": -0.00898463708286268,
+          "Curricular units 1st sem (credited)": 0.15067319190735337,
+          "Curricular units 1st sem (enrolled)": 0.04838191012247451,
+          "Curricular units 1st sem (evaluations)": 0.08585379150648315,
+          "Curricular units 1st sem (approved)": -0.04419463795877226,
+          "Curricular units 1st sem (grade)": -0.046646477910312775,
+          "Curricular units 1st sem (without evaluations)": 0.0038968848011176004,
+          "Curricular units 2nd sem (credited)": 0.12889865132389872,
+          "Curricular units 2nd sem (enrolled)": 0.027732884331293044,
+          "Curricular units 2nd sem (evaluations)": 0.08059718291423486,
+          "Curricular units 2nd sem (approved)": -0.06911276454477981,
+          "Curricular units 2nd sem (grade)": -0.059210203799363814,
+          "Curricular units 2nd sem (without evaluations)": 0.001978972324344173,
+          "Unemployment rate": 0.13083836996008533,
+          "Inflation rate": -0.04618850802428325,
+          "GDP": 0.01352689433832688
+        },
+        "Previous qualification (grade)": {
+          "Marital status": -0.037717276294622515,
+          "Application mode": -0.06063630992669815,
+          "Application order": -0.013955679244789293,
+          "Course": -0.06948795184039426,
+          "Daytime/evening attendance": 0.06733201320142901,
+          "Previous qualification": 0.10528382126520666,
+          "Previous qualification (grade)": 1.0,
+          "Nacionality": 0.007707327648235516,
+          "Mother's qualification": -0.03449729234603091,
+          "Father's qualification": -0.014051579977699099,
+          "Mother's occupation": -0.026451266947677188,
+          "Father's occupation": -0.02591679121945999,
+          "Admission grade": 0.5614829252767194,
+          "Displaced": 0.008187102067112637,
+          "Educational special needs": -0.0037480813884228892,
+          "Debtor": -0.041268895146058394,
+          "Tuition fees up to date": 0.07355746801503042,
+          "Gender": -0.060187886105793516,
+          "Scholarship holder": 0.0853848666703368,
+          "Age at enrollment": -0.10658106503156256,
+          "International": 0.0158249682320579,
+          "Curricular units 1st sem (credited)": 0.00022266840385968235,
+          "Curricular units 1st sem (enrolled)": 0.017958243598860526,
+          "Curricular units 1st sem (evaluations)": -0.061582356168312716,
+          "Curricular units 1st sem (approved)": 0.10400583044090672,
+          "Curricular units 1st sem (grade)": 0.07965621783735112,
+          "Curricular units 1st sem (without evaluations)": 0.0005993275195560019,
+          "Curricular units 2nd sem (credited)": -0.00032013494193498847,
+          "Curricular units 2nd sem (enrolled)": 0.03007568934738275,
+          "Curricular units 2nd sem (evaluations)": -0.048591270245780624,
+          "Curricular units 2nd sem (approved)": 0.12182704025020803,
+          "Curricular units 2nd sem (grade)": 0.08935334250679547,
+          "Curricular units 2nd sem (without evaluations)": -0.011396666601323387,
+          "Unemployment rate": 0.05211220739726397,
+          "Inflation rate": 0.028678459572131366,
+          "GDP": -0.05373079621309406
+        },
+        "Nacionality": {
+          "Marital status": 0.004659553486982047,
+          "Application mode": 0.005936736253794672,
+          "Application order": -0.016600855130341624,
+          "Course": -0.018785964219067138,
+          "Daytime/evening attendance": 0.0063566984169861306,
+          "Previous qualification": -0.010346411039507624,
+          "Previous qualification (grade)": 0.007707327648235516,
+          "Nacionality": 1.0,
+          "Mother's qualification": -0.024835822198081416,
+          "Father's qualification": -0.04084796146863564,
+          "Mother's occupation": 0.005131504039847178,
+          "Father's occupation": 0.0049440349197405024,
+          "Admission grade": -0.0014287844078380788,
+          "Displaced": -0.012903520080315983,
+          "Educational special needs": 0.0015905233392651081,
+          "Debtor": 0.034451725798038575,
+          "Tuition fees up to date": -0.012720868469702471,
+          "Gender": -0.006141660320772191,
+          "Scholarship holder": -0.008790569952246792,
+          "Age at enrollment": 0.004281713840390968,
+          "International": 0.8169366845260979,
+          "Curricular units 1st sem (credited)": 0.006494384805251021,
+          "Curricular units 1st sem (enrolled)": -0.009031479017861777,
+          "Curricular units 1st sem (evaluations)": -0.0006474736720236267,
+          "Curricular units 1st sem (approved)": -0.007437862820272031,
+          "Curricular units 1st sem (grade)": -0.007060026330904481,
+          "Curricular units 1st sem (without evaluations)": 0.010346627965763595,
+          "Curricular units 2nd sem (credited)": 0.006125154965545849,
+          "Curricular units 2nd sem (enrolled)": -0.012355772395930845,
+          "Curricular units 2nd sem (evaluations)": -0.00005107030138946121,
+          "Curricular units 2nd sem (approved)": -0.008279092449532718,
+          "Curricular units 2nd sem (grade)": -0.0052321080773861176,
+          "Curricular units 2nd sem (without evaluations)": 0.0025787292679545016,
+          "Unemployment rate": 0.0018230034897631193,
+          "Inflation rate": 0.0015363840834745977,
+          "GDP": 0.020057983110391326
+        },
+        "Mother's qualification": {
+          "Marital status": 0.19837285483528325,
+          "Application mode": 0.16358966413619896,
+          "Application order": -0.062138087437494605,
+          "Course": 0.018063143037863563,
+          "Daytime/evening attendance": -0.19959333304958032,
+          "Previous qualification": 0.0012519166487290616,
+          "Previous qualification (grade)": -0.03449729234603091,
+          "Nacionality": -0.024835822198081416,
+          "Mother's qualification": 1.0,
+          "Father's qualification": 0.5674565846456415,
+          "Mother's occupation": 0.1097173728713194,
+          "Father's occupation": 0.06801168522196699,
+          "Admission grade": -0.048385873278552656,
+          "Displaced": -0.08648824160806297,
+          "Educational special needs": -0.01582053777422862,
+          "Debtor": 0.028475875623961575,
+          "Tuition fees up to date": -0.07037342499640042,
+          "Gender": -0.020114126250970497,
+          "Scholarship holder": 0.03671707463465627,
+          "Age at enrollment": 0.29666734236042824,
+          "International": -0.023198190313599612,
+          "Curricular units 1st sem (credited)": 0.01621845691163898,
+          "Curricular units 1st sem (enrolled)": 0.003419073529647701,
+          "Curricular units 1st sem (evaluations)": 0.025327891711561332,
+          "Curricular units 1st sem (approved)": -0.08151345694301282,
+          "Curricular units 1st sem (grade)": -0.07520951711431059,
+          "Curricular units 1st sem (without evaluations)": 0.014499545739693628,
+          "Curricular units 2nd sem (credited)": 0.01787043685323085,
+          "Curricular units 2nd sem (enrolled)": -0.008667343902205818,
+          "Curricular units 2nd sem (evaluations)": 0.0025278045083099074,
+          "Curricular units 2nd sem (approved)": -0.0835162573364017,
+          "Curricular units 2nd sem (grade)": -0.08280460696208564,
+          "Curricular units 2nd sem (without evaluations)": 0.017145310227772423,
+          "Unemployment rate": -0.1266862111104949,
+          "Inflation rate": 0.06869597330272097,
+          "GDP": -0.09999221567190615
+        },
+        "Father's qualification": {
+          "Marital status": 0.1448195794899415,
+          "Application mode": 0.10208607632815034,
+          "Application order": -0.04607412553802371,
+          "Course": 0.022938849959022237,
+          "Daytime/evening attendance": -0.147777382156164,
+          "Previous qualification": -0.002975924537356542,
+          "Previous qualification (grade)": -0.014051579977699099,
+          "Nacionality": -0.04084796146863564,
+          "Mother's qualification": 0.5674565846456415,
+          "Father's qualification": 1.0,
+          "Mother's occupation": 0.0832114469975149,
+          "Father's occupation": 0.07731824055964684,
+          "Admission grade": -0.02810579169492064,
+          "Displaced": -0.05990492144131639,
+          "Educational special needs": -0.008519650230574664,
+          "Debtor": 0.005882707751999351,
+          "Tuition fees up to date": -0.028480612869593587,
+          "Gender": -0.04405753014281653,
+          "Scholarship holder": 0.1006312718221373,
+          "Age at enrollment": 0.20761428038351615,
+          "International": -0.04149410187134206,
+          "Curricular units 1st sem (credited)": 0.016559676387968195,
+          "Curricular units 1st sem (enrolled)": 0.009878194708138829,
+          "Curricular units 1st sem (evaluations)": 0.033539936950108235,
+          "Curricular units 1st sem (approved)": -0.02249097213168242,
+          "Curricular units 1st sem (grade)": -0.014536185171881018,
+          "Curricular units 1st sem (without evaluations)": 0.0046030589948462914,
+          "Curricular units 2nd sem (credited)": 0.017970999422241094,
+          "Curricular units 2nd sem (enrolled)": -0.0005771561614841232,
+          "Curricular units 2nd sem (evaluations)": 0.021645377677704504,
+          "Curricular units 2nd sem (approved)": -0.021592344914241956,
+          "Curricular units 2nd sem (grade)": -0.017741156634582155,
+          "Curricular units 2nd sem (without evaluations)": 0.004241838118088073,
+          "Unemployment rate": -0.0996372605457463,
+          "Inflation rate": 0.06415767093718361,
+          "GDP": -0.0704770097916451
+        },
+        "Mother's occupation": {
+          "Marital status": 0.06969521049285277,
+          "Application mode": 0.06306198416981725,
+          "Application order": -0.03719238198503137,
+          "Course": 0.01582735238523936,
+          "Daytime/evening attendance": -0.04020587597989258,
+          "Previous qualification": 0.011863914103448293,
+          "Previous qualification (grade)": -0.026451266947677188,
+          "Nacionality": 0.005131504039847178,
+          "Mother's qualification": 0.1097173728713194,
+          "Father's qualification": 0.0832114469975149,
+          "Mother's occupation": 1.0,
+          "Father's occupation": 0.8950522875645862,
+          "Admission grade": -0.034579025224201435,
+          "Displaced": -0.03825918503664523,
+          "Educational special needs": 0.015839827367585366,
+          "Debtor": 0.07227446599315082,
+          "Tuition fees up to date": -0.035259073750900455,
+          "Gender": 0.024918742325814813,
+          "Scholarship holder": -0.011593618727571267,
+          "Age at enrollment": 0.09892308548998292,
+          "International": 0.005959028994166894,
+          "Curricular units 1st sem (credited)": 0.008034925482951158,
+          "Curricular units 1st sem (enrolled)": -0.005714162470002029,
+          "Curricular units 1st sem (evaluations)": 0.005610888219809922,
+          "Curricular units 1st sem (approved)": -0.04608404977583525,
+          "Curricular units 1st sem (grade)": -0.04344743449518171,
+          "Curricular units 1st sem (without evaluations)": 0.019537687474865232,
+          "Curricular units 2nd sem (credited)": 0.006257565542451491,
+          "Curricular units 2nd sem (enrolled)": -0.010710347151087872,
+          "Curricular units 2nd sem (evaluations)": -0.0016292807776709382,
+          "Curricular units 2nd sem (approved)": -0.04845748150359699,
+          "Curricular units 2nd sem (grade)": -0.04343587936184423,
+          "Curricular units 2nd sem (without evaluations)": 0.028166228029727458,
+          "Unemployment rate": -0.07880914899653331,
+          "Inflation rate": 0.04078524065018058,
+          "GDP": 0.06879968026478663
+        },
+        "Father's occupation": {
+          "Marital status": 0.054670940173503005,
+          "Application mode": 0.04562823584830501,
+          "Application order": -0.02915635382346755,
+          "Course": 0.0156455849854901,
+          "Daytime/evening attendance": -0.028312859890184346,
+          "Previous qualification": 0.005875577282774803,
+          "Previous qualification (grade)": -0.02591679121945999,
+          "Nacionality": 0.0049440349197405024,
+          "Mother's qualification": 0.06801168522196699,
+          "Father's qualification": 0.07731824055964684,
+          "Mother's occupation": 0.8950522875645862,
+          "Father's occupation": 1.0,
+          "Admission grade": -0.032109945259182794,
+          "Displaced": -0.030186171394382094,
+          "Educational special needs": 0.015519580031930004,
+          "Debtor": 0.06049236554967862,
+          "Tuition fees up to date": -0.024888831481787683,
+          "Gender": 0.018933575254178797,
+          "Scholarship holder": -0.016069280724659518,
+          "Age at enrollment": 0.07515760011105836,
+          "International": 0.004388008512691828,
+          "Curricular units 1st sem (credited)": 0.0071023027508420634,
+          "Curricular units 1st sem (enrolled)": -0.008516716345637467,
+          "Curricular units 1st sem (evaluations)": 0.0017694613580828888,
+          "Curricular units 1st sem (approved)": -0.03852436094699426,
+          "Curricular units 1st sem (grade)": -0.033765650571990866,
+          "Curricular units 1st sem (without evaluations)": 0.014312873043716059,
+          "Curricular units 2nd sem (credited)": 0.005507314986146766,
+          "Curricular units 2nd sem (enrolled)": -0.013583883612496737,
+          "Curricular units 2nd sem (evaluations)": -0.0024290942778964195,
+          "Curricular units 2nd sem (approved)": -0.040724129191956636,
+          "Curricular units 2nd sem (grade)": -0.03483189400032164,
+          "Curricular units 2nd sem (without evaluations)": 0.022342027136055657,
+          "Unemployment rate": -0.08867581258244739,
+          "Inflation rate": 0.04421355455398504,
+          "GDP": 0.07777369227309779
+        },
+        "Admission grade": {
+          "Marital status": -0.03738777216461501,
+          "Application mode": -0.07124322843600266,
+          "Application order": -0.03571407512464043,
+          "Course": -0.08996933621149651,
+          "Daytime/evening attendance": 0.01664727160513254,
+          "Previous qualification": 0.14338215069861376,
+          "Previous qualification (grade)": 0.5614829252767194,
+          "Nacionality": -0.0014287844078380788,
+          "Mother's qualification": -0.048385873278552656,
+          "Father's qualification": -0.02810579169492064,
+          "Mother's occupation": -0.034579025224201435,
+          "Father's occupation": -0.032109945259182794,
+          "Admission grade": 1.0,
+          "Displaced": 0.02943815267974332,
+          "Educational special needs": -0.005237165892906318,
+          "Debtor": -0.0556032955525619,
+          "Tuition fees up to date": 0.09287599794819114,
+          "Gender": -0.04010536541079402,
+          "Scholarship holder": 0.07349042023311088,
+          "Age at enrollment": -0.1079034042554483,
+          "International": 0.007141995617541013,
+          "Curricular units 1st sem (credited)": 0.051245356752410307,
+          "Curricular units 1st sem (enrolled)": -0.01683131780600041,
+          "Curricular units 1st sem (evaluations)": -0.06793804423943496,
+          "Curricular units 1st sem (approved)": 0.14022004909432362,
+          "Curricular units 1st sem (grade)": 0.11904844606931404,
+          "Curricular units 1st sem (without evaluations)": -0.00013144696008351837,
+          "Curricular units 2nd sem (credited)": 0.045671471350837066,
+          "Curricular units 2nd sem (enrolled)": -0.01652959199326358,
+          "Curricular units 2nd sem (evaluations)": -0.04824063899776546,
+          "Curricular units 2nd sem (approved)": 0.1542321282298901,
+          "Curricular units 2nd sem (grade)": 0.13520754387571648,
+          "Curricular units 2nd sem (without evaluations)": -0.013064303448093709,
+          "Unemployment rate": 0.029367366400137505,
+          "Inflation rate": -0.01594980606709039,
+          "GDP": -0.018837461919754942
+        },
+        "Displaced": {
+          "Marital status": -0.2161219246548748,
+          "Application mode": -0.3233430392964111,
+          "Application order": 0.3479661857494343,
+          "Course": -0.07057492164757759,
+          "Daytime/evening attendance": 0.24379594271639443,
+          "Previous qualification": -0.12759742870683477,
+          "Previous qualification (grade)": 0.008187102067112637,
+          "Nacionality": -0.012903520080315983,
+          "Mother's qualification": -0.08648824160806297,
+          "Father's qualification": -0.05990492144131639,
+          "Mother's occupation": -0.03825918503664523,
+          "Father's occupation": -0.030186171394382094,
+          "Admission grade": 0.02943815267974332,
+          "Displaced": 1.0,
+          "Educational special needs": 0.0018122963960733429,
+          "Debtor": -0.08901091238083929,
+          "Tuition fees up to date": 0.1252167839950296,
+          "Gender": -0.1736709071966246,
+          "Scholarship holder": 0.08402831290396305,
+          "Age at enrollment": -0.3730105603278153,
+          "International": -0.009634736514877323,
+          "Curricular units 1st sem (credited)": -0.0625623541217704,
+          "Curricular units 1st sem (enrolled)": -0.01838444929871342,
+          "Curricular units 1st sem (evaluations)": -0.035549250293505724,
+          "Curricular units 1st sem (approved)": 0.14197506623505468,
+          "Curricular units 1st sem (grade)": 0.12793375239996352,
+          "Curricular units 1st sem (without evaluations)": -0.014000143837736519,
+          "Curricular units 2nd sem (credited)": -0.05714318341297958,
+          "Curricular units 2nd sem (enrolled)": -0.0019073642089223765,
+          "Curricular units 2nd sem (evaluations)": 0.0044588434135879726,
+          "Curricular units 2nd sem (approved)": 0.15115443731914754,
+          "Curricular units 2nd sem (grade)": 0.1352646979942156,
+          "Curricular units 2nd sem (without evaluations)": -0.028553439388626877,
+          "Unemployment rate": -0.15945528345758866,
+          "Inflation rate": -0.019085621114250523,
+          "GDP": 0.09579853930752653
+        },
+        "Educational special needs": {
+          "Marital status": -0.011644083005156108,
+          "Application mode": -0.012460008010769626,
+          "Application order": 0.006565936873663895,
+          "Course": -0.014631484410140602,
+          "Daytime/evening attendance": 0.013246322987702078,
+          "Previous qualification": -0.009546479844444622,
+          "Previous qualification (grade)": -0.0037480813884228892,
+          "Nacionality": 0.0015905233392651081,
+          "Mother's qualification": -0.01582053777422862,
+          "Father's qualification": -0.008519650230574664,
+          "Mother's occupation": 0.015839827367585366,
+          "Father's occupation": 0.015519580031930004,
+          "Admission grade": -0.005237165892906318,
+          "Displaced": 0.0018122963960733429,
+          "Educational special needs": 1.0,
+          "Debtor": 0.0038137653529640597,
+          "Tuition fees up to date": 0.002373923576138416,
+          "Gender": -0.013049995321880437,
+          "Scholarship holder": 0.008063214196276553,
+          "Age at enrollment": -0.017212750688703544,
+          "International": 0.0029169568761130203,
+          "Curricular units 1st sem (credited)": -0.0036475631251874983,
+          "Curricular units 1st sem (enrolled)": -0.010117060807183734,
+          "Curricular units 1st sem (evaluations)": -0.006151910561862666,
+          "Curricular units 1st sem (approved)": 0.0017483316914004253,
+          "Curricular units 1st sem (grade)": 0.000332419562220518,
+          "Curricular units 1st sem (without evaluations)": -0.007118055139537748,
+          "Curricular units 2nd sem (credited)": -0.004632036888333094,
+          "Curricular units 2nd sem (enrolled)": -0.00854943929562275,
+          "Curricular units 2nd sem (evaluations)": -0.000492629687902855,
+          "Curricular units 2nd sem (approved)": 0.0020034898238169107,
+          "Curricular units 2nd sem (grade)": 0.0020982767383345776,
+          "Curricular units 2nd sem (without evaluations)": 0.00006551064106705132,
+          "Unemployment rate": 0.019943196941030247,
+          "Inflation rate": -0.001557143677418772,
+          "GDP": 0.014951377388749881
+        },
+        "Debtor": {
+          "Marital status": 0.04914527094128707,
+          "Application mode": 0.153215137671861,
+          "Application order": -0.05918699994232705,
+          "Course": -0.02076453625806097,
+          "Daytime/evening attendance": -0.02834070361354998,
+          "Previous qualification": 0.09498348461623794,
+          "Previous qualification (grade)": -0.041268895146058394,
+          "Nacionality": 0.034451725798038575,
+          "Mother's qualification": 0.028475875623961575,
+          "Father's qualification": 0.005882707751999351,
+          "Mother's occupation": 0.07227446599315082,
+          "Father's occupation": 0.06049236554967862,
+          "Admission grade": -0.0556032955525619,
+          "Displaced": -0.08901091238083929,
+          "Educational special needs": 0.0038137653529640597,
+          "Debtor": 1.0,
+          "Tuition fees up to date": -0.4753625188822486,
+          "Gender": 0.08877709562934484,
+          "Scholarship holder": -0.09390529308347553,
+          "Age at enrollment": 0.1360813143290639,
+          "International": 0.03929793006276582,
+          "Curricular units 1st sem (credited)": 0.028306002108254305,
+          "Curricular units 1st sem (enrolled)": -0.02521544118055859,
+          "Curricular units 1st sem (evaluations)": 0.029594394518037716,
+          "Curricular units 1st sem (approved)": -0.16567239516755866,
+          "Curricular units 1st sem (grade)": -0.15349337790970374,
+          "Curricular units 1st sem (without evaluations)": 0.015461076920543307,
+          "Curricular units 2nd sem (credited)": 0.023396418944697312,
+          "Curricular units 2nd sem (enrolled)": -0.040438871992985626,
+          "Curricular units 2nd sem (evaluations)": 0.009322239668763797,
+          "Curricular units 2nd sem (approved)": -0.1948141097678049,
+          "Curricular units 2nd sem (grade)": -0.18519596671758495,
+          "Curricular units 2nd sem (without evaluations)": 0.03393552475968333,
+          "Unemployment rate": 0.03487505465272575,
+          "Inflation rate": -0.016464983377719896,
+          "GDP": 0.0361725903910921
+        },
+        "Tuition fees up to date": {
+          "Marital status": -0.11019294643731624,
+          "Application mode": -0.21676421211629113,
+          "Application order": 0.06485411086745617,
+          "Course": 0.016521556868847816,
+          "Daytime/evening attendance": 0.0995515044775929,
+          "Previous qualification": -0.07769210653055275,
+          "Previous qualification (grade)": 0.07355746801503042,
+          "Nacionality": -0.012720868469702471,
+          "Mother's qualification": -0.07037342499640042,
+          "Father's qualification": -0.028480612869593587,
+          "Mother's occupation": -0.035259073750900455,
+          "Father's occupation": -0.024888831481787683,
+          "Admission grade": 0.09287599794819114,
+          "Displaced": 0.1252167839950296,
+          "Educational special needs": 0.002373923576138416,
+          "Debtor": -0.4753625188822486,
+          "Tuition fees up to date": 1.0,
+          "Gender": -0.17170636881441267,
+          "Scholarship holder": 0.1672362860022098,
+          "Age at enrollment": -0.24961671318911652,
+          "International": -0.014148893594640374,
+          "Curricular units 1st sem (credited)": 0.010641353541851145,
+          "Curricular units 1st sem (enrolled)": 0.07967624778073153,
+          "Curricular units 1st sem (evaluations)": 0.06430123557446069,
+          "Curricular units 1st sem (approved)": 0.34346693539676504,
+          "Curricular units 1st sem (grade)": 0.3414963699493095,
+          "Curricular units 1st sem (without evaluations)": -0.05306283495074219,
+          "Curricular units 2nd sem (credited)": 0.013724616754134373,
+          "Curricular units 2nd sem (enrolled)": 0.09225387995500609,
+          "Curricular units 2nd sem (evaluations)": 0.10535565978507674,
+          "Curricular units 2nd sem (approved)": 0.37015013346734943,
+          "Curricular units 2nd sem (grade)": 0.38137950549984134,
+          "Curricular units 2nd sem (without evaluations)": -0.04686215042705432,
+          "Unemployment rate": -0.0017904913987182088,
+          "Inflation rate": -0.005714378972991094,
+          "GDP": 0.057132943678566056
+        },
+        "Gender": {
+          "Marital status": 0.0317000152923378,
+          "Application mode": 0.24031168407460732,
+          "Application order": -0.12243319868953974,
+          "Course": -0.10651212583700724,
+          "Daytime/evening attendance": -0.07699600730558744,
+          "Previous qualification": 0.112779399370711,
+          "Previous qualification (grade)": -0.060187886105793516,
+          "Nacionality": -0.006141660320772191,
+          "Mother's qualification": -0.020114126250970497,
+          "Father's qualification": -0.04405753014281653,
+          "Mother's occupation": 0.024918742325814813,
+          "Father's occupation": 0.018933575254178797,
+          "Admission grade": -0.04010536541079402,
+          "Displaced": -0.1736709071966246,
+          "Educational special needs": -0.013049995321880437,
+          "Debtor": 0.08877709562934484,
+          "Tuition fees up to date": -0.17170636881441267,
+          "Gender": 1.0,
+          "Scholarship holder": -0.22781694789436924,
+          "Age at enrollment": 0.19935519137271393,
+          "International": -0.0059332034627319645,
+          "Curricular units 1st sem (credited)": 0.004252107945753895,
+          "Curricular units 1st sem (enrolled)": -0.18358358565977523,
+          "Curricular units 1st sem (evaluations)": -0.041384581760612806,
+          "Curricular units 1st sem (approved)": -0.3204239431014102,
+          "Curricular units 1st sem (grade)": -0.2840224351889789,
+          "Curricular units 1st sem (without evaluations)": 0.006010801986516232,
+          "Curricular units 2nd sem (credited)": 0.0010231524038953376,
+          "Curricular units 2nd sem (enrolled)": -0.20790628460587401,
+          "Curricular units 2nd sem (evaluations)": -0.07175188534925268,
+          "Curricular units 2nd sem (approved)": -0.3397344304249012,
+          "Curricular units 2nd sem (grade)": -0.2993452035724094,
+          "Curricular units 2nd sem (without evaluations)": 0.049950304540587076,
+          "Unemployment rate": 0.003328744975101046,
+          "Inflation rate": 0.009015962644475777,
+          "GDP": -0.040390064010284374
+        },
+        "Scholarship holder": {
+          "Marital status": -0.07563247904160736,
+          "Application mode": -0.20932963793728737,
+          "Application order": 0.09276792032400977,
+          "Course": 0.04196064247306154,
+          "Daytime/evening attendance": 0.10542384131031292,
+          "Previous qualification": -0.08135141836574904,
+          "Previous qualification (grade)": 0.0853848666703368,
+          "Nacionality": -0.008790569952246792,
+          "Mother's qualification": 0.03671707463465627,
+          "Father's qualification": 0.1006312718221373,
+          "Mother's occupation": -0.011593618727571267,
+          "Father's occupation": -0.016069280724659518,
+          "Admission grade": 0.07349042023311088,
+          "Displaced": 0.08402831290396305,
+          "Educational special needs": 0.008063214196276553,
+          "Debtor": -0.09390529308347553,
+          "Tuition fees up to date": 0.1672362860022098,
+          "Gender": -0.22781694789436924,
+          "Scholarship holder": 1.0,
+          "Age at enrollment": -0.2007227741616473,
+          "International": -0.010612762973102463,
+          "Curricular units 1st sem (credited)": -0.03889518509748519,
+          "Curricular units 1st sem (enrolled)": 0.10807818193479692,
+          "Curricular units 1st sem (evaluations)": 0.009468730636683713,
+          "Curricular units 1st sem (approved)": 0.3282108823400027,
+          "Curricular units 1st sem (grade)": 0.2736422491207117,
+          "Curricular units 1st sem (without evaluations)": -0.05132197641423542,
+          "Curricular units 2nd sem (credited)": -0.035398182589744503,
+          "Curricular units 2nd sem (enrolled)": 0.13344802735431474,
+          "Curricular units 2nd sem (evaluations)": 0.047350173429397575,
+          "Curricular units 2nd sem (approved)": 0.3555320057097408,
+          "Curricular units 2nd sem (grade)": 0.2950949347027649,
+          "Curricular units 2nd sem (without evaluations)": -0.05538571689741211,
+          "Unemployment rate": 0.07265381009548928,
+          "Inflation rate": -0.040151089857510036,
+          "GDP": 0.07478119660178591
+        },
+        "Age at enrollment": {
+          "Marital status": 0.552403540155024,
+          "Application mode": 0.5936643955505715,
+          "Application order": -0.24025779096715322,
+          "Course": 0.023750720443602574,
+          "Daytime/evening attendance": -0.4913927464764705,
+          "Previous qualification": 0.18688744480701197,
+          "Previous qualification (grade)": -0.10658106503156256,
+          "Nacionality": 0.004281713840390968,
+          "Mother's qualification": 0.29666734236042824,
+          "Father's qualification": 0.20761428038351615,
+          "Mother's occupation": 0.09892308548998292,
+          "Father's occupation": 0.07515760011105836,
+          "Admission grade": -0.1079034042554483,
+          "Displaced": -0.3730105603278153,
+          "Educational special needs": -0.017212750688703544,
+          "Debtor": 0.1360813143290639,
+          "Tuition fees up to date": -0.24961671318911652,
+          "Gender": 0.19935519137271393,
+          "Scholarship holder": -0.2007227741616473,
+          "Age at enrollment": 1.0,
+          "International": 0.003103377181473952,
+          "Curricular units 1st sem (credited)": 0.12215945387273441,
+          "Curricular units 1st sem (enrolled)": 0.011152241252189889,
+          "Curricular units 1st sem (evaluations)": 0.019878037718741002,
+          "Curricular units 1st sem (approved)": -0.27705884404437436,
+          "Curricular units 1st sem (grade)": -0.28835423957536227,
+          "Curricular units 1st sem (without evaluations)": 0.03659990345117349,
+          "Curricular units 2nd sem (credited)": 0.11189097063353251,
+          "Curricular units 2nd sem (enrolled)": -0.021517991903044955,
+          "Curricular units 2nd sem (evaluations)": -0.04319994688411118,
+          "Curricular units 2nd sem (approved)": -0.2931030113967019,
+          "Curricular units 2nd sem (grade)": -0.3041325328879865,
+          "Curricular units 2nd sem (without evaluations)": 0.046131931535813145,
+          "Unemployment rate": 0.016703024238943962,
+          "Inflation rate": 0.05204948573009309,
+          "GDP": -0.09285919918907545
+        },
+        "International": {
+          "Marital status": -0.004285780380623677,
+          "Application mode": 0.005971454077350469,
+          "Application order": -0.016731178830477974,
+          "Course": -0.015162724468235852,
+          "Daytime/evening attendance": 0.009798785146437498,
+          "Previous qualification": -0.00898463708286268,
+          "Previous qualification (grade)": 0.0158249682320579,
+          "Nacionality": 0.8169366845260979,
+          "Mother's qualification": -0.023198190313599612,
+          "Father's qualification": -0.04149410187134206,
+          "Mother's occupation": 0.005959028994166894,
+          "Father's occupation": 0.004388008512691828,
+          "Admission grade": 0.007141995617541013,
+          "Displaced": -0.009634736514877323,
+          "Educational special needs": 0.0029169568761130203,
+          "Debtor": 0.03929793006276582,
+          "Tuition fees up to date": -0.014148893594640374,
+          "Gender": -0.0059332034627319645,
+          "Scholarship holder": -0.010612762973102463,
+          "Age at enrollment": 0.003103377181473952,
+          "International": 1.0,
+          "Curricular units 1st sem (credited)": 0.015521132111113214,
+          "Curricular units 1st sem (enrolled)": -0.0025051300203822293,
+          "Curricular units 1st sem (evaluations)": 0.0033221535883424446,
+          "Curricular units 1st sem (approved)": -0.001169182973387808,
+          "Curricular units 1st sem (grade)": -0.0016377049703408288,
+          "Curricular units 1st sem (without evaluations)": 0.004580018430337061,
+          "Curricular units 2nd sem (credited)": 0.01475134227387809,
+          "Curricular units 2nd sem (enrolled)": -0.007844672729453257,
+          "Curricular units 2nd sem (evaluations)": 0.003224687121551503,
+          "Curricular units 2nd sem (approved)": -0.005382290530350237,
+          "Curricular units 2nd sem (grade)": -0.0010237302145955558,
+          "Curricular units 2nd sem (without evaluations)": -0.003366886395940856,
+          "Unemployment rate": -0.000583579518868284,
+          "Inflation rate": 0.0017842099025313263,
+          "GDP": 0.024085766729950397
+        },
+        "Curricular units 1st sem (credited)": {
+          "Marital status": 0.039837617259094266,
+          "Application mode": 0.17430865993902117,
+          "Application order": -0.07349309306586105,
+          "Course": -0.06778969405450475,
+          "Daytime/evening attendance": -0.07928441179035776,
+          "Previous qualification": 0.15067319190735337,
+          "Previous qualification (grade)": 0.00022266840385968235,
+          "Nacionality": 0.006494384805251021,
+          "Mother's qualification": 0.01621845691163898,
+          "Father's qualification": 0.016559676387968195,
+          "Mother's occupation": 0.008034925482951158,
+          "Father's occupation": 0.0071023027508420634,
+          "Admission grade": 0.051245356752410307,
+          "Displaced": -0.0625623541217704,
+          "Educational special needs": -0.0036475631251874983,
+          "Debtor": 0.028306002108254305,
+          "Tuition fees up to date": 0.010641353541851145,
+          "Gender": 0.004252107945753895,
+          "Scholarship holder": -0.03889518509748519,
+          "Age at enrollment": 0.12215945387273441,
+          "International": 0.015521132111113214,
+          "Curricular units 1st sem (credited)": 1.0,
+          "Curricular units 1st sem (enrolled)": 0.5492561317815626,
+          "Curricular units 1st sem (evaluations)": 0.33208032800899834,
+          "Curricular units 1st sem (approved)": 0.3568876675122548,
+          "Curricular units 1st sem (grade)": 0.08046177634109393,
+          "Curricular units 1st sem (without evaluations)": 0.04195823192122603,
+          "Curricular units 2nd sem (credited)": 0.9339352235159386,
+          "Curricular units 2nd sem (enrolled)": 0.4211793866588958,
+          "Curricular units 2nd sem (evaluations)": 0.2642345330277355,
+          "Curricular units 2nd sem (approved)": 0.27001379438233725,
+          "Curricular units 2nd sem (grade)": 0.08342775444285559,
+          "Curricular units 2nd sem (without evaluations)": 0.02241666538344984,
+          "Unemployment rate": 0.025980162691962513,
+          "Inflation rate": 0.005706798477895152,
+          "GDP": -0.005943184326699543
+        },
+        "Curricular units 1st sem (enrolled)": {
+          "Marital status": 0.007967856753525593,
+          "Application mode": 0.04574088444835381,
+          "Application order": 0.10971241009338173,
+          "Course": 0.576324027877121,
+          "Daytime/evening attendance": 0.03125172524774314,
+          "Previous qualification": 0.04838191012247451,
+          "Previous qualification (grade)": 0.017958243598860526,
+          "Nacionality": -0.009031479017861777,
+          "Mother's qualification": 0.003419073529647701,
+          "Father's qualification": 0.009878194708138829,
+          "Mother's occupation": -0.005714162470002029,
+          "Father's occupation": -0.008516716345637467,
+          "Admission grade": -0.01683131780600041,
+          "Displaced": -0.01838444929871342,
+          "Educational special needs": -0.010117060807183734,
+          "Debtor": -0.02521544118055859,
+          "Tuition fees up to date": 0.07967624778073153,
+          "Gender": -0.18358358565977523,
+          "Scholarship holder": 0.10807818193479692,
+          "Age at enrollment": 0.011152241252189889,
+          "International": -0.0025051300203822293,
+          "Curricular units 1st sem (credited)": 0.5492561317815626,
+          "Curricular units 1st sem (enrolled)": 1.0,
+          "Curricular units 1st sem (evaluations)": 0.48446189580137317,
+          "Curricular units 1st sem (approved)": 0.5995260967963518,
+          "Curricular units 1st sem (grade)": 0.38814079245209904,
+          "Curricular units 1st sem (without evaluations)": 0.02124493002046818,
+          "Curricular units 2nd sem (credited)": 0.5317546589916842,
+          "Curricular units 2nd sem (enrolled)": 0.9563207275685444,
+          "Curricular units 2nd sem (evaluations)": 0.45969276803433745,
+          "Curricular units 2nd sem (approved)": 0.5480004607298753,
+          "Curricular units 2nd sem (grade)": 0.37497520087845976,
+          "Curricular units 2nd sem (without evaluations)": 0.006231145574870112,
+          "Unemployment rate": 0.08212926492876632,
+          "Inflation rate": 0.01610992410056702,
+          "GDP": 0.014016638040573952
+        },
+        "Curricular units 1st sem (evaluations)": {
+          "Marital status": 0.008847788555745188,
+          "Application mode": 0.10174565724567342,
+          "Application order": -0.029602751639601584,
+          "Course": 0.32716827807697385,
+          "Daytime/evening attendance": -0.007956988249930078,
+          "Previous qualification": 0.08585379150648315,
+          "Previous qualification (grade)": -0.061582356168312716,
+          "Nacionality": -0.0006474736720236267,
+          "Mother's qualification": 0.025327891711561332,
+          "Father's qualification": 0.033539936950108235,
+          "Mother's occupation": 0.005610888219809922,
+          "Father's occupation": 0.0017694613580828888,
+          "Admission grade": -0.06793804423943496,
+          "Displaced": -0.035549250293505724,
+          "Educational special needs": -0.006151910561862666,
+          "Debtor": 0.029594394518037716,
+          "Tuition fees up to date": 0.06430123557446069,
+          "Gender": -0.041384581760612806,
+          "Scholarship holder": 0.009468730636683713,
+          "Age at enrollment": 0.019878037718741002,
+          "International": 0.0033221535883424446,
+          "Curricular units 1st sem (credited)": 0.33208032800899834,
+          "Curricular units 1st sem (enrolled)": 0.48446189580137317,
+          "Curricular units 1st sem (evaluations)": 1.0,
+          "Curricular units 1st sem (approved)": 0.4187691888601698,
+          "Curricular units 1st sem (grade)": 0.5008548942541909,
+          "Curricular units 1st sem (without evaluations)": 0.12000430976639742,
+          "Curricular units 2nd sem (credited)": 0.3171233760091172,
+          "Curricular units 2nd sem (enrolled)": 0.4373537655625189,
+          "Curricular units 2nd sem (evaluations)": 0.7866991800896532,
+          "Curricular units 2nd sem (approved)": 0.3543038429202017,
+          "Curricular units 2nd sem (grade)": 0.42913915598912167,
+          "Curricular units 2nd sem (without evaluations)": 0.07730297159544001,
+          "Unemployment rate": 0.029568582570210427,
+          "Inflation rate": -0.03152809567447217,
+          "GDP": -0.044139545553210396
+        },
+        "Curricular units 1st sem (approved)": {
+          "Marital status": -0.10719825014888537,
+          "Application mode": -0.24601475783853874,
+          "Application order": 0.14306016405734528,
+          "Course": 0.25998125066849165,
+          "Daytime/evening attendance": 0.11554968178162649,
+          "Previous qualification": -0.04419463795877226,
+          "Previous qualification (grade)": 0.10400583044090672,
+          "Nacionality": -0.007437862820272031,
+          "Mother's qualification": -0.08151345694301282,
+          "Father's qualification": -0.02249097213168242,
+          "Mother's occupation": -0.04608404977583525,
+          "Father's occupation": -0.03852436094699426,
+          "Admission grade": 0.14022004909432362,
+          "Displaced": 0.14197506623505468,
+          "Educational special needs": 0.0017483316914004253,
+          "Debtor": -0.16567239516755866,
+          "Tuition fees up to date": 0.34346693539676504,
+          "Gender": -0.3204239431014102,
+          "Scholarship holder": 0.3282108823400027,
+          "Age at enrollment": -0.27705884404437436,
+          "International": -0.001169182973387808,
+          "Curricular units 1st sem (credited)": 0.3568876675122548,
+          "Curricular units 1st sem (enrolled)": 0.5995260967963518,
+          "Curricular units 1st sem (evaluations)": 0.4187691888601698,
+          "Curricular units 1st sem (approved)": 1.0,
+          "Curricular units 1st sem (grade)": 0.8398601823988966,
+          "Curricular units 1st sem (without evaluations)": -0.05534271602614465,
+          "Curricular units 2nd sem (credited)": 0.3457838499116558,
+          "Curricular units 2nd sem (enrolled)": 0.590151351358344,
+          "Curricular units 2nd sem (evaluations)": 0.48493019162756323,
+          "Curricular units 2nd sem (approved)": 0.9226568693320767,
+          "Curricular units 2nd sem (grade)": 0.8304297773348425,
+          "Curricular units 2nd sem (without evaluations)": -0.06504263323747156,
+          "Unemployment rate": 0.05524096865353036,
+          "Inflation rate": -0.043473946573151,
+          "GDP": 0.09327233169889323
+        },
+        "Curricular units 1st sem (grade)": {
+          "Marital status": -0.1046841840531484,
+          "Application mode": -0.2481519704731862,
+          "Application order": 0.09729103063832899,
+          "Course": 0.3447058761673807,
+          "Daytime/evening attendance": 0.11027282175882441,
+          "Previous qualification": -0.046646477910312775,
+          "Previous qualification (grade)": 0.07965621783735112,
+          "Nacionality": -0.007060026330904481,
+          "Mother's qualification": -0.07520951711431059,
+          "Father's qualification": -0.014536185171881018,
+          "Mother's occupation": -0.04344743449518171,
+          "Father's occupation": -0.033765650571990866,
+          "Admission grade": 0.11904844606931404,
+          "Displaced": 0.12793375239996352,
+          "Educational special needs": 0.000332419562220518,
+          "Debtor": -0.15349337790970374,
+          "Tuition fees up to date": 0.3414963699493095,
+          "Gender": -0.2840224351889789,
+          "Scholarship holder": 0.2736422491207117,
+          "Age at enrollment": -0.28835423957536227,
+          "International": -0.0016377049703408288,
+          "Curricular units 1st sem (credited)": 0.08046177634109393,
+          "Curricular units 1st sem (enrolled)": 0.38814079245209904,
+          "Curricular units 1st sem (evaluations)": 0.5008548942541909,
+          "Curricular units 1st sem (approved)": 0.8398601823988966,
+          "Curricular units 1st sem (grade)": 1.0,
+          "Curricular units 1st sem (without evaluations)": -0.035563907165762694,
+          "Curricular units 2nd sem (credited)": 0.07324137436543376,
+          "Curricular units 2nd sem (enrolled)": 0.4010748444275195,
+          "Curricular units 2nd sem (evaluations)": 0.5535661809971507,
+          "Curricular units 2nd sem (approved)": 0.7875594625498274,
+          "Curricular units 2nd sem (grade)": 0.8893926874052023,
+          "Curricular units 2nd sem (without evaluations)": -0.04332432253609048,
+          "Unemployment rate": 0.005158869905417286,
+          "Inflation rate": -0.04529495218198674,
+          "GDP": 0.09848225508031391
+        },
+        "Curricular units 1st sem (without evaluations)": {
+          "Marital status": 0.02351110336752483,
+          "Application mode": 0.03310250450106228,
+          "Application order": -0.018315930317604333,
+          "Course": 0.012659885479004245,
+          "Daytime/evening attendance": 0.023853771346768287,
+          "Previous qualification": 0.0038968848011176004,
+          "Previous qualification (grade)": 0.0005993275195560019,
+          "Nacionality": 0.010346627965763595,
+          "Mother's qualification": 0.014499545739693628,
+          "Father's qualification": 0.0046030589948462914,
+          "Mother's occupation": 0.019537687474865232,
+          "Father's occupation": 0.014312873043716059,
+          "Admission grade": -0.00013144696008351837,
+          "Displaced": -0.014000143837736519,
+          "Educational special needs": -0.007118055139537748,
+          "Debtor": 0.015461076920543307,
+          "Tuition fees up to date": -0.05306283495074219,
+          "Gender": 0.006010801986516232,
+          "Scholarship holder": -0.05132197641423542,
+          "Age at enrollment": 0.03659990345117349,
+          "International": 0.004580018430337061,
+          "Curricular units 1st sem (credited)": 0.04195823192122603,
+          "Curricular units 1st sem (enrolled)": 0.02124493002046818,
+          "Curricular units 1st sem (evaluations)": 0.12000430976639742,
+          "Curricular units 1st sem (approved)": -0.05534271602614465,
+          "Curricular units 1st sem (grade)": -0.035563907165762694,
+          "Curricular units 1st sem (without evaluations)": 1.0,
+          "Curricular units 2nd sem (credited)": 0.042009152536849476,
+          "Curricular units 2nd sem (enrolled)": 0.011252618846282623,
+          "Curricular units 2nd sem (evaluations)": 0.060927750785512116,
+          "Curricular units 2nd sem (approved)": -0.0551030996149744,
+          "Curricular units 2nd sem (grade)": -0.040058366660567314,
+          "Curricular units 2nd sem (without evaluations)": 0.4462856024146527,
+          "Unemployment rate": -0.04493285777683074,
+          "Inflation rate": -0.07136788066706876,
+          "GDP": -0.11624151482221975
+        },
+        "Curricular units 2nd sem (credited)": {
+          "Marital status": 0.03726814894197051,
+          "Application mode": 0.15997698144159322,
+          "Application order": -0.06685341007186756,
+          "Course": -0.06645327353679267,
+          "Daytime/evening attendance": -0.07157473821956827,
+          "Previous qualification": 0.12889865132389872,
+          "Previous qualification (grade)": -0.00032013494193498847,
+          "Nacionality": 0.006125154965545849,
+          "Mother's qualification": 0.01787043685323085,
+          "Father's qualification": 0.017970999422241094,
+          "Mother's occupation": 0.006257565542451491,
+          "Father's occupation": 0.005507314986146766,
+          "Admission grade": 0.045671471350837066,
+          "Displaced": -0.05714318341297958,
+          "Educational special needs": -0.004632036888333094,
+          "Debtor": 0.023396418944697312,
+          "Tuition fees up to date": 0.013724616754134373,
+          "Gender": 0.0010231524038953376,
+          "Scholarship holder": -0.035398182589744503,
+          "Age at enrollment": 0.11189097063353251,
+          "International": 0.01475134227387809,
+          "Curricular units 1st sem (credited)": 0.9339352235159386,
+          "Curricular units 1st sem (enrolled)": 0.5317546589916842,
+          "Curricular units 1st sem (evaluations)": 0.3171233760091172,
+          "Curricular units 1st sem (approved)": 0.3457838499116558,
+          "Curricular units 1st sem (grade)": 0.07324137436543376,
+          "Curricular units 1st sem (without evaluations)": 0.042009152536849476,
+          "Curricular units 2nd sem (credited)": 1.0,
+          "Curricular units 2nd sem (enrolled)": 0.42992996472861633,
+          "Curricular units 2nd sem (evaluations)": 0.2602982406208178,
+          "Curricular units 2nd sem (approved)": 0.2785199086218111,
+          "Curricular units 2nd sem (grade)": 0.07990961179751249,
+          "Curricular units 2nd sem (without evaluations)": 0.02595941799957661,
+          "Unemployment rate": 0.023758632306416422,
+          "Inflation rate": 0.006440925860725915,
+          "GDP": -0.008123649771646773
+        },
+        "Curricular units 2nd sem (enrolled)": {
+          "Marital status": -0.00517710925227244,
+          "Application mode": 0.013383405391144056,
+          "Application order": 0.15022429882711605,
+          "Course": 0.613657573127587,
+          "Daytime/evening attendance": 0.05932616529742672,
+          "Previous qualification": 0.027732884331293044,
+          "Previous qualification (grade)": 0.03007568934738275,
+          "Nacionality": -0.012355772395930845,
+          "Mother's qualification": -0.008667343902205818,
+          "Father's qualification": -0.0005771561614841232,
+          "Mother's occupation": -0.010710347151087872,
+          "Father's occupation": -0.013583883612496737,
+          "Admission grade": -0.01652959199326358,
+          "Displaced": -0.0019073642089223765,
+          "Educational special needs": -0.00854943929562275,
+          "Debtor": -0.040438871992985626,
+          "Tuition fees up to date": 0.09225387995500609,
+          "Gender": -0.20790628460587401,
+          "Scholarship holder": 0.13344802735431474,
+          "Age at enrollment": -0.021517991903044955,
+          "International": -0.007844672729453257,
+          "Curricular units 1st sem (credited)": 0.4211793866588958,
+          "Curricular units 1st sem (enrolled)": 0.9563207275685444,
+          "Curricular units 1st sem (evaluations)": 0.4373537655625189,
+          "Curricular units 1st sem (approved)": 0.590151351358344,
+          "Curricular units 1st sem (grade)": 0.4010748444275195,
+          "Curricular units 1st sem (without evaluations)": 0.011252618846282623,
+          "Curricular units 2nd sem (credited)": 0.42992996472861633,
+          "Curricular units 2nd sem (enrolled)": 1.0,
+          "Curricular units 2nd sem (evaluations)": 0.4458101474666204,
+          "Curricular units 2nd sem (approved)": 0.572588355831617,
+          "Curricular units 2nd sem (grade)": 0.39250862117842583,
+          "Curricular units 2nd sem (without evaluations)": -0.00037983125133319077,
+          "Unemployment rate": 0.11381726354304168,
+          "Inflation rate": 0.007337809213785699,
+          "GDP": 0.017073868146679078
+        },
+        "Curricular units 2nd sem (evaluations)": {
+          "Marital status": -0.021254357755813618,
+          "Application mode": 0.04799202771258173,
+          "Application order": -0.0050800515951330396,
+          "Course": 0.3283031384338997,
+          "Daytime/evening attendance": 0.02361542007866517,
+          "Previous qualification": 0.08059718291423486,
+          "Previous qualification (grade)": -0.048591270245780624,
+          "Nacionality": -0.00005107030138946121,
+          "Mother's qualification": 0.0025278045083099074,
+          "Father's qualification": 0.021645377677704504,
+          "Mother's occupation": -0.0016292807776709382,
+          "Father's occupation": -0.0024290942778964195,
+          "Admission grade": -0.04824063899776546,
+          "Displaced": 0.0044588434135879726,
+          "Educational special needs": -0.000492629687902855,
+          "Debtor": 0.009322239668763797,
+          "Tuition fees up to date": 0.10535565978507674,
+          "Gender": -0.07175188534925268,
+          "Scholarship holder": 0.047350173429397575,
+          "Age at enrollment": -0.04319994688411118,
+          "International": 0.003224687121551503,
+          "Curricular units 1st sem (credited)": 0.2642345330277355,
+          "Curricular units 1st sem (enrolled)": 0.45969276803433745,
+          "Curricular units 1st sem (evaluations)": 0.7866991800896532,
+          "Curricular units 1st sem (approved)": 0.48493019162756323,
+          "Curricular units 1st sem (grade)": 0.5535661809971507,
+          "Curricular units 1st sem (without evaluations)": 0.060927750785512116,
+          "Curricular units 2nd sem (credited)": 0.2602982406208178,
+          "Curricular units 2nd sem (enrolled)": 0.4458101474666204,
+          "Curricular units 2nd sem (evaluations)": 1.0,
+          "Curricular units 2nd sem (approved)": 0.4119138340745946,
+          "Curricular units 2nd sem (grade)": 0.5176366731510688,
+          "Curricular units 2nd sem (without evaluations)": 0.0719717272656539,
+          "Unemployment rate": 0.026388558005414918,
+          "Inflation rate": -0.024715741535314462,
+          "GDP": 0.014411264372885915
+        },
+        "Curricular units 2nd sem (approved)": {
+          "Marital status": -0.11136902876600208,
+          "Application mode": -0.27472818173378283,
+          "Application order": 0.1664326171021289,
+          "Course": 0.2494840938796461,
+          "Daytime/evening attendance": 0.12097864721371597,
+          "Previous qualification": -0.06911276454477981,
+          "Previous qualification (grade)": 0.12182704025020803,
+          "Nacionality": -0.008279092449532718,
+          "Mother's qualification": -0.0835162573364017,
+          "Father's qualification": -0.021592344914241956,
+          "Mother's occupation": -0.04845748150359699,
+          "Father's occupation": -0.040724129191956636,
+          "Admission grade": 0.1542321282298901,
+          "Displaced": 0.15115443731914754,
+          "Educational special needs": 0.0020034898238169107,
+          "Debtor": -0.1948141097678049,
+          "Tuition fees up to date": 0.37015013346734943,
+          "Gender": -0.3397344304249012,
+          "Scholarship holder": 0.3555320057097408,
+          "Age at enrollment": -0.2931030113967019,
+          "International": -0.005382290530350237,
+          "Curricular units 1st sem (credited)": 0.27001379438233725,
+          "Curricular units 1st sem (enrolled)": 0.5480004607298753,
+          "Curricular units 1st sem (evaluations)": 0.3543038429202017,
+          "Curricular units 1st sem (approved)": 0.9226568693320767,
+          "Curricular units 1st sem (grade)": 0.7875594625498274,
+          "Curricular units 1st sem (without evaluations)": -0.0551030996149744,
+          "Curricular units 2nd sem (credited)": 0.2785199086218111,
+          "Curricular units 2nd sem (enrolled)": 0.572588355831617,
+          "Curricular units 2nd sem (evaluations)": 0.4119138340745946,
+          "Curricular units 2nd sem (approved)": 1.0,
+          "Curricular units 2nd sem (grade)": 0.8593698811677395,
+          "Curricular units 2nd sem (without evaluations)": -0.0661649176850922,
+          "Unemployment rate": 0.057681617731462645,
+          "Inflation rate": -0.042613930824962135,
+          "GDP": 0.08906660995441157
+        },
+        "Curricular units 2nd sem (grade)": {
+          "Marital status": -0.11121551647291963,
+          "Application mode": -0.27166447848765657,
+          "Application order": 0.10632607855764749,
+          "Course": 0.31689560087344576,
+          "Daytime/evening attendance": 0.11083707684992568,
+          "Previous qualification": -0.059210203799363814,
+          "Previous qualification (grade)": 0.08935334250679547,
+          "Nacionality": -0.0052321080773861176,
+          "Mother's qualification": -0.08280460696208564,
+          "Father's qualification": -0.017741156634582155,
+          "Mother's occupation": -0.04343587936184423,
+          "Father's occupation": -0.03483189400032164,
+          "Admission grade": 0.13520754387571648,
+          "Displaced": 0.1352646979942156,
+          "Educational special needs": 0.0020982767383345776,
+          "Debtor": -0.18519596671758495,
+          "Tuition fees up to date": 0.38137950549984134,
+          "Gender": -0.2993452035724094,
+          "Scholarship holder": 0.2950949347027649,
+          "Age at enrollment": -0.3041325328879865,
+          "International": -0.0010237302145955558,
+          "Curricular units 1st sem (credited)": 0.08342775444285559,
+          "Curricular units 1st sem (enrolled)": 0.37497520087845976,
+          "Curricular units 1st sem (evaluations)": 0.42913915598912167,
+          "Curricular units 1st sem (approved)": 0.8304297773348425,
+          "Curricular units 1st sem (grade)": 0.8893926874052023,
+          "Curricular units 1st sem (without evaluations)": -0.040058366660567314,
+          "Curricular units 2nd sem (credited)": 0.07990961179751249,
+          "Curricular units 2nd sem (enrolled)": 0.39250862117842583,
+          "Curricular units 2nd sem (evaluations)": 0.5176366731510688,
+          "Curricular units 2nd sem (approved)": 0.8593698811677395,
+          "Curricular units 2nd sem (grade)": 1.0,
+          "Curricular units 2nd sem (without evaluations)": -0.04267195458031169,
+          "Unemployment rate": 0.005968926106595355,
+          "Inflation rate": -0.04616730259739881,
+          "GDP": 0.1075804416702233
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+          "Marital status": 0.025688520546485155,
+          "Application mode": 0.043297565773978995,
+          "Application order": -0.019871481466183935,
+          "Course": 0.018006612853031463,
+          "Daytime/evening attendance": -0.014665083739557834,
+          "Previous qualification": 0.001978972324344173,
+          "Previous qualification (grade)": -0.011396666601323387,
+          "Nacionality": 0.0025787292679545016,
+          "Mother's qualification": 0.017145310227772423,
+          "Father's qualification": 0.004241838118088073,
+          "Mother's occupation": 0.028166228029727458,
+          "Father's occupation": 0.022342027136055657,
+          "Admission grade": -0.013064303448093709,
+          "Displaced": -0.028553439388626877,
+          "Educational special needs": 0.00006551064106705132,
+          "Debtor": 0.03393552475968333,
+          "Tuition fees up to date": -0.04686215042705432,
+          "Gender": 0.049950304540587076,
+          "Scholarship holder": -0.05538571689741211,
+          "Age at enrollment": 0.046131931535813145,
+          "International": -0.003366886395940856,
+          "Curricular units 1st sem (credited)": 0.02241666538344984,
+          "Curricular units 1st sem (enrolled)": 0.006231145574870112,
+          "Curricular units 1st sem (evaluations)": 0.07730297159544001,
+          "Curricular units 1st sem (approved)": -0.06504263323747156,
+          "Curricular units 1st sem (grade)": -0.04332432253609048,
+          "Curricular units 1st sem (without evaluations)": 0.4462856024146527,
+          "Curricular units 2nd sem (credited)": 0.02595941799957661,
+          "Curricular units 2nd sem (enrolled)": -0.00037983125133319077,
+          "Curricular units 2nd sem (evaluations)": 0.0719717272656539,
+          "Curricular units 2nd sem (approved)": -0.0661649176850922,
+          "Curricular units 2nd sem (grade)": -0.04267195458031169,
+          "Curricular units 2nd sem (without evaluations)": 1.0,
+          "Unemployment rate": -0.019000974070549983,
+          "Inflation rate": -0.021178930346206347,
+          "GDP": -0.04144815196517384
+        },
+        "Unemployment rate": {
+          "Marital status": -0.03448054013194454,
+          "Application mode": 0.09843882665326045,
+          "Application order": -0.06602194383422705,
+          "Course": -0.0019818750035831244,
+          "Daytime/evening attendance": 0.0638606835019786,
+          "Previous qualification": 0.13083836996008533,
+          "Previous qualification (grade)": 0.05211220739726397,
+          "Nacionality": 0.0018230034897631193,
+          "Mother's qualification": -0.1266862111104949,
+          "Father's qualification": -0.0996372605457463,
+          "Mother's occupation": -0.07880914899653331,
+          "Father's occupation": -0.08867581258244739,
+          "Admission grade": 0.029367366400137505,
+          "Displaced": -0.15945528345758866,
+          "Educational special needs": 0.019943196941030247,
+          "Debtor": 0.03487505465272575,
+          "Tuition fees up to date": -0.0017904913987182088,
+          "Gender": 0.003328744975101046,
+          "Scholarship holder": 0.07265381009548928,
+          "Age at enrollment": 0.016703024238943962,
+          "International": -0.000583579518868284,
+          "Curricular units 1st sem (credited)": 0.025980162691962513,
+          "Curricular units 1st sem (enrolled)": 0.08212926492876632,
+          "Curricular units 1st sem (evaluations)": 0.029568582570210427,
+          "Curricular units 1st sem (approved)": 0.05524096865353036,
+          "Curricular units 1st sem (grade)": 0.005158869905417286,
+          "Curricular units 1st sem (without evaluations)": -0.04493285777683074,
+          "Curricular units 2nd sem (credited)": 0.023758632306416422,
+          "Curricular units 2nd sem (enrolled)": 0.11381726354304168,
+          "Curricular units 2nd sem (evaluations)": 0.026388558005414918,
+          "Curricular units 2nd sem (approved)": 0.057681617731462645,
+          "Curricular units 2nd sem (grade)": 0.005968926106595355,
+          "Curricular units 2nd sem (without evaluations)": -0.019000974070549983,
+          "Unemployment rate": 1.0,
+          "Inflation rate": -0.011955235539949696,
+          "GDP": -0.29894149687836313
+        },
+        "Inflation rate": {
+          "Marital status": 0.01952290367204533,
+          "Application mode": 0.005130030215819844,
+          "Application order": -0.004206359400070153,
+          "Course": 0.007152411148999256,
+          "Daytime/evening attendance": -0.04527042326360356,
+          "Previous qualification": -0.04618850802428325,
+          "Previous qualification (grade)": 0.028678459572131366,
+          "Nacionality": 0.0015363840834745977,
+          "Mother's qualification": 0.06869597330272097,
+          "Father's qualification": 0.06415767093718361,
+          "Mother's occupation": 0.04078524065018058,
+          "Father's occupation": 0.04421355455398504,
+          "Admission grade": -0.01594980606709039,
+          "Displaced": -0.019085621114250523,
+          "Educational special needs": -0.001557143677418772,
+          "Debtor": -0.016464983377719896,
+          "Tuition fees up to date": -0.005714378972991094,
+          "Gender": 0.009015962644475777,
+          "Scholarship holder": -0.040151089857510036,
+          "Age at enrollment": 0.05204948573009309,
+          "International": 0.0017842099025313263,
+          "Curricular units 1st sem (credited)": 0.005706798477895152,
+          "Curricular units 1st sem (enrolled)": 0.01610992410056702,
+          "Curricular units 1st sem (evaluations)": -0.03152809567447217,
+          "Curricular units 1st sem (approved)": -0.043473946573151,
+          "Curricular units 1st sem (grade)": -0.04529495218198674,
+          "Curricular units 1st sem (without evaluations)": -0.07136788066706876,
+          "Curricular units 2nd sem (credited)": 0.006440925860725915,
+          "Curricular units 2nd sem (enrolled)": 0.007337809213785699,
+          "Curricular units 2nd sem (evaluations)": -0.024715741535314462,
+          "Curricular units 2nd sem (approved)": -0.042613930824962135,
+          "Curricular units 2nd sem (grade)": -0.04616730259739881,
+          "Curricular units 2nd sem (without evaluations)": -0.021178930346206347,
+          "Unemployment rate": -0.011955235539949696,
+          "Inflation rate": 1.0,
+          "GDP": -0.08573604259225162
+        },
+        "GDP": {
+          "Marital status": -0.04616549618026289,
+          "Application mode": -0.06596395093357685,
+          "Application order": 0.031860116604942895,
+          "Course": 0.024719434999183,
+          "Daytime/evening attendance": 0.03790766294777148,
+          "Previous qualification": 0.01352689433832688,
+          "Previous qualification (grade)": -0.05373079621309406,
+          "Nacionality": 0.020057983110391326,
+          "Mother's qualification": -0.09999221567190615,
+          "Father's qualification": -0.0704770097916451,
+          "Mother's occupation": 0.06879968026478663,
+          "Father's occupation": 0.07777369227309779,
+          "Admission grade": -0.018837461919754942,
+          "Displaced": 0.09579853930752653,
+          "Educational special needs": 0.014951377388749881,
+          "Debtor": 0.0361725903910921,
+          "Tuition fees up to date": 0.057132943678566056,
+          "Gender": -0.040390064010284374,
+          "Scholarship holder": 0.07478119660178591,
+          "Age at enrollment": -0.09285919918907545,
+          "International": 0.024085766729950397,
+          "Curricular units 1st sem (credited)": -0.005943184326699543,
+          "Curricular units 1st sem (enrolled)": 0.014016638040573952,
+          "Curricular units 1st sem (evaluations)": -0.044139545553210396,
+          "Curricular units 1st sem (approved)": 0.09327233169889323,
+          "Curricular units 1st sem (grade)": 0.09848225508031391,
+          "Curricular units 1st sem (without evaluations)": -0.11624151482221975,
+          "Curricular units 2nd sem (credited)": -0.008123649771646773,
+          "Curricular units 2nd sem (enrolled)": 0.017073868146679078,
+          "Curricular units 2nd sem (evaluations)": 0.014411264372885915,
+          "Curricular units 2nd sem (approved)": 0.08906660995441157,
+          "Curricular units 2nd sem (grade)": 0.1075804416702233,
+          "Curricular units 2nd sem (without evaluations)": -0.04144815196517384,
+          "Unemployment rate": -0.29894149687836313,
+          "Inflation rate": -0.08573604259225162,
+          "GDP": 1.0
+        }
+      },
+      "outlier_analysis": {
+        "Marital status": {
+          "lower_bound": 1.0,
+          "upper_bound": 1.0,
+          "outlier_count": 6329,
+          "outlier_rate": 0.0827125643639405
+        },
+        "Application mode": {
+          "lower_bound": -56.0,
+          "upper_bound": 96.0,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Application order": {
+          "lower_bound": -0.5,
+          "upper_bound": 3.5,
+          "outlier_count": 7895,
+          "outlier_rate": 0.10317833712329125
+        },
+        "Course": {
+          "lower_bound": 8292.5,
+          "upper_bound": 10496.5,
+          "outlier_count": 5371,
+          "outlier_rate": 0.0701926344128179
+        },
+        "Daytime/evening attendance": {
+          "lower_bound": 1.0,
+          "upper_bound": 1.0,
+          "outlier_count": 6480,
+          "outlier_rate": 0.08468595624558928
+        },
+        "Previous qualification": {
+          "lower_bound": 1.0,
+          "upper_bound": 1.0,
+          "outlier_count": 9335,
+          "outlier_rate": 0.12199743851119998
+        },
+        "Previous qualification (grade)": {
+          "lower_bound": 102.5,
+          "upper_bound": 162.5,
+          "outlier_count": 1364,
+          "outlier_rate": 0.01782587103688021
+        },
+        "Nacionality": {
+          "lower_bound": 1.0,
+          "upper_bound": 1.0,
+          "outlier_count": 505,
+          "outlier_rate": 0.006599754306176325
+        },
+        "Mother's qualification": {
+          "lower_bound": -53.0,
+          "upper_bound": 91.0,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Father's qualification": {
+          "lower_bound": -45.5,
+          "upper_bound": 86.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Mother's occupation": {
+          "lower_bound": -3.5,
+          "upper_bound": 16.5,
+          "outlier_count": 1660,
+          "outlier_rate": 0.021694241877728115
+        },
+        "Father's occupation": {
+          "lower_bound": -1.0,
+          "upper_bound": 15.0,
+          "outlier_count": 1684,
+          "outlier_rate": 0.022007893567526596
+        },
+        "Admission grade": {
+          "lower_bound": 97.0,
+          "upper_bound": 153.0,
+          "outlier_count": 2577,
+          "outlier_rate": 0.03367835019211166
+        },
+        "Displaced": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Educational special needs": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 286,
+          "outlier_rate": 0.0037376826367652057
+        },
+        "Debtor": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 5462,
+          "outlier_rate": 0.07138189706997046
+        },
+        "Tuition fees up to date": {
+          "lower_bound": 1.0,
+          "upper_bound": 1.0,
+          "outlier_count": 8138,
+          "outlier_rate": 0.10635406048250085
+        },
+        "Gender": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Scholarship holder": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 18930,
+          "outlier_rate": 0.24739277032855014
+        },
+        "Age at enrollment": {
+          "lower_bound": 10.5,
+          "upper_bound": 30.5,
+          "outlier_count": 8935,
+          "outlier_rate": 0.116769910347892
+        },
+        "International": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 507,
+          "outlier_rate": 0.006625891946992864
+        },
+        "Curricular units 1st sem (credited)": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 3089,
+          "outlier_rate": 0.04036958624114587
+        },
+        "Curricular units 1st sem (enrolled)": {
+          "lower_bound": 3.5,
+          "upper_bound": 7.5,
+          "outlier_count": 9135,
+          "outlier_rate": 0.11938367442954599
+        },
+        "Curricular units 1st sem (evaluations)": {
+          "lower_bound": 1.5,
+          "upper_bound": 13.5,
+          "outlier_count": 10692,
+          "outlier_rate": 0.1397318278052223
+        },
+        "Curricular units 1st sem (approved)": {
+          "lower_bound": -4.0,
+          "upper_bound": 12.0,
+          "outlier_count": 293,
+          "outlier_rate": 0.003829164379623095
+        },
+        "Curricular units 1st sem (grade)": {
+          "lower_bound": 6.69523809523809,
+          "upper_bound": 17.285714285714292,
+          "outlier_count": 16059,
+          "outlier_rate": 0.2098721869364071
+        },
+        "Curricular units 1st sem (without evaluations)": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 2449,
+          "outlier_rate": 0.0320055411798531
+        },
+        "Curricular units 2nd sem (credited)": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 2709,
+          "outlier_rate": 0.03540343448600329
+        },
+        "Curricular units 2nd sem (enrolled)": {
+          "lower_bound": 3.5,
+          "upper_bound": 7.5,
+          "outlier_count": 14416,
+          "outlier_rate": 0.1884001150056196
+        },
+        "Curricular units 2nd sem (evaluations)": {
+          "lower_bound": 1.5,
+          "upper_bound": 13.5,
+          "outlier_count": 11254,
+          "outlier_rate": 0.14707650487467
+        },
+        "Curricular units 2nd sem (approved)": {
+          "lower_bound": -6.5,
+          "upper_bound": 13.5,
+          "outlier_count": 61,
+          "outlier_rate": 0.0007971980449044669
+        },
+        "Curricular units 2nd sem (grade)": {
+          "lower_bound": 5.133928571428623,
+          "upper_bound": 18.110119047618962,
+          "outlier_count": 18482,
+          "outlier_rate": 0.2415379387856452
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+          "lower_bound": 0.0,
+          "upper_bound": 0.0,
+          "outlier_count": 2146,
+          "outlier_rate": 0.02804568859614731
+        },
+        "Unemployment rate": {
+          "lower_bound": 4.450000000000002,
+          "upper_bound": 17.65,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Inflation rate": {
+          "lower_bound": -3.1500000000000004,
+          "upper_bound": 6.050000000000001,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "GDP": {
+          "lower_bound": -6.9350000000000005,
+          "upper_bound": 7.025,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        }
+      }
+    },
+    "data_quality_flags": [
+      "model_search_budget: large tabular dataset -> skip high-cost RF/ExtraTrees grid search",
+      "model_search_budget: large tabular dataset -> narrow grids around fast boosting defaults",
+      "model_search_budget: grid combinations reduced from 20 to 2"
+    ],
+    "target_column": "",
+    "target_columns": [],
+    "train_shape": [
+      76518,
+      38
+    ],
+    "test_shape": [
+      51012,
+      37
+    ]
+  },
+  "feature_state": {
+    "engineered_train_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/features/engineered_train.csv",
+    "engineered_test_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/features/engineered_test.csv",
+    "selected_features": [
+      "Marital status",
+      "Application mode",
+      "Application order",
+      "Course",
+      "Daytime/evening attendance",
+      "Previous qualification",
+      "Previous qualification (grade)",
+      "Nacionality",
+      "Mother's qualification",
+      "Father's qualification",
+      "Mother's occupation",
+      "Father's occupation",
+      "Admission grade",
+      "Displaced",
+      "Educational special needs",
+      "Debtor",
+      "Tuition fees up to date",
+      "Gender",
+      "Scholarship holder",
+      "Age at enrollment",
+      "International",
+      "Curricular units 1st sem (credited)",
+      "Curricular units 1st sem (enrolled)",
+      "Curricular units 1st sem (evaluations)",
+      "Curricular units 1st sem (approved)",
+      "Curricular units 1st sem (grade)",
+      "Curricular units 1st sem (without evaluations)",
+      "Curricular units 2nd sem (credited)",
+      "Curricular units 2nd sem (enrolled)",
+      "Curricular units 2nd sem (evaluations)",
+      "Curricular units 2nd sem (approved)",
+      "Curricular units 2nd sem (grade)",
+      "Curricular units 2nd sem (without evaluations)",
+      "Unemployment rate",
+      "Inflation rate",
+      "GDP",
+      "Age_at_enrollment_bin",
+      "Curricular_units_approved_total",
+      "Curricular_units_enrolled_total",
+      "Curricular_units_approved_trend_2nd_minus_1st",
+      "Curricular_units_grade_trend_2nd_minus_1st"
+    ],
+    "dropped_features": [],
+    "feature_transform_summary": {
+      "Step: create_binning": {
+        "reasoning": "Age at enrollment has a wide range and outliers; quantile binning provides a robust nonlinear representation.",
+        "params": {
+          "column": "Age at enrollment",
+          "n_bins": 5,
+          "new_col": "Age_at_enrollment_bin",
+          "strategy": "quantile"
+        }
+      },
+      "Step: create_interaction": {
+        "reasoning": "The change in grade between semesters provides a signal for improving or deteriorating academic performance.",
+        "params": {
+          "cols": [
+            "Curricular units 2nd sem (grade)",
+            "Curricular units 1st sem (grade)"
+          ],
+          "operator": "-",
+          "new_col": "Curricular_units_grade_trend_2nd_minus_1st"
+        }
+      }
+    },
+    "feature_importance_summary": {},
+    "leakage_checks": [
+      "PASS: target columns excluded from selected_features",
+      "PASS: id columns excluded from selected_features",
+      "PASS: train/test feature schema aligned"
+    ]
+  },
+  "model_state": {
+    "candidate_models": [
+      "LogisticRegression",
+      "HistGradientBoosting"
+    ],
+    "best_model_name": "HistGradientBoosting",
+    "best_params": {
+      "l2_regularization": 0.0,
+      "learning_rate": 0.05,
+      "max_depth": 6,
+      "max_iter": 200
+    },
+    "validation_metrics": {
+      "LogisticRegression": {
+        "cv_f1_macro_mean": 0.7773
+      },
+      "HistGradientBoosting": {
+        "cv_f1_macro_mean": 0.7931
+      },
+      "_meta": {
+        "task_family": "multiclass_classification",
+        "target_mode": "single_target",
+        "prediction_kind": "label",
+        "primary_metric": "f1_macro",
+        "metric_direction": "maximize",
+        "plan_name": "model_building_tool_plan",
+        "plan_applied": true,
+        "n_samples_train": 76518,
+        "n_features_train": 42
+      }
+    },
+    "cv_results": {
+      "LogisticRegression": {
+        "best_params": {
+          "C": 3.0,
+          "penalty": "l2"
+        },
+        "cv_f1_macro_mean": 0.7773
+      },
+      "HistGradientBoosting": {
+        "best_params": {
+          "l2_regularization": 0.0,
+          "learning_rate": 0.05,
+          "max_depth": 6,
+          "max_iter": 200
+        },
+        "cv_f1_macro_mean": 0.7931
+      }
+    },
+    "prediction_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/predictions/submission.csv",
+    "model_explanations": {},
+    "baseline_metrics": {
+      "accuracy": 0.4742,
+      "f1_macro": 0.2144,
+      "f1_weighted": 0.305,
+      "balanced_accuracy": 0.3333,
+      "log_loss": 18.9531,
+      "roc_auc_ovr_macro": 0.5,
+      "_meta": {
+        "source": "out_of_fold_dummy_baseline",
+        "strategy": "most_frequent"
+      }
+    }
+  },
+  "review_state": {
+    "latest_review_status": "approved",
+    "review_history": [
+      {
+        "phase": "reader",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [],
+        "checked_state_fields": [
+          "problem_understanding.task_summary",
+          "problem_understanding.candidate_metrics",
+          "problem_understanding.data_overview",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.submission.submission_columns",
+          "data_state.current_train_path",
+          "data_state.current_test_path"
+        ],
+        "comment": "Reader output approved; task, target, data, and path fields are consistent. Proceed to planning.",
+        "details": {
+          "train_columns": [
+            "id",
+            "Marital status",
+            "Application mode",
+            "Application order",
+            "Course",
+            "Daytime/evening attendance",
+            "Previous qualification",
+            "Previous qualification (grade)",
+            "Nacionality",
+            "Mother's qualification",
+            "Father's qualification",
+            "Mother's occupation",
+            "Father's occupation",
+            "Admission grade",
+            "Displaced",
+            "Educational special needs",
+            "Debtor",
+            "Tuition fees up to date",
+            "Gender",
+            "Scholarship holder",
+            "Age at enrollment",
+            "International",
+            "Curricular units 1st sem (credited)",
+            "Curricular units 1st sem (enrolled)",
+            "Curricular units 1st sem (evaluations)",
+            "Curricular units 1st sem (approved)",
+            "Curricular units 1st sem (grade)",
+            "Curricular units 1st sem (without evaluations)",
+            "Curricular units 2nd sem (credited)",
+            "Curricular units 2nd sem (enrolled)",
+            "Curricular units 2nd sem (evaluations)",
+            "Curricular units 2nd sem (approved)",
+            "Curricular units 2nd sem (grade)",
+            "Curricular units 2nd sem (without evaluations)",
+            "Unemployment rate",
+            "Inflation rate",
+            "GDP",
+            "Target"
+          ],
+          "test_columns": [
+            "id",
+            "Marital status",
+            "Application mode",
+            "Application order",
+            "Course",
+            "Daytime/evening attendance",
+            "Previous qualification",
+            "Previous qualification (grade)",
+            "Nacionality",
+            "Mother's qualification",
+            "Father's qualification",
+            "Mother's occupation",
+            "Father's occupation",
+            "Admission grade",
+            "Displaced",
+            "Educational special needs",
+            "Debtor",
+            "Tuition fees up to date",
+            "Gender",
+            "Scholarship holder",
+            "Age at enrollment",
+            "International",
+            "Curricular units 1st sem (credited)",
+            "Curricular units 1st sem (enrolled)",
+            "Curricular units 1st sem (evaluations)",
+            "Curricular units 1st sem (approved)",
+            "Curricular units 1st sem (grade)",
+            "Curricular units 1st sem (without evaluations)",
+            "Curricular units 2nd sem (credited)",
+            "Curricular units 2nd sem (enrolled)",
+            "Curricular units 2nd sem (evaluations)",
+            "Curricular units 2nd sem (approved)",
+            "Curricular units 2nd sem (grade)",
+            "Curricular units 2nd sem (without evaluations)",
+            "Unemployment rate",
+            "Inflation rate",
+            "GDP"
+          ],
+          "sample_submission_columns": [
+            "id",
+            "Target"
+          ],
+          "target_spec": {
+            "status": "resolved",
+            "target_columns": [
+              "Target"
+            ],
+            "target_mode": "single_target",
+            "task_family": "multiclass_classification",
+            "prediction_kind": "label",
+            "user_target_hint": "Target",
+            "user_task_family_hint": "",
+            "submission": {
+              "id_columns": [
+                "id"
+              ],
+              "output_columns": [
+                "Target"
+              ],
+              "submission_columns": [
+                "id",
+                "Target"
+              ],
+              "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/classification_with_an_academic_success_dataset/sample_submission.csv"
+            },
+            "evaluation": {
+              "metric_hint": "f1_macro",
+              "primary_metric": "f1_macro",
+              "candidate_metrics": [
+                "f1_macro"
+              ]
+            },
+            "evidence": [
+              {
+                "source": "compatibility_fields",
+                "detail": "Used explicit target columns provided in the incoming state.",
+                "columns": [
+                  "Target"
+                ]
+              }
+            ]
+          },
+          "target_columns": [
+            "Target"
+          ]
+        }
+      },
+      {
+        "phase": "preliminary_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [
+          "artifacts.figures is empty; EDA still passes if structured findings exist"
+        ],
+        "checked_artifacts": [
+          "preliminary_eda_report"
+        ],
+        "checked_state_fields": [
+          "data_state.schema_summary",
+          "data_state.eda_findings",
+          "artifacts.figures"
+        ],
+        "comment": "- Approved: `preliminary_eda_report` is present and the phase has no blocking failures.\n- Structured EDA evidence is available via `data_state.schema_summary` and `data_state.eda_findings`.\n- `artifacts.figures` is empty, but this is a non-blocking warning because structured findings satisfy the EDA requirement.\n- No retry needed; proceed to the next phase.",
+        "details": {
+          "current_train_path_shape": [
+            76518,
+            38
+          ]
+        }
+      },
+      {
+        "phase": "data_cleaning",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [
+          "data_state.data_quality_flags is empty; no quality notes were recorded"
+        ],
+        "checked_artifacts": [
+          "cleaned_train_data",
+          "phase_plan_records.data_cleaning",
+          "cleaned_test_data",
+          "cleaning_report"
+        ],
+        "checked_state_fields": [
+          "data_state.current_train_path",
+          "data_state.current_test_path",
+          "data_state.cleaning_summary",
+          "data_state.data_quality_flags",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "- **Approved** — data_cleaning artifacts (`cleaned_train_data`, `cleaned_test_data`, `cleaning_report`, `phase_plan_records.data_cleaning`) are present and consistent with `data_state.current_train_path` / `current_test_path`.\n- `data_state.cleaning_summary` records the cleaning actions; no blocking failures were reported.\n- Target spec (`target_columns`, `target_mode`, `task_family`, `submission` id/output/column fields) is populated and aligns with the cleaned outputs.\n- **Warning (non-blocking):** `data_state.data_quality_flags` is empty — no quality notes were recorded. Consider logging at least explicit \"no issues found\" entries (e.g., missing-value rates, duplicates, dtype/range checks on target and ID columns) so downstream phases can confirm quality was verified rather than skipped.\n- No retry action needed; proceed to the next phase.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Target"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Target"
+            ],
+            "submission_columns": [
+              "id",
+              "Target"
+            ],
+            "target_mode": "single_target",
+            "task_family": "multiclass_classification",
+            "prediction_kind": "label"
+          },
+          "cleaned_train_data_shape": [
+            76518,
+            38
+          ],
+          "cleaned_test_data_shape": [
+            51012,
+            37
+          ]
+        }
+      },
+      {
+        "phase": "indepth_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "indepth_eda_report",
+          "phase_plan_records.indepth_eda"
+        ],
+        "checked_state_fields": [
+          "data_state.indepth_eda_summary",
+          "artifacts.indepth_eda_report",
+          "artifacts.figures"
+        ],
+        "comment": "- **Approved.** `indepth_eda_report` is present and consistent with `phase_plan_records.indepth_eda`; no blocking failures or warnings were flagged.\n- `data_state.indepth_eda_summary` aligns with the narrative in `artifacts.indepth_eda_report`, with no conflicting claims detected.\n- `artifacts.figures` is populated and referenced by the report; figure inventory matches the described analyses.\n- Recommendation: carry the EDA summary forward as-is into downstream phases (feature selection / modeling) without re-running EDA.\n- Optional (non-blocking): ensure the figure paths listed in `artifacts.figures` remain stable for reproducibility in later phases.",
+        "details": {
+          "current_train_path_shape": [
+            76518,
+            38
+          ]
+        }
+      },
+      {
+        "phase": "feature_engineering",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "feature_summary",
+          "phase_plan_records.feature_engineering"
+        ],
+        "checked_state_fields": [
+          "feature_state.engineered_train_path",
+          "feature_state.engineered_test_path",
+          "feature_state.selected_features",
+          "feature_state.feature_transform_summary",
+          "feature_state.leakage_checks",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns"
+        ],
+        "comment": "- **Approved:** Feature engineering has no blocking failures or warnings.\n- Checked `feature_summary` and `phase_plan_records.feature_engineering`; both are present and consistent with the phase.\n- `feature_state` records engineered train/test paths, selected features, transform summary, and leakage checks.\n- `target_spec` fields are populated for target columns, mode, task family, submission ID columns, and status.\n- Proceed to the next phase; reuse the documented feature pipeline for validation/test/inference to avoid train-serving skew.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Target"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Target"
+            ],
+            "submission_columns": [
+              "id",
+              "Target"
+            ],
+            "target_mode": "single_target",
+            "task_family": "multiclass_classification",
+            "prediction_kind": "label"
+          },
+          "engineered_train_path_shape": [
+            76518,
+            43
+          ],
+          "engineered_test_path_shape": [
+            51012,
+            42
+          ]
+        }
+      },
+      {
+        "phase": "model_building",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "model_results",
+          "phase_plan_records.model_building",
+          "best_model",
+          "prediction_file"
+        ],
+        "checked_state_fields": [
+          "model_state.candidate_models",
+          "model_state.best_model_name",
+          "model_state.validation_metrics",
+          "model_state.cv_results",
+          "model_state.prediction_path",
+          "model_state.baseline_metrics",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "- Approved: `model_building` phase passed all deterministic checks with no blocking failures or warnings.\n- Candidate models and the selected `best_model` were validated against `model_state.candidate_models` and `model_state.best_model_name`; selection is consistent with reported `validation_metrics` and `cv_results`.\n- `model_results`, `best_model`, and `prediction_file` artifacts are present and align with `model_state.prediction_path`.\n- Baseline comparison is supported by `model_state.baseline_metrics`, and improvements over baseline are consistent with the chosen model.\n- `target_spec` fields (status, target_columns, target_mode, task_family, submission id/output/submission columns) are coherent with the task and generated predictions.\n- No corrective action required; proceed to the next phase.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Target"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Target"
+            ],
+            "submission_columns": [
+              "id",
+              "Target"
+            ],
+            "target_mode": "single_target",
+            "task_family": "multiclass_classification",
+            "prediction_kind": "label"
+          },
+          "prediction_file_shape": [
+            51012,
+            2
+          ],
+          "prediction_columns": [
+            "id",
+            "Target"
+          ],
+          "expected_submission_columns": [
+            "id",
+            "Target"
+          ]
+        }
+      }
+    ],
+    "retry_count_by_phase": {},
+    "fatal_errors": [],
+    "last_review_comment": "- Approved: `model_building` phase passed all deterministic checks with no blocking failures or warnings.\n- Candidate models and the selected `best_model` were validated against `model_state.candidate_models` and `model_state.best_model_name`; selection is consistent with reported `validation_metrics` and `cv_results`.\n- `model_results`, `best_model`, and `prediction_file` artifacts are present and align with `model_state.prediction_path`.\n- Baseline comparison is supported by `model_state.baseline_metrics`, and improvements over baseline are consistent with the chosen model.\n- `target_spec` fields (status, target_columns, target_mode, task_family, submission id/output/submission columns) are coherent with the task and generated predictions.\n- No corrective action required; proceed to the next phase.",
+    "pending_review_phase": "model_building"
+  },
+  "report_state": {
+    "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/reports/technical_report.md",
+    "business_report_path": "",
+    "executive_summary": "This workflow trained a multiclass_classification solution for target `Target`. The selected model is HistGradientBoosting, evaluated primarily with f1_macro=0.7931.",
+    "limitations": [
+      "Feature importance is unavailable, so driver-level interpretation is limited."
+    ],
+    "recommended_actions": []
+  },
+  "artifacts": {
+    "preliminary_eda_report": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/eda/preliminary_eda.md",
+    "cleaned_train_data": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/data/cleaned_train.csv",
+    "cleaned_test_data": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/data/cleaned_test.csv",
+    "cleaning_report": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/data/cleaning_report.md",
+    "indepth_eda_report": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/eda/in_depth_eda.md",
+    "feature_summary": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/features/feature_summary.json",
+    "engineered_train_data": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/features/engineered_train.csv",
+    "engineered_test_data": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/features/engineered_test.csv",
+    "model_results": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/models/model_results.json",
+    "best_model": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/models/best_model.pkl",
+    "prediction_file": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/predictions/submission.csv",
+    "technical_report": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/reports/technical_report.md",
+    "business_report": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/reports/business_report.md",
+    "run_manifest": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/reports/run_manifest.json",
+    "figures": [
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/figures/target_analysis_Target_A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1-run-b61d33ea.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/figures/correlation_matrix_A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1-run-b61d33ea.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/figures/outlier_analysis_A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1-run-b61d33ea.png"
+    ],
+    "phase_review_records": {
+      "preliminary_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_reviews/preliminary_eda.json",
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_reviews/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_reviews/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_reviews/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_reviews/model_building.json"
+    },
+    "phase_plan_records": {
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_plans/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_plans/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_plans/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1/artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea/phase_plans/model_building.json"
+    }
+  },
+  "runtime_state": {
+    "thread_id": "A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1",
+    "run_id": "A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1-run-b61d33ea",
+    "artifact_root": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_141801_b61d33ea",
+    "checkpoint_namespace": "default",
+    "token_usage": {},
+    "llm_calls": 0,
+    "phase_runtime_sec": {
+      "reader": 10.2147,
+      "planner": 21.118299999999998,
+      "preliminary_eda": 0.1386,
+      "data_cleaning": 0.6491,
+      "indepth_eda": 3.0359,
+      "feature_engineering": 0.7421,
+      "model_building": 18.8451,
+      "summarizer": 0.0028
+    },
+    "total_runtime_sec": 54.7466,
+    "cost_estimate": null,
+    "workspace_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r1",
+    "interrupted": false,
+    "last_reviewed_phase": "model_building"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "name": "reader",
+      "content": "Initialized problem understanding and dataset paths."
+    },
+    {
+      "role": "system",
+      "name": "technical_summarizer",
+      "content": "Generated final technical report."
+    }
+  ]
+}

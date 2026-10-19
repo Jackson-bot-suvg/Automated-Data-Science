@@ -1,0 +1,37 @@
+{
+  "candidate_hash": "ba8d099e19b450116c335f68e629935eca0e657d43e286d1765b0b5429ee8d23",
+  "contract_digest": "b189ba4ef6db285d2b3e0d6561fe3763a7a91b803f825b2558844c2cd5fda065",
+  "fit_seconds_prefix": 6.965,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_pairing_digest": "1e08705c41a378b3ba943fa49f8518cff8a1a1bcacaacff1d26c7dca13adbfc3",
+      "before_pairing_digest": "ae76c39a6187f2d0c32b4cb13987c690e21151353ca0a748ad14f4be7e360e7b",
+      "fixed_points": 0,
+      "id_columns": [
+        "id"
+      ],
+      "n_rows": 75,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "type"
+      ]
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101",
+  "prefix_run_id": "A2P__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "1b668dfd6a1a135332ae15f0596e9bf2b5b24a0691438c1bae6a176660865b91",
+  "state_hash": "a20e6b651e3ef303764c85b12e9d83c403f1d412a8e8b6f9d7dca61c6e50e642",
+  "visible_evidence_hash": "200d346b8454cac3bc1dd1f9647cb939fb480bf7619d141fb7458e37ec6ad337"
+}

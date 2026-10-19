@@ -1,0 +1,2594 @@
+{
+  "task_config": {
+    "task_id": "A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0",
+    "task_type": "",
+    "target_column": "",
+    "target_columns": [],
+    "raw_task": "predict steel plate defect types",
+    "dataset_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect",
+    "target_hint": "Pastry,Z_Scratch,K_Scatch,Stains,Dirtiness,Bumps,Other_Faults",
+    "metric_hint": "roc_auc_macro_ovr",
+    "dataset_paths": {
+      "train": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/train.csv",
+      "test": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/test.csv",
+      "submission": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/sample_submission.csv"
+    },
+    "business_context": "predict steel plate defect types",
+    "constraints": {
+      "max_runtime_min": null,
+      "max_tokens": null,
+      "interpretability_required": true,
+      "business_translation_required": true
+    }
+  },
+  "problem_understanding": {
+    "task_summary": "Multi-label classification of seven steel plate defect categories from tabular manufacturing features, predicting defect probabilities for each category.",
+    "predicted_task_type": "multilabel_classification",
+    "target_column": "",
+    "target_columns": [],
+    "candidate_metrics": [
+      "roc_auc_macro_ovr"
+    ],
+    "data_overview": {
+      "n_rows": 19219,
+      "n_cols": 35,
+      "column_types": {
+        "id": "int64",
+        "X_Minimum": "int64",
+        "X_Maximum": "int64",
+        "Y_Minimum": "int64",
+        "Y_Maximum": "int64",
+        "Pixels_Areas": "int64",
+        "X_Perimeter": "int64",
+        "Y_Perimeter": "int64",
+        "Sum_of_Luminosity": "int64",
+        "Minimum_of_Luminosity": "int64",
+        "Maximum_of_Luminosity": "int64",
+        "Length_of_Conveyer": "int64",
+        "TypeOfSteel_A300": "int64",
+        "TypeOfSteel_A400": "int64",
+        "Steel_Plate_Thickness": "int64",
+        "Edges_Index": "float64",
+        "Empty_Index": "float64",
+        "Square_Index": "float64",
+        "Outside_X_Index": "float64",
+        "Edges_X_Index": "float64",
+        "Edges_Y_Index": "float64",
+        "Outside_Global_Index": "float64",
+        "LogOfAreas": "float64",
+        "Log_X_Index": "float64",
+        "Log_Y_Index": "float64",
+        "Orientation_Index": "float64",
+        "Luminosity_Index": "float64",
+        "SigmoidOfAreas": "float64",
+        "Pastry": "int64",
+        "Z_Scratch": "int64",
+        "K_Scatch": "int64",
+        "Stains": "int64",
+        "Dirtiness": "int64",
+        "Bumps": "int64",
+        "Other_Faults": "int64"
+      },
+      "missingness_summary": {}
+    },
+    "risks": [
+      "Class distribution across the seven defect labels is not summarized in the provided metadata; label imbalance should be checked before modeling.",
+      "Evaluation is macro-averaged ROC AUC across seven labels, so weaker or rare-label performance can disproportionately reduce the score.",
+      "The dataset is synthetically generated for a Kaggle Playground competition and may contain generation artifacts."
+    ],
+    "business_goal_summary": "Predict the probability of each steel plate defect type to support manufacturing quality control and inspection prioritization. The output should be interpretable and translatable into business-facing defect risk signals for the seven categories."
+  },
+  "target_spec": {
+    "status": "resolved",
+    "target_columns": [
+      "Pastry",
+      "Z_Scratch",
+      "K_Scatch",
+      "Stains",
+      "Dirtiness",
+      "Bumps",
+      "Other_Faults"
+    ],
+    "target_mode": "multi_label",
+    "task_family": "multilabel_classification",
+    "prediction_kind": "probability",
+    "user_target_hint": "Pastry,Z_Scratch,K_Scatch,Stains,Dirtiness,Bumps,Other_Faults",
+    "user_task_family_hint": "",
+    "submission": {
+      "id_columns": [
+        "id"
+      ],
+      "output_columns": [
+        "Pastry",
+        "Z_Scratch",
+        "K_Scatch",
+        "Stains",
+        "Dirtiness",
+        "Bumps",
+        "Other_Faults"
+      ],
+      "submission_columns": [
+        "id",
+        "Pastry",
+        "Z_Scratch",
+        "K_Scatch",
+        "Stains",
+        "Dirtiness",
+        "Bumps",
+        "Other_Faults"
+      ],
+      "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/sample_submission.csv"
+    },
+    "evaluation": {
+      "metric_hint": "roc_auc_macro_ovr",
+      "primary_metric": "roc_auc_macro_ovr",
+      "candidate_metrics": [
+        "roc_auc_macro_ovr"
+      ]
+    },
+    "evidence": [
+      {
+        "source": "train_test_diff",
+        "detail": "Columns present in train.csv but missing from test.csv suggest candidate targets.",
+        "columns": [
+          "Pastry",
+          "Z_Scratch",
+          "K_Scatch",
+          "Stains",
+          "Dirtiness",
+          "Bumps",
+          "Other_Faults"
+        ]
+      },
+      {
+        "source": "sample_submission",
+        "detail": "Sample submission output columns align with train/test target diff.",
+        "columns": [
+          "Pastry",
+          "Z_Scratch",
+          "K_Scatch",
+          "Stains",
+          "Dirtiness",
+          "Bumps",
+          "Other_Faults"
+        ]
+      }
+    ]
+  },
+  "execution_plan": {
+    "phases": [
+      "preliminary_eda",
+      "data_cleaning",
+      "indepth_eda",
+      "feature_engineering",
+      "model_building"
+    ],
+    "phase_objectives": {
+      "preliminary_eda": "Profile the dataset, summarize schema, and create EDA evidence for later planning.",
+      "data_cleaning": "Create cleaned train/test datasets and a traceable cleaning report.",
+      "indepth_eda": "Perform in-depth EDA to uncover hidden patterns and insights.",
+      "feature_engineering": "Create aligned engineered feature datasets and feature summary artifacts.",
+      "model_building": "Train candidate models, select the best model, and produce prediction artifacts with metric evidence."
+    },
+    "success_criteria": {
+      "preliminary_eda": {
+        "criteria": [
+          "artifacts.preliminary_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "profile_dataset",
+          "missingness_visualization",
+          "basic_distribution_visualization"
+        ],
+        "agent_plan": {
+          "plan_name": "preliminary_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "data_cleaning": {
+        "criteria": [
+          "artifacts.cleaned_train_data and artifacts.cleaned_test_data exist",
+          "data_state.current_train_path and current_test_path point to cleaned files"
+        ],
+        "allowed_tools": [
+          "drop_columns",
+          "fill_missing",
+          "clip_outliers"
+        ],
+        "agent_plan": {
+          "plan_name": "data_cleaning_pending_plan",
+          "steps": []
+        }
+      },
+      "indepth_eda": {
+        "criteria": [
+          "artifacts.indepth_eda_report exists",
+          "data_state.schema_summary and data_state.eda_findings are populated"
+        ],
+        "allowed_tools": [
+          "target_analysis",
+          "feature_feature_relationships",
+          "outlier_analysis",
+          "segment_analysis"
+        ],
+        "agent_plan": {
+          "plan_name": "indepth_eda_pending_plan",
+          "steps": []
+        }
+      },
+      "feature_engineering": {
+        "criteria": [
+          "feature_state.engineered_train_path and engineered_test_path exist",
+          "feature_state.selected_features is populated"
+        ],
+        "allowed_tools": [
+          "extract_regex",
+          "create_binning",
+          "create_interaction",
+          "group_rare_categories",
+          "encode_categorical"
+        ],
+        "agent_plan": {
+          "plan_name": "feature_engineering_pending_plan",
+          "steps": []
+        }
+      },
+      "model_building": {
+        "criteria": [
+          "artifacts.model_results, artifacts.best_model, and artifacts.prediction_file exist",
+          "model_state.best_model_name and validation metrics are populated"
+        ],
+        "allowed_tools": [
+          "detect_feature_types",
+          "build_preprocessor",
+          "get_candidate_models",
+          "fit_and_select_model",
+          "summarize_cv_results",
+          "compute_metric_bundle",
+          "build_submission",
+          "save_model_artifacts"
+        ],
+        "agent_plan": {
+          "plan_name": "model_building_tool_plan",
+          "steps": [
+            {
+              "tool": "configure_preprocessing",
+              "parameters": {
+                "numeric_impute": "median",
+                "scaler": "standard"
+              },
+              "reasoning": "Prepare numeric features for conservative multilabel modeling; imputation safeguards against any residual missing values and scaling supports linear models while remaining harmless for tree-based models."
+            },
+            {
+              "tool": "configure_candidate_models",
+              "parameters": {
+                "models": [
+                  {
+                    "name": "LogisticRegression"
+                  },
+                  {
+                    "name": "RandomForest"
+                  },
+                  {
+                    "name": "ExtraTrees"
+                  }
+                ]
+              },
+              "reasoning": "Use a small set of task-compatible, conservative multilabel candidate models suited to tabular numeric features."
+            },
+            {
+              "tool": "configure_scoring",
+              "parameters": {
+                "primary_metric": "roc_auc_macro_ovr"
+              },
+              "reasoning": "Align model scoring with the resolved primary metric for the multilabel probability prediction task."
+            }
+          ]
+        }
+      }
+    },
+    "review_points": [
+      "Reviewer must validate required artifacts for the selected phase.",
+      "Reviewer must validate that phase-specific state fields are populated before advancing."
+    ],
+    "fallback_rules": [
+      "If reviewer requests retry, repeat the pending review phase.",
+      "If LLM output is unavailable or invalid, use deterministic phase order."
+    ]
+  },
+  "current_phase": "technical_summary",
+  "phase_history": [
+    "reader",
+    "preliminary_eda",
+    "preliminary_eda",
+    "data_cleaning",
+    "data_cleaning",
+    "indepth_eda",
+    "indepth_eda",
+    "feature_engineering",
+    "feature_engineering",
+    "model_building",
+    "model_building",
+    "technical_summary"
+  ],
+  "data_state": {
+    "raw_train_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/train.csv",
+    "raw_test_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/test.csv",
+    "current_train_path": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/data/cleaned_train.csv",
+    "current_test_path": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/data/cleaned_test.csv",
+    "schema_summary": {
+      "columns": [
+        "id",
+        "X_Minimum",
+        "X_Maximum",
+        "Y_Minimum",
+        "Y_Maximum",
+        "Pixels_Areas",
+        "X_Perimeter",
+        "Y_Perimeter",
+        "Sum_of_Luminosity",
+        "Minimum_of_Luminosity",
+        "Maximum_of_Luminosity",
+        "Length_of_Conveyer",
+        "TypeOfSteel_A300",
+        "TypeOfSteel_A400",
+        "Steel_Plate_Thickness",
+        "Edges_Index",
+        "Empty_Index",
+        "Square_Index",
+        "Outside_X_Index",
+        "Edges_X_Index",
+        "Edges_Y_Index",
+        "Outside_Global_Index",
+        "LogOfAreas",
+        "Log_X_Index",
+        "Log_Y_Index",
+        "Orientation_Index",
+        "Luminosity_Index",
+        "SigmoidOfAreas",
+        "Pastry",
+        "Z_Scratch",
+        "K_Scatch",
+        "Stains",
+        "Dirtiness",
+        "Bumps",
+        "Other_Faults"
+      ]
+    },
+    "cleaning_summary": {
+      "no_action_needed": {
+        "reason": "Planner determined no cleaning action was required for the current dataset snapshot.",
+        "plan_name": "data_cleaning_no_action_needed"
+      }
+    },
+    "eda_findings": {
+      "dataset_shape": {
+        "rows": 19219,
+        "columns": 35
+      },
+      "target_variable": [
+        "Pastry",
+        "Z_Scratch",
+        "K_Scatch",
+        "Stains",
+        "Dirtiness",
+        "Bumps",
+        "Other_Faults"
+      ],
+      "columns": {
+        "id": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 9609.0,
+          "min": 0.0,
+          "max": 19218.0,
+          "nunique": 19219
+        },
+        "X_Minimum": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 709.8546750611374,
+          "min": 0.0,
+          "max": 1705.0,
+          "nunique": 1191
+        },
+        "X_Maximum": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 753.8576408762162,
+          "min": 4.0,
+          "max": 1713.0,
+          "nunique": 1259
+        },
+        "Y_Minimum": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1849756.0400124877,
+          "min": 6712.0,
+          "max": 12987661.0,
+          "nunique": 3345
+        },
+        "Y_Maximum": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1846605.345439409,
+          "min": 6724.0,
+          "max": 12987692.0,
+          "nunique": 3341
+        },
+        "Pixels_Areas": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1683.9876164212499,
+          "min": 6.0,
+          "max": 152655.0,
+          "nunique": 1154
+        },
+        "X_Perimeter": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 95.65466465476872,
+          "min": 2.0,
+          "max": 7553.0,
+          "nunique": 460
+        },
+        "Y_Perimeter": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 64.1240959467194,
+          "min": 1.0,
+          "max": 903.0,
+          "nunique": 331
+        },
+        "Sum_of_Luminosity": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 191846.67823507986,
+          "min": 250.0,
+          "max": 11591414.0,
+          "nunique": 2595
+        },
+        "Minimum_of_Luminosity": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 84.8084187522764,
+          "min": 0.0,
+          "max": 196.0,
+          "nunique": 162
+        },
+        "Maximum_of_Luminosity": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 128.64738019668036,
+          "min": 39.0,
+          "max": 253.0,
+          "nunique": 98
+        },
+        "Length_of_Conveyer": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1459.350746656954,
+          "min": 1227.0,
+          "max": 1794.0,
+          "nunique": 99
+        },
+        "TypeOfSteel_A300": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.40267443675529424,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "TypeOfSteel_A400": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.5963369582184297,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Steel_Plate_Thickness": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 76.21312243092773,
+          "min": 40.0,
+          "max": 300.0,
+          "nunique": 27
+        },
+        "Edges_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.3529393620895988,
+          "min": 0.0,
+          "max": 0.9952,
+          "nunique": 1849
+        },
+        "Empty_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.40930947864092826,
+          "min": 0.0,
+          "max": 0.9275,
+          "nunique": 1748
+        },
+        "Square_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.5745203944013737,
+          "min": 0.0083,
+          "max": 1.0,
+          "nunique": 1118
+        },
+        "Outside_X_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.03060935532545918,
+          "min": 0.0015,
+          "max": 0.6651,
+          "nunique": 525
+        },
+        "Edges_X_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.614749477079973,
+          "min": 0.0144,
+          "max": 1.0,
+          "nunique": 1102
+        },
+        "Edges_Y_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.8316521000052032,
+          "min": 0.105,
+          "max": 1.0,
+          "nunique": 900
+        },
+        "Outside_Global_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.591898641968885,
+          "min": -0.0,
+          "max": 1.0,
+          "nunique": 4
+        },
+        "LogOfAreas": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 2.4734746084603776,
+          "min": 0.7782,
+          "max": 4.5543,
+          "nunique": 1072
+        },
+        "Log_X_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.312666767261564,
+          "min": 0.301,
+          "max": 2.9973,
+          "nunique": 206
+        },
+        "Log_Y_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 1.389736620011447,
+          "min": 0.0,
+          "max": 4.0333,
+          "nunique": 241
+        },
+        "Orientation_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.10274234455486758,
+          "min": -0.9884,
+          "max": 0.9917,
+          "nunique": 1598
+        },
+        "Luminosity_Index": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": -0.13838178625318695,
+          "min": -0.885,
+          "max": 0.6421,
+          "nunique": 2046
+        },
+        "SigmoidOfAreas": {
+          "dtype": "float64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.5719021902804517,
+          "min": 0.119,
+          "max": 1.0,
+          "nunique": 467
+        },
+        "Pastry": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.07627868255372287,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Z_Scratch": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.059836620011447,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "K_Scatch": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.17857328685155316,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Stains": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.029554087101305998,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Dirtiness": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.025235444091784173,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Bumps": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.24782767053436702,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        },
+        "Other_Faults": {
+          "dtype": "int64",
+          "missing_rate": 0.0,
+          "type": "numeric",
+          "mean": 0.3412248295957126,
+          "min": 0.0,
+          "max": 1.0,
+          "nunique": 2
+        }
+      },
+      "class_distribution": {
+        "Pastry": {
+          "0": 0.9237213174462772,
+          "1": 0.07627868255372287
+        },
+        "Z_Scratch": {
+          "0": 0.940163379988553,
+          "1": 0.059836620011447
+        },
+        "K_Scatch": {
+          "0": 0.8214267131484468,
+          "1": 0.17857328685155316
+        },
+        "Stains": {
+          "0": 0.970445912898694,
+          "1": 0.029554087101305998
+        },
+        "Dirtiness": {
+          "0": 0.9747645559082159,
+          "1": 0.025235444091784173
+        },
+        "Bumps": {
+          "0": 0.752172329465633,
+          "1": 0.24782767053436702
+        },
+        "Other_Faults": {
+          "0": 0.6587751704042875,
+          "1": 0.3412248295957126
+        }
+      },
+      "label_cooccurrence": {
+        "Pastry__x__Z_Scratch": -0.0725,
+        "Pastry__x__K_Scatch": -0.1335,
+        "Pastry__x__Stains": -0.0501,
+        "Pastry__x__Dirtiness": -0.0462,
+        "Pastry__x__Bumps": -0.1649,
+        "Pastry__x__Other_Faults": -0.2068,
+        "Z_Scratch__x__K_Scatch": -0.1176,
+        "Z_Scratch__x__Stains": -0.044,
+        "Z_Scratch__x__Dirtiness": -0.0406,
+        "Z_Scratch__x__Bumps": -0.1448,
+        "Z_Scratch__x__Other_Faults": -0.1816,
+        "K_Scatch__x__Stains": -0.0814,
+        "K_Scatch__x__Dirtiness": -0.075,
+        "K_Scatch__x__Bumps": -0.267,
+        "K_Scatch__x__Other_Faults": -0.3304,
+        "Stains__x__Dirtiness": -0.0281,
+        "Stains__x__Bumps": -0.1002,
+        "Stains__x__Other_Faults": -0.1256,
+        "Dirtiness__x__Bumps": -0.0924,
+        "Dirtiness__x__Other_Faults": -0.1158,
+        "Bumps__x__Other_Faults": -0.4131
+      }
+    },
+    "indepth_eda_summary": {
+      "target_analysis": {
+        "Pastry": {
+          "variable": "Pastry",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.07627868255372287,
+            "std": 0.26545039368742035,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 17753,
+            "1": 1466
+          }
+        },
+        "Z_Scratch": {
+          "variable": "Z_Scratch",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.059836620011447,
+            "std": 0.23719006341560991,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 18069,
+            "1": 1150
+          }
+        },
+        "K_Scatch": {
+          "variable": "K_Scatch",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.17857328685155316,
+            "std": 0.38300457015005224,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 15787,
+            "1": 3432
+          }
+        },
+        "Stains": {
+          "variable": "Stains",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.029554087101305998,
+            "std": 0.1693580096165976,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 18651,
+            "1": 568
+          }
+        },
+        "Dirtiness": {
+          "variable": "Dirtiness",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.025235444091784173,
+            "std": 0.15684354124807162,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 18734,
+            "1": 485
+          }
+        },
+        "Bumps": {
+          "variable": "Bumps",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.24782767053436702,
+            "std": 0.43176245316902195,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 14456,
+            "1": 4763
+          }
+        },
+        "Other_Faults": {
+          "variable": "Other_Faults",
+          "model_type": "multilabel_classification",
+          "summary": {
+            "count": 19219.0,
+            "mean": 0.3412248295957126,
+            "std": 0.4741330426504408,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 1.0,
+            "max": 1.0
+          },
+          "value_counts": {
+            "0": 12661,
+            "1": 6558
+          }
+        }
+      },
+      "feature_feature_relationships": {
+        "X_Minimum": {
+          "X_Minimum": 1.0,
+          "X_Maximum": 0.9897672786491649,
+          "Y_Minimum": 0.016070945514265456,
+          "Y_Maximum": 0.014247029140203009,
+          "Pixels_Areas": -0.46475935690242276,
+          "X_Perimeter": -0.45196073435190354,
+          "Y_Perimeter": -0.4265139923651497,
+          "Sum_of_Luminosity": -0.4300728489537279,
+          "Minimum_of_Luminosity": 0.3377483759986791,
+          "Maximum_of_Luminosity": -0.1329551720266294,
+          "Length_of_Conveyer": 0.308739978851305,
+          "TypeOfSteel_A300": 0.22015094404065821,
+          "TypeOfSteel_A400": -0.21812220342054642,
+          "Steel_Plate_Thickness": 0.18876414940073535,
+          "Edges_Index": 0.16735787248333117,
+          "Empty_Index": -0.17562362199452103,
+          "Square_Index": 0.04563496923923841,
+          "Outside_X_Index": -0.522112099328909,
+          "Edges_X_Index": 0.11274622488411509,
+          "Edges_Y_Index": 0.4604209556444688,
+          "Outside_Global_Index": 0.22210897771764074,
+          "LogOfAreas": -0.5050236189129371,
+          "Log_X_Index": -0.5307275047095575,
+          "Log_Y_Index": -0.375323607834225,
+          "Orientation_Index": 0.27687147019198927,
+          "Luminosity_Index": -0.06884437871352171,
+          "SigmoidOfAreas": -0.37697285853281215
+        },
+        "X_Maximum": {
+          "X_Minimum": 0.9897672786491649,
+          "X_Maximum": 1.0,
+          "Y_Minimum": 0.018909105729969136,
+          "Y_Maximum": 0.016513151050816115,
+          "Pixels_Areas": -0.3919373180579781,
+          "X_Perimeter": -0.37843410508041164,
+          "Y_Perimeter": -0.35652818275000725,
+          "Sum_of_Luminosity": -0.3630917392424608,
+          "Minimum_of_Luminosity": 0.2755707582157504,
+          "Maximum_of_Luminosity": -0.12966872454174616,
+          "Length_of_Conveyer": 0.2934661270009687,
+          "TypeOfSteel_A300": 0.1898016711519787,
+          "TypeOfSteel_A400": -0.188032734299957,
+          "Steel_Plate_Thickness": 0.1647887784676368,
+          "Edges_Index": 0.12980045465304987,
+          "Empty_Index": -0.1461667711815021,
+          "Square_Index": 0.03512386631219396,
+          "Outside_X_Index": -0.4325447812144823,
+          "Edges_X_Index": 0.09579869164522206,
+          "Edges_Y_Index": 0.39174260063863,
+          "Outside_Global_Index": 0.19047441286181518,
+          "LogOfAreas": -0.42887465812545417,
+          "Log_X_Index": -0.4483478850843579,
+          "Log_Y_Index": -0.316769716027383,
+          "Orientation_Index": 0.2371571620337239,
+          "Luminosity_Index": -0.07923523311693537,
+          "SigmoidOfAreas": -0.31959776082102864
+        },
+        "Y_Minimum": {
+          "X_Minimum": 0.016070945514265456,
+          "X_Maximum": 0.018909105729969136,
+          "Y_Minimum": 1.0,
+          "Y_Maximum": 0.9695524650996821,
+          "Pixels_Areas": -0.007369864053528855,
+          "X_Perimeter": -0.012711797638716668,
+          "Y_Perimeter": -0.02487571599802461,
+          "Sum_of_Luminosity": -0.008189427906927687,
+          "Minimum_of_Luminosity": -0.017320954613535472,
+          "Maximum_of_Luminosity": -0.0291604100782939,
+          "Length_of_Conveyer": 0.0165864936282188,
+          "TypeOfSteel_A300": 0.04478117278147803,
+          "TypeOfSteel_A400": -0.0443281923126974,
+          "Steel_Plate_Thickness": -0.054389282624173786,
+          "Edges_Index": 0.035761950351555036,
+          "Empty_Index": -0.03379172348612604,
+          "Square_Index": 0.03395170868809802,
+          "Outside_X_Index": 0.019684624235797307,
+          "Edges_X_Index": 0.05270950035491479,
+          "Edges_Y_Index": -0.0026466244776390683,
+          "Outside_Global_Index": -0.025373718983639677,
+          "LogOfAreas": -0.0017543443271776458,
+          "Log_X_Index": 0.015115946979282875,
+          "Log_Y_Index": -0.02370248345833182,
+          "Orientation_Index": -0.04420217124897102,
+          "Luminosity_Index": -0.023000067528904274,
+          "SigmoidOfAreas": -0.03151145167225095
+        },
+        "Y_Maximum": {
+          "X_Minimum": 0.014247029140203009,
+          "X_Maximum": 0.016513151050816115,
+          "Y_Minimum": 0.9695524650996821,
+          "Y_Maximum": 1.0,
+          "Pixels_Areas": -0.007019227720459681,
+          "X_Perimeter": -0.012377056847224368,
+          "Y_Perimeter": -0.024797904218797403,
+          "Sum_of_Luminosity": -0.007809277319748367,
+          "Minimum_of_Luminosity": -0.01873868293798891,
+          "Maximum_of_Luminosity": -0.028312358857659998,
+          "Length_of_Conveyer": 0.015734701874929275,
+          "TypeOfSteel_A300": 0.04486747864993577,
+          "TypeOfSteel_A400": -0.04442177266645786,
+          "Steel_Plate_Thickness": -0.05868270675688373,
+          "Edges_Index": 0.03422160972235737,
+          "Empty_Index": -0.03282440406251288,
+          "Square_Index": 0.03455210710987315,
+          "Outside_X_Index": 0.017270706535199052,
+          "Edges_X_Index": 0.051545664817784845,
+          "Edges_Y_Index": -0.0013820168907113294,
+          "Outside_Global_Index": -0.023284953259345313,
+          "LogOfAreas": -0.0009949038190862252,
+          "Log_X_Index": 0.015623568437638808,
+          "Log_Y_Index": -0.022941487561834673,
+          "Orientation_Index": -0.04249025794101277,
+          "Luminosity_Index": -0.022869398085892015,
+          "SigmoidOfAreas": -0.030344847786391998
+        },
+        "Pixels_Areas": {
+          "X_Minimum": -0.46475935690242276,
+          "X_Maximum": -0.3919373180579781,
+          "Y_Minimum": -0.007369864053528855,
+          "Y_Maximum": -0.007019227720459681,
+          "Pixels_Areas": 1.0,
+          "X_Perimeter": 0.8350787335737487,
+          "Y_Perimeter": 0.8345434453321342,
+          "Sum_of_Luminosity": 0.7978425105074191,
+          "Minimum_of_Luminosity": -0.6228674040562532,
+          "Maximum_of_Luminosity": 0.1304988461687688,
+          "Length_of_Conveyer": -0.20825649566368548,
+          "TypeOfSteel_A300": -0.30463501253866687,
+          "TypeOfSteel_A400": 0.30030822163163434,
+          "Steel_Plate_Thickness": -0.23246734237913022,
+          "Edges_Index": -0.33725820065988865,
+          "Empty_Index": 0.26926324603391055,
+          "Square_Index": 0.0246582085469893,
+          "Outside_X_Index": 0.7648097243096539,
+          "Edges_X_Index": -0.30333462512345494,
+          "Edges_Y_Index": -0.6507037772985392,
+          "Outside_Global_Index": -0.20557888606971708,
+          "LogOfAreas": 0.7745802697299345,
+          "Log_X_Index": 0.7497314996860668,
+          "Log_Y_Index": 0.6400329068902496,
+          "Orientation_Index": -0.26901338948611386,
+          "Luminosity_Index": -0.015081076757870421,
+          "SigmoidOfAreas": 0.5426719574378932
+        },
+        "X_Perimeter": {
+          "X_Minimum": -0.45196073435190354,
+          "X_Maximum": -0.37843410508041164,
+          "Y_Minimum": -0.012711797638716668,
+          "Y_Maximum": -0.012377056847224368,
+          "Pixels_Areas": 0.8350787335737487,
+          "X_Perimeter": 1.0,
+          "Y_Perimeter": 0.9125793077170434,
+          "Sum_of_Luminosity": 0.8020724927380158,
+          "Minimum_of_Luminosity": -0.6038914689109364,
+          "Maximum_of_Luminosity": 0.1580362373330485,
+          "Length_of_Conveyer": -0.20605977400905756,
+          "TypeOfSteel_A300": -0.3008827419211378,
+          "TypeOfSteel_A400": 0.2964668257244444,
+          "Steel_Plate_Thickness": -0.22575656730419594,
+          "Edges_Index": -0.32638758140289253,
+          "Empty_Index": 0.3224168796172199,
+          "Square_Index": 0.05005234380553267,
+          "Outside_X_Index": 0.7524699998686873,
+          "Edges_X_Index": -0.37867178365924303,
+          "Edges_Y_Index": -0.664781331201831,
+          "Outside_Global_Index": -0.17461526444056433,
+          "LogOfAreas": 0.7715462002197809,
+          "Log_X_Index": 0.7504175984361539,
+          "Log_Y_Index": 0.6674412759032694,
+          "Orientation_Index": -0.2349687592895762,
+          "Luminosity_Index": 0.005212249339641716,
+          "SigmoidOfAreas": 0.5612564255633063
+        },
+        "Y_Perimeter": {
+          "X_Minimum": -0.4265139923651497,
+          "X_Maximum": -0.35652818275000725,
+          "Y_Minimum": -0.02487571599802461,
+          "Y_Maximum": -0.024797904218797403,
+          "Pixels_Areas": 0.8345434453321342,
+          "X_Perimeter": 0.9125793077170434,
+          "Y_Perimeter": 1.0,
+          "Sum_of_Luminosity": 0.8091705936142483,
+          "Minimum_of_Luminosity": -0.6028258888492034,
+          "Maximum_of_Luminosity": 0.16083101137794265,
+          "Length_of_Conveyer": -0.18871616214945525,
+          "TypeOfSteel_A300": -0.30405684177247466,
+          "TypeOfSteel_A400": 0.29955683069587846,
+          "Steel_Plate_Thickness": -0.18962807707282575,
+          "Edges_Index": -0.3209503170092657,
+          "Empty_Index": 0.33807859523633566,
+          "Square_Index": 0.0033719053869290232,
+          "Outside_X_Index": 0.7000360450248774,
+          "Edges_X_Index": -0.46909170464046746,
+          "Edges_Y_Index": -0.6121572934821616,
+          "Outside_Global_Index": -0.08122510997323236,
+          "LogOfAreas": 0.7908629185691817,
+          "Log_X_Index": 0.7056570595367649,
+          "Log_Y_Index": 0.7611173433977736,
+          "Orientation_Index": -0.11396761965359936,
+          "Luminosity_Index": -0.005650057228994455,
+          "SigmoidOfAreas": 0.6081671522155405
+        },
+        "Sum_of_Luminosity": {
+          "X_Minimum": -0.4300728489537279,
+          "X_Maximum": -0.3630917392424608,
+          "Y_Minimum": -0.008189427906927687,
+          "Y_Maximum": -0.007809277319748367,
+          "Pixels_Areas": 0.7978425105074191,
+          "X_Perimeter": 0.8020724927380158,
+          "Y_Perimeter": 0.8091705936142483,
+          "Sum_of_Luminosity": 1.0,
+          "Minimum_of_Luminosity": -0.5808567671399145,
+          "Maximum_of_Luminosity": 0.128569314785049,
+          "Length_of_Conveyer": -0.19428169887503585,
+          "TypeOfSteel_A300": -0.28205061867166764,
+          "TypeOfSteel_A400": 0.27799975725204934,
+          "Steel_Plate_Thickness": -0.21508186401237708,
+          "Edges_Index": -0.30905531996248226,
+          "Empty_Index": 0.27144823582188227,
+          "Square_Index": 0.03194832125965555,
+          "Outside_X_Index": 0.7039122893750737,
+          "Edges_X_Index": -0.31512452633610205,
+          "Edges_Y_Index": -0.6082969824965891,
+          "Outside_Global_Index": -0.17704788183902012,
+          "LogOfAreas": 0.7264829961007245,
+          "Log_X_Index": 0.6980347853242383,
+          "Log_Y_Index": 0.6156510299543769,
+          "Orientation_Index": -0.234624837804918,
+          "Luminosity_Index": -0.013845326437552216,
+          "SigmoidOfAreas": 0.5202821049551525
+        },
+        "Minimum_of_Luminosity": {
+          "X_Minimum": 0.3377483759986791,
+          "X_Maximum": 0.2755707582157504,
+          "Y_Minimum": -0.017320954613535472,
+          "Y_Maximum": -0.01873868293798891,
+          "Pixels_Areas": -0.6228674040562532,
+          "X_Perimeter": -0.6038914689109364,
+          "Y_Perimeter": -0.6028258888492034,
+          "Sum_of_Luminosity": -0.5808567671399145,
+          "Minimum_of_Luminosity": 1.0,
+          "Maximum_of_Luminosity": 0.3972654312824296,
+          "Length_of_Conveyer": 0.01861211176602652,
+          "TypeOfSteel_A300": 0.10383497885186348,
+          "TypeOfSteel_A400": -0.10091642127574056,
+          "Steel_Plate_Thickness": 0.13388145975446844,
+          "Edges_Index": 0.3979040743735384,
+          "Empty_Index": -0.09613325003691921,
+          "Square_Index": 0.06294022382629026,
+          "Outside_X_Index": -0.638549102535647,
+          "Edges_X_Index": 0.23459225012913978,
+          "Edges_Y_Index": 0.46784067639235605,
+          "Outside_Global_Index": 0.11248026320607644,
+          "LogOfAreas": -0.691405571035723,
+          "Log_X_Index": -0.6377106011196727,
+          "Log_Y_Index": -0.5851941805955305,
+          "Orientation_Index": 0.17938545450453605,
+          "Luminosity_Index": 0.6191743717481374,
+          "SigmoidOfAreas": -0.5046917450464867
+        },
+        "Maximum_of_Luminosity": {
+          "X_Minimum": -0.1329551720266294,
+          "X_Maximum": -0.12966872454174616,
+          "Y_Minimum": -0.0291604100782939,
+          "Y_Maximum": -0.028312358857659998,
+          "Pixels_Areas": 0.1304988461687688,
+          "X_Perimeter": 0.1580362373330485,
+          "Y_Perimeter": 0.16083101137794265,
+          "Sum_of_Luminosity": 0.128569314785049,
+          "Minimum_of_Luminosity": 0.3972654312824296,
+          "Maximum_of_Luminosity": 1.0,
+          "Length_of_Conveyer": -0.18141129703336584,
+          "TypeOfSteel_A300": -0.2210928809935303,
+          "TypeOfSteel_A400": 0.22008835482297126,
+          "Steel_Plate_Thickness": -0.11391745485736927,
+          "Edges_Index": 0.1539308483237203,
+          "Empty_Index": 0.10887777277753333,
+          "Square_Index": 0.06147951564781129,
+          "Outside_X_Index": 0.07460967680433364,
+          "Edges_X_Index": -0.014784611664441196,
+          "Edges_Y_Index": -0.15327644471482457,
+          "Outside_Global_Index": -0.12008322806779201,
+          "LogOfAreas": 0.033190855761423534,
+          "Log_X_Index": 0.07942558089833655,
+          "Log_Y_Index": 0.0046495082485714465,
+          "Orientation_Index": -0.11353094225820266,
+          "Luminosity_Index": 0.8538555122645558,
+          "SigmoidOfAreas": 0.018501178213443197
+        },
+        "Length_of_Conveyer": {
+          "X_Minimum": 0.308739978851305,
+          "X_Maximum": 0.2934661270009687,
+          "Y_Minimum": 0.0165864936282188,
+          "Y_Maximum": 0.015734701874929275,
+          "Pixels_Areas": -0.20825649566368548,
+          "X_Perimeter": -0.20605977400905756,
+          "Y_Perimeter": -0.18871616214945525,
+          "Sum_of_Luminosity": -0.19428169887503585,
+          "Minimum_of_Luminosity": 0.01861211176602652,
+          "Maximum_of_Luminosity": -0.18141129703336584,
+          "Length_of_Conveyer": 1.0,
+          "TypeOfSteel_A300": 0.4349130423085681,
+          "TypeOfSteel_A400": -0.4336911920069306,
+          "Steel_Plate_Thickness": 0.243282050412701,
+          "Edges_Index": 0.07570438950771208,
+          "Empty_Index": -0.2527075258311651,
+          "Square_Index": 0.09375308351410826,
+          "Outside_X_Index": -0.27246634932562314,
+          "Edges_X_Index": 0.11072609833867507,
+          "Edges_Y_Index": 0.29674942333874543,
+          "Outside_Global_Index": 0.18272132815692124,
+          "LogOfAreas": -0.25497894517334285,
+          "Log_X_Index": -0.2879669099015713,
+          "Log_Y_Index": -0.1953146233830631,
+          "Orientation_Index": 0.18076990817286792,
+          "Luminosity_Index": -0.21045644634657207,
+          "SigmoidOfAreas": -0.2604676197090613
+        },
+        "TypeOfSteel_A300": {
+          "X_Minimum": 0.22015094404065821,
+          "X_Maximum": 0.1898016711519787,
+          "Y_Minimum": 0.04478117278147803,
+          "Y_Maximum": 0.04486747864993577,
+          "Pixels_Areas": -0.30463501253866687,
+          "X_Perimeter": -0.3008827419211378,
+          "Y_Perimeter": -0.30405684177247466,
+          "Sum_of_Luminosity": -0.28205061867166764,
+          "Minimum_of_Luminosity": 0.10383497885186348,
+          "Maximum_of_Luminosity": -0.2210928809935303,
+          "Length_of_Conveyer": 0.4349130423085681,
+          "TypeOfSteel_A300": 1.0,
+          "TypeOfSteel_A400": -0.9977316148553689,
+          "Steel_Plate_Thickness": 0.16494827524898054,
+          "Edges_Index": 0.11772142404923808,
+          "Empty_Index": -0.1461326037030605,
+          "Square_Index": 0.176618823609919,
+          "Outside_X_Index": -0.3330262332242502,
+          "Edges_X_Index": 0.1980263016682649,
+          "Edges_Y_Index": 0.28642431509216815,
+          "Outside_Global_Index": 0.0622854760598247,
+          "LogOfAreas": -0.3629231124116843,
+          "Log_X_Index": -0.3218686435571675,
+          "Log_Y_Index": -0.33478206186514187,
+          "Orientation_Index": 0.06572633432096599,
+          "Luminosity_Index": -0.21540883988010934,
+          "SigmoidOfAreas": -0.34685202001321486
+        },
+        "TypeOfSteel_A400": {
+          "X_Minimum": -0.21812220342054642,
+          "X_Maximum": -0.188032734299957,
+          "Y_Minimum": -0.0443281923126974,
+          "Y_Maximum": -0.04442177266645786,
+          "Pixels_Areas": 0.30030822163163434,
+          "X_Perimeter": 0.2964668257244444,
+          "Y_Perimeter": 0.29955683069587846,
+          "Sum_of_Luminosity": 0.27799975725204934,
+          "Minimum_of_Luminosity": -0.10091642127574056,
+          "Maximum_of_Luminosity": 0.22008835482297126,
+          "Length_of_Conveyer": -0.4336911920069306,
+          "TypeOfSteel_A300": -0.9977316148553689,
+          "TypeOfSteel_A400": 1.0,
+          "Steel_Plate_Thickness": -0.1635493285390858,
+          "Edges_Index": -0.11610560520605281,
+          "Empty_Index": 0.14490008060103524,
+          "Square_Index": -0.17697277431475933,
+          "Outside_X_Index": 0.32980573913773376,
+          "Edges_X_Index": -0.19626780902841676,
+          "Edges_Y_Index": -0.28334005410311014,
+          "Outside_Global_Index": -0.06176655362835503,
+          "LogOfAreas": 0.35939200632792995,
+          "Log_X_Index": 0.3188571699892898,
+          "Log_Y_Index": 0.3319591809968523,
+          "Orientation_Index": -0.06535720434827702,
+          "Luminosity_Index": 0.21497025894204236,
+          "SigmoidOfAreas": 0.3443531241413258
+        },
+        "Steel_Plate_Thickness": {
+          "X_Minimum": 0.18876414940073535,
+          "X_Maximum": 0.1647887784676368,
+          "Y_Minimum": -0.054389282624173786,
+          "Y_Maximum": -0.05868270675688373,
+          "Pixels_Areas": -0.23246734237913022,
+          "X_Perimeter": -0.22575656730419594,
+          "Y_Perimeter": -0.18962807707282575,
+          "Sum_of_Luminosity": -0.21508186401237708,
+          "Minimum_of_Luminosity": 0.13388145975446844,
+          "Maximum_of_Luminosity": -0.11391745485736927,
+          "Length_of_Conveyer": 0.243282050412701,
+          "TypeOfSteel_A300": 0.16494827524898054,
+          "TypeOfSteel_A400": -0.1635493285390858,
+          "Steel_Plate_Thickness": 1.0,
+          "Edges_Index": 0.08559741002584194,
+          "Empty_Index": -0.06171046191396143,
+          "Square_Index": -0.048431268346066175,
+          "Outside_X_Index": -0.27006313047449376,
+          "Edges_X_Index": -0.03677419241621813,
+          "Edges_Y_Index": 0.25563211808773384,
+          "Outside_Global_Index": 0.20067420948846654,
+          "LogOfAreas": -0.20228571950902016,
+          "Log_X_Index": -0.26769565544895585,
+          "Log_Y_Index": -0.09445310489301262,
+          "Orientation_Index": 0.24092283450613888,
+          "Luminosity_Index": -0.10206641773357282,
+          "SigmoidOfAreas": -0.12535364698410395
+        },
+        "Edges_Index": {
+          "X_Minimum": 0.16735787248333117,
+          "X_Maximum": 0.12980045465304987,
+          "Y_Minimum": 0.035761950351555036,
+          "Y_Maximum": 0.03422160972235737,
+          "Pixels_Areas": -0.33725820065988865,
+          "X_Perimeter": -0.32638758140289253,
+          "Y_Perimeter": -0.3209503170092657,
+          "Sum_of_Luminosity": -0.30905531996248226,
+          "Minimum_of_Luminosity": 0.3979040743735384,
+          "Maximum_of_Luminosity": 0.1539308483237203,
+          "Length_of_Conveyer": 0.07570438950771208,
+          "TypeOfSteel_A300": 0.11772142404923808,
+          "TypeOfSteel_A400": -0.11610560520605281,
+          "Steel_Plate_Thickness": 0.08559741002584194,
+          "Edges_Index": 1.0,
+          "Empty_Index": -0.1747463045097314,
+          "Square_Index": 0.12072024987605531,
+          "Outside_X_Index": -0.36247098123248545,
+          "Edges_X_Index": 0.22415197050515015,
+          "Edges_Y_Index": 0.313507595396475,
+          "Outside_Global_Index": 0.04841484472151815,
+          "LogOfAreas": -0.42036711533260424,
+          "Log_X_Index": -0.38378177865970425,
+          "Log_Y_Index": -0.3736605663207503,
+          "Orientation_Index": 0.08022477992127178,
+          "Luminosity_Index": 0.2135471806398113,
+          "SigmoidOfAreas": -0.3509335677200811
+        },
+        "Empty_Index": {
+          "X_Minimum": -0.17562362199452103,
+          "X_Maximum": -0.1461667711815021,
+          "Y_Minimum": -0.03379172348612604,
+          "Y_Maximum": -0.03282440406251288,
+          "Pixels_Areas": 0.26926324603391055,
+          "X_Perimeter": 0.3224168796172199,
+          "Y_Perimeter": 0.33807859523633566,
+          "Sum_of_Luminosity": 0.27144823582188227,
+          "Minimum_of_Luminosity": -0.09613325003691921,
+          "Maximum_of_Luminosity": 0.10887777277753333,
+          "Length_of_Conveyer": -0.2527075258311651,
+          "TypeOfSteel_A300": -0.1461326037030605,
+          "TypeOfSteel_A400": 0.14490008060103524,
+          "Steel_Plate_Thickness": -0.06171046191396143,
+          "Edges_Index": -0.1747463045097314,
+          "Empty_Index": 1.0,
+          "Square_Index": -0.12525763023636105,
+          "Outside_X_Index": 0.29322321762379683,
+          "Edges_X_Index": -0.32349428913906586,
+          "Edges_Y_Index": -0.46552326943500205,
+          "Outside_Global_Index": -0.2056635107113638,
+          "LogOfAreas": 0.37947893675976463,
+          "Log_X_Index": 0.421584562908144,
+          "Log_Y_Index": 0.3604588645812726,
+          "Orientation_Index": -0.17919897456017259,
+          "Luminosity_Index": 0.0851165160943827,
+          "SigmoidOfAreas": 0.4801163839545642
+        },
+        "Square_Index": {
+          "X_Minimum": 0.04563496923923841,
+          "X_Maximum": 0.03512386631219396,
+          "Y_Minimum": 0.03395170868809802,
+          "Y_Maximum": 0.03455210710987315,
+          "Pixels_Areas": 0.0246582085469893,
+          "X_Perimeter": 0.05005234380553267,
+          "Y_Perimeter": 0.0033719053869290232,
+          "Sum_of_Luminosity": 0.03194832125965555,
+          "Minimum_of_Luminosity": 0.06294022382629026,
+          "Maximum_of_Luminosity": 0.06147951564781129,
+          "Length_of_Conveyer": 0.09375308351410826,
+          "TypeOfSteel_A300": 0.176618823609919,
+          "TypeOfSteel_A400": -0.17697277431475933,
+          "Steel_Plate_Thickness": -0.048431268346066175,
+          "Edges_Index": 0.12072024987605531,
+          "Empty_Index": -0.12525763023636105,
+          "Square_Index": 1.0,
+          "Outside_X_Index": -0.098957171347509,
+          "Edges_X_Index": 0.29960979341258054,
+          "Edges_Y_Index": 0.08315195111522064,
+          "Outside_Global_Index": -0.09901903459523913,
+          "LogOfAreas": -0.23484564535641625,
+          "Log_X_Index": -0.11159833221379452,
+          "Log_Y_Index": -0.32251356816398014,
+          "Orientation_Index": -0.2097058798553719,
+          "Luminosity_Index": 0.08299707329973062,
+          "SigmoidOfAreas": -0.36151069293281257
+        },
+        "Outside_X_Index": {
+          "X_Minimum": -0.522112099328909,
+          "X_Maximum": -0.4325447812144823,
+          "Y_Minimum": 0.019684624235797307,
+          "Y_Maximum": 0.017270706535199052,
+          "Pixels_Areas": 0.7648097243096539,
+          "X_Perimeter": 0.7524699998686873,
+          "Y_Perimeter": 0.7000360450248774,
+          "Sum_of_Luminosity": 0.7039122893750737,
+          "Minimum_of_Luminosity": -0.638549102535647,
+          "Maximum_of_Luminosity": 0.07460967680433364,
+          "Length_of_Conveyer": -0.27246634932562314,
+          "TypeOfSteel_A300": -0.3330262332242502,
+          "TypeOfSteel_A400": 0.32980573913773376,
+          "Steel_Plate_Thickness": -0.27006313047449376,
+          "Edges_Index": -0.36247098123248545,
+          "Empty_Index": 0.29322321762379683,
+          "Square_Index": -0.098957171347509,
+          "Outside_X_Index": 1.0,
+          "Edges_X_Index": -0.15680166607710566,
+          "Edges_Y_Index": -0.7600214369667425,
+          "Outside_Global_Index": -0.3827771967289823,
+          "LogOfAreas": 0.8119602292784269,
+          "Log_X_Index": 0.8983409899912763,
+          "Log_Y_Index": 0.5989178037903241,
+          "Orientation_Index": -0.4676877143968807,
+          "Luminosity_Index": -0.05073971077881771,
+          "SigmoidOfAreas": 0.6090487289358967
+        },
+        "Edges_X_Index": {
+          "X_Minimum": 0.11274622488411509,
+          "X_Maximum": 0.09579869164522206,
+          "Y_Minimum": 0.05270950035491479,
+          "Y_Maximum": 0.051545664817784845,
+          "Pixels_Areas": -0.30333462512345494,
+          "X_Perimeter": -0.37867178365924303,
+          "Y_Perimeter": -0.46909170464046746,
+          "Sum_of_Luminosity": -0.31512452633610205,
+          "Minimum_of_Luminosity": 0.23459225012913978,
+          "Maximum_of_Luminosity": -0.014784611664441196,
+          "Length_of_Conveyer": 0.11072609833867507,
+          "TypeOfSteel_A300": 0.1980263016682649,
+          "TypeOfSteel_A400": -0.19626780902841676,
+          "Steel_Plate_Thickness": -0.03677419241621813,
+          "Edges_Index": 0.22415197050515015,
+          "Empty_Index": -0.32349428913906586,
+          "Square_Index": 0.29960979341258054,
+          "Outside_X_Index": -0.15680166607710566,
+          "Edges_X_Index": 1.0,
+          "Edges_Y_Index": 0.13614744110039365,
+          "Outside_Global_Index": -0.3363224877974088,
+          "LogOfAreas": -0.46266530563349906,
+          "Log_X_Index": -0.20769314774656467,
+          "Log_Y_Index": -0.651383950151415,
+          "Orientation_Index": -0.41269645203007405,
+          "Luminosity_Index": 0.07265937711737815,
+          "SigmoidOfAreas": -0.5386777959167549
+        },
+        "Edges_Y_Index": {
+          "X_Minimum": 0.4604209556444688,
+          "X_Maximum": 0.39174260063863,
+          "Y_Minimum": -0.0026466244776390683,
+          "Y_Maximum": -0.0013820168907113294,
+          "Pixels_Areas": -0.6507037772985392,
+          "X_Perimeter": -0.664781331201831,
+          "Y_Perimeter": -0.6121572934821616,
+          "Sum_of_Luminosity": -0.6082969824965891,
+          "Minimum_of_Luminosity": 0.46784067639235605,
+          "Maximum_of_Luminosity": -0.15327644471482457,
+          "Length_of_Conveyer": 0.29674942333874543,
+          "TypeOfSteel_A300": 0.28642431509216815,
+          "TypeOfSteel_A400": -0.28334005410311014,
+          "Steel_Plate_Thickness": 0.25563211808773384,
+          "Edges_Index": 0.313507595396475,
+          "Empty_Index": -0.46552326943500205,
+          "Square_Index": 0.08315195111522064,
+          "Outside_X_Index": -0.7600214369667425,
+          "Edges_X_Index": 0.13614744110039365,
+          "Edges_Y_Index": 1.0,
+          "Outside_Global_Index": 0.5299143973533448,
+          "LogOfAreas": -0.713606725134868,
+          "Log_X_Index": -0.8518128006577471,
+          "Log_Y_Index": -0.4643136415696039,
+          "Orientation_Index": 0.6072714625411394,
+          "Luminosity_Index": -0.053777936773624205,
+          "SigmoidOfAreas": -0.5947370933090534
+        },
+        "Outside_Global_Index": {
+          "X_Minimum": 0.22210897771764074,
+          "X_Maximum": 0.19047441286181518,
+          "Y_Minimum": -0.025373718983639677,
+          "Y_Maximum": -0.023284953259345313,
+          "Pixels_Areas": -0.20557888606971708,
+          "X_Perimeter": -0.17461526444056433,
+          "Y_Perimeter": -0.08122510997323236,
+          "Sum_of_Luminosity": -0.17704788183902012,
+          "Minimum_of_Luminosity": 0.11248026320607644,
+          "Maximum_of_Luminosity": -0.12008322806779201,
+          "Length_of_Conveyer": 0.18272132815692124,
+          "TypeOfSteel_A300": 0.0622854760598247,
+          "TypeOfSteel_A400": -0.06176655362835503,
+          "Steel_Plate_Thickness": 0.20067420948846654,
+          "Edges_Index": 0.04841484472151815,
+          "Empty_Index": -0.2056635107113638,
+          "Square_Index": -0.09901903459523913,
+          "Outside_X_Index": -0.3827771967289823,
+          "Edges_X_Index": -0.3363224877974088,
+          "Edges_Y_Index": 0.5299143973533448,
+          "Outside_Global_Index": 1.0,
+          "LogOfAreas": -0.16896256718625752,
+          "Log_X_Index": -0.43642152545483254,
+          "Log_Y_Index": 0.12774148319865908,
+          "Orientation_Index": 0.8639872069439485,
+          "Luminosity_Index": -0.11550575379983932,
+          "SigmoidOfAreas": -0.10598578483797859
+        },
+        "LogOfAreas": {
+          "X_Minimum": -0.5050236189129371,
+          "X_Maximum": -0.42887465812545417,
+          "Y_Minimum": -0.0017543443271776458,
+          "Y_Maximum": -0.0009949038190862252,
+          "Pixels_Areas": 0.7745802697299345,
+          "X_Perimeter": 0.7715462002197809,
+          "Y_Perimeter": 0.7908629185691817,
+          "Sum_of_Luminosity": 0.7264829961007245,
+          "Minimum_of_Luminosity": -0.691405571035723,
+          "Maximum_of_Luminosity": 0.033190855761423534,
+          "Length_of_Conveyer": -0.25497894517334285,
+          "TypeOfSteel_A300": -0.3629231124116843,
+          "TypeOfSteel_A400": 0.35939200632792995,
+          "Steel_Plate_Thickness": -0.20228571950902016,
+          "Edges_Index": -0.42036711533260424,
+          "Empty_Index": 0.37947893675976463,
+          "Square_Index": -0.23484564535641625,
+          "Outside_X_Index": 0.8119602292784269,
+          "Edges_X_Index": -0.46266530563349906,
+          "Edges_Y_Index": -0.713606725134868,
+          "Outside_Global_Index": -0.16896256718625752,
+          "LogOfAreas": 1.0,
+          "Log_X_Index": 0.8882390325856595,
+          "Log_Y_Index": 0.8792281394891334,
+          "Orientation_Index": -0.21486573342132634,
+          "Luminosity_Index": -0.13356733669647367,
+          "SigmoidOfAreas": 0.8724531424401515
+        },
+        "Log_X_Index": {
+          "X_Minimum": -0.5307275047095575,
+          "X_Maximum": -0.4483478850843579,
+          "Y_Minimum": 0.015115946979282875,
+          "Y_Maximum": 0.015623568437638808,
+          "Pixels_Areas": 0.7497314996860668,
+          "X_Perimeter": 0.7504175984361539,
+          "Y_Perimeter": 0.7056570595367649,
+          "Sum_of_Luminosity": 0.6980347853242383,
+          "Minimum_of_Luminosity": -0.6377106011196727,
+          "Maximum_of_Luminosity": 0.07942558089833655,
+          "Length_of_Conveyer": -0.2879669099015713,
+          "TypeOfSteel_A300": -0.3218686435571675,
+          "TypeOfSteel_A400": 0.3188571699892898,
+          "Steel_Plate_Thickness": -0.26769565544895585,
+          "Edges_Index": -0.38378177865970425,
+          "Empty_Index": 0.421584562908144,
+          "Square_Index": -0.11159833221379452,
+          "Outside_X_Index": 0.8983409899912763,
+          "Edges_X_Index": -0.20769314774656467,
+          "Edges_Y_Index": -0.8518128006577471,
+          "Outside_Global_Index": -0.43642152545483254,
+          "LogOfAreas": 0.8882390325856595,
+          "Log_X_Index": 1.0,
+          "Log_Y_Index": 0.6678991749644874,
+          "Orientation_Index": -0.5209808071098402,
+          "Luminosity_Index": -0.05845787325050208,
+          "SigmoidOfAreas": 0.7487413061334335
+        },
+        "Log_Y_Index": {
+          "X_Minimum": -0.375323607834225,
+          "X_Maximum": -0.316769716027383,
+          "Y_Minimum": -0.02370248345833182,
+          "Y_Maximum": -0.022941487561834673,
+          "Pixels_Areas": 0.6400329068902496,
+          "X_Perimeter": 0.6674412759032694,
+          "Y_Perimeter": 0.7611173433977736,
+          "Sum_of_Luminosity": 0.6156510299543769,
+          "Minimum_of_Luminosity": -0.5851941805955305,
+          "Maximum_of_Luminosity": 0.0046495082485714465,
+          "Length_of_Conveyer": -0.1953146233830631,
+          "TypeOfSteel_A300": -0.33478206186514187,
+          "TypeOfSteel_A400": 0.3319591809968523,
+          "Steel_Plate_Thickness": -0.09445310489301262,
+          "Edges_Index": -0.3736605663207503,
+          "Empty_Index": 0.3604588645812726,
+          "Square_Index": -0.32251356816398014,
+          "Outside_X_Index": 0.5989178037903241,
+          "Edges_X_Index": -0.651383950151415,
+          "Edges_Y_Index": -0.4643136415696039,
+          "Outside_Global_Index": 0.12774148319865908,
+          "LogOfAreas": 0.8792281394891334,
+          "Log_X_Index": 0.6678991749644874,
+          "Log_Y_Index": 1.0,
+          "Orientation_Index": 0.14486110924030327,
+          "Luminosity_Index": -0.15743711680524147,
+          "SigmoidOfAreas": 0.8524500761700227
+        },
+        "Orientation_Index": {
+          "X_Minimum": 0.27687147019198927,
+          "X_Maximum": 0.2371571620337239,
+          "Y_Minimum": -0.04420217124897102,
+          "Y_Maximum": -0.04249025794101277,
+          "Pixels_Areas": -0.26901338948611386,
+          "X_Perimeter": -0.2349687592895762,
+          "Y_Perimeter": -0.11396761965359936,
+          "Sum_of_Luminosity": -0.234624837804918,
+          "Minimum_of_Luminosity": 0.17938545450453605,
+          "Maximum_of_Luminosity": -0.11353094225820266,
+          "Length_of_Conveyer": 0.18076990817286792,
+          "TypeOfSteel_A300": 0.06572633432096599,
+          "TypeOfSteel_A400": -0.06535720434827702,
+          "Steel_Plate_Thickness": 0.24092283450613888,
+          "Edges_Index": 0.08022477992127178,
+          "Empty_Index": -0.17919897456017259,
+          "Square_Index": -0.2097058798553719,
+          "Outside_X_Index": -0.4676877143968807,
+          "Edges_X_Index": -0.41269645203007405,
+          "Edges_Y_Index": 0.6072714625411394,
+          "Outside_Global_Index": 0.8639872069439485,
+          "LogOfAreas": -0.21486573342132634,
+          "Log_X_Index": -0.5209808071098402,
+          "Log_Y_Index": 0.14486110924030327,
+          "Orientation_Index": 1.0,
+          "Luminosity_Index": -0.10433564559234455,
+          "SigmoidOfAreas": -0.08947046900101222
+        },
+        "Luminosity_Index": {
+          "X_Minimum": -0.06884437871352171,
+          "X_Maximum": -0.07923523311693537,
+          "Y_Minimum": -0.023000067528904274,
+          "Y_Maximum": -0.022869398085892015,
+          "Pixels_Areas": -0.015081076757870421,
+          "X_Perimeter": 0.005212249339641716,
+          "Y_Perimeter": -0.005650057228994455,
+          "Sum_of_Luminosity": -0.013845326437552216,
+          "Minimum_of_Luminosity": 0.6191743717481374,
+          "Maximum_of_Luminosity": 0.8538555122645558,
+          "Length_of_Conveyer": -0.21045644634657207,
+          "TypeOfSteel_A300": -0.21540883988010934,
+          "TypeOfSteel_A400": 0.21497025894204236,
+          "Steel_Plate_Thickness": -0.10206641773357282,
+          "Edges_Index": 0.2135471806398113,
+          "Empty_Index": 0.0851165160943827,
+          "Square_Index": 0.08299707329973062,
+          "Outside_X_Index": -0.05073971077881771,
+          "Edges_X_Index": 0.07265937711737815,
+          "Edges_Y_Index": -0.053777936773624205,
+          "Outside_Global_Index": -0.11550575379983932,
+          "LogOfAreas": -0.13356733669647367,
+          "Log_X_Index": -0.05845787325050208,
+          "Log_Y_Index": -0.15743711680524147,
+          "Orientation_Index": -0.10433564559234455,
+          "Luminosity_Index": 1.0,
+          "SigmoidOfAreas": -0.11909941431952112
+        },
+        "SigmoidOfAreas": {
+          "X_Minimum": -0.37697285853281215,
+          "X_Maximum": -0.31959776082102864,
+          "Y_Minimum": -0.03151145167225095,
+          "Y_Maximum": -0.030344847786391998,
+          "Pixels_Areas": 0.5426719574378932,
+          "X_Perimeter": 0.5612564255633063,
+          "Y_Perimeter": 0.6081671522155405,
+          "Sum_of_Luminosity": 0.5202821049551525,
+          "Minimum_of_Luminosity": -0.5046917450464867,
+          "Maximum_of_Luminosity": 0.018501178213443197,
+          "Length_of_Conveyer": -0.2604676197090613,
+          "TypeOfSteel_A300": -0.34685202001321486,
+          "TypeOfSteel_A400": 0.3443531241413258,
+          "Steel_Plate_Thickness": -0.12535364698410395,
+          "Edges_Index": -0.3509335677200811,
+          "Empty_Index": 0.4801163839545642,
+          "Square_Index": -0.36151069293281257,
+          "Outside_X_Index": 0.6090487289358967,
+          "Edges_X_Index": -0.5386777959167549,
+          "Edges_Y_Index": -0.5947370933090534,
+          "Outside_Global_Index": -0.10598578483797859,
+          "LogOfAreas": 0.8724531424401515,
+          "Log_X_Index": 0.7487413061334335,
+          "Log_Y_Index": 0.8524500761700227,
+          "Orientation_Index": -0.08947046900101222,
+          "Luminosity_Index": -0.11909941431952112,
+          "SigmoidOfAreas": 1.0
+        }
+      },
+      "outlier_analysis": {
+        "X_Minimum": {
+          "lower_bound": -1605.5,
+          "upper_bound": 2806.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "X_Maximum": {
+          "lower_bound": -1212.5,
+          "upper_bound": 2591.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Y_Minimum": {
+          "lower_bound": -1908378.0,
+          "upper_bound": 4933878.0,
+          "outlier_count": 1118,
+          "outlier_rate": 0.05817160101982413
+        },
+        "Y_Maximum": {
+          "lower_bound": -1900011.5,
+          "upper_bound": 4920024.5,
+          "outlier_count": 1112,
+          "outlier_rate": 0.057859409958894846
+        },
+        "Pixels_Areas": {
+          "lower_bound": -757.0,
+          "upper_bound": 1499.0,
+          "outlier_count": 3722,
+          "outlier_rate": 0.19366252146313545
+        },
+        "X_Perimeter": {
+          "lower_bound": -58.5,
+          "upper_bound": 137.5,
+          "outlier_count": 3717,
+          "outlier_rate": 0.19340236224569438
+        },
+        "Y_Perimeter": {
+          "lower_bound": -56.5,
+          "upper_bound": 131.5,
+          "outlier_count": 2785,
+          "outlier_rate": 0.1449086841146782
+        },
+        "Sum_of_Luminosity": {
+          "lower_bound": -77347.0,
+          "upper_bound": 155173.0,
+          "outlier_count": 3826,
+          "outlier_rate": 0.19907383318590977
+        },
+        "Minimum_of_Luminosity": {
+          "lower_bound": 17.5,
+          "upper_bound": 157.5,
+          "outlier_count": 211,
+          "outlier_rate": 0.01097871897601332
+        },
+        "Maximum_of_Luminosity": {
+          "lower_bound": 107.5,
+          "upper_bound": 151.5,
+          "outlier_count": 1292,
+          "outlier_rate": 0.06722514178677351
+        },
+        "Length_of_Conveyer": {
+          "lower_bound": 917.0,
+          "upper_bound": 2093.0,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "TypeOfSteel_A300": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "TypeOfSteel_A400": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Steel_Plate_Thickness": {
+          "lower_bound": -20.0,
+          "upper_bound": 140.0,
+          "outlier_count": 2173,
+          "outlier_rate": 0.11306519589989074
+        },
+        "Edges_Index": {
+          "lower_bound": -0.83765,
+          "upper_bound": 1.5523500000000001,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Empty_Index": {
+          "lower_bound": 0.05185000000000006,
+          "upper_bound": 0.7602499999999999,
+          "outlier_count": 61,
+          "outlier_rate": 0.003173942452781102
+        },
+        "Square_Index": {
+          "lower_bound": -0.287925,
+          "upper_bound": 1.481875,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Outside_X_Index": {
+          "lower_bound": -0.01215,
+          "upper_bound": 0.037849999999999995,
+          "outlier_count": 3641,
+          "outlier_rate": 0.18944794214059005
+        },
+        "Edges_X_Index": {
+          "lower_bound": -0.04954999999999998,
+          "upper_bound": 1.2868499999999998,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Edges_Y_Index": {
+          "lower_bound": 0.138,
+          "upper_bound": 1.5171999999999999,
+          "outlier_count": 25,
+          "outlier_rate": 0.0013007960872053698
+        },
+        "Outside_Global_Index": {
+          "lower_bound": -1.5,
+          "upper_bound": 2.5,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "LogOfAreas": {
+          "lower_bound": 0.6511499999999997,
+          "upper_bound": 4.113150000000001,
+          "outlier_count": 421,
+          "outlier_rate": 0.021905406108538427
+        },
+        "Log_X_Index": {
+          "lower_bound": 0.3529,
+          "upper_bound": 2.0785,
+          "outlier_count": 3325,
+          "outlier_rate": 0.17300587959831418
+        },
+        "Log_Y_Index": {
+          "lower_bound": 0.13659999999999983,
+          "upper_bound": 2.6502,
+          "outlier_count": 8,
+          "outlier_rate": 0.0004162547479057183
+        },
+        "Orientation_Index": {
+          "lower_bound": -1.4758499999999999,
+          "upper_bound": 1.7325499999999998,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        },
+        "Luminosity_Index": {
+          "lower_bound": -0.35525,
+          "upper_bound": 0.07875,
+          "outlier_count": 999,
+          "outlier_rate": 0.05197981164472657
+        },
+        "SigmoidOfAreas": {
+          "lower_bound": -0.8661,
+          "upper_bound": 2.1187,
+          "outlier_count": 0,
+          "outlier_rate": 0.0
+        }
+      }
+    },
+    "data_quality_flags": [
+      "model_search_budget: medium dataset -> single-point RF/ExtraTrees screening"
+    ],
+    "target_column": "",
+    "target_columns": [],
+    "train_shape": [
+      19219,
+      35
+    ],
+    "test_shape": [
+      12814,
+      28
+    ]
+  },
+  "feature_state": {
+    "engineered_train_path": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/features/engineered_train.csv",
+    "engineered_test_path": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/features/engineered_test.csv",
+    "selected_features": [
+      "X_Minimum",
+      "X_Maximum",
+      "Y_Minimum",
+      "Y_Maximum",
+      "Pixels_Areas",
+      "X_Perimeter",
+      "Y_Perimeter",
+      "Sum_of_Luminosity",
+      "Minimum_of_Luminosity",
+      "Maximum_of_Luminosity",
+      "Length_of_Conveyer",
+      "TypeOfSteel_A300",
+      "TypeOfSteel_A400",
+      "Steel_Plate_Thickness",
+      "Edges_Index",
+      "Empty_Index",
+      "Square_Index",
+      "Outside_X_Index",
+      "Edges_X_Index",
+      "Edges_Y_Index",
+      "Outside_Global_Index",
+      "LogOfAreas",
+      "Log_X_Index",
+      "Log_Y_Index",
+      "Orientation_Index",
+      "Luminosity_Index",
+      "SigmoidOfAreas",
+      "Bounding_Box_Width",
+      "Bounding_Box_Height",
+      "Area_to_X_Perimeter_Ratio",
+      "Luminosity_Range",
+      "Pixels_Areas_Bin"
+    ],
+    "dropped_features": [],
+    "feature_transform_summary": {
+      "Step: create_interaction": {
+        "reasoning": "Represent local image contrast within the defect region, which may differ across defect types.",
+        "params": {
+          "cols": [
+            "Maximum_of_Luminosity",
+            "Minimum_of_Luminosity"
+          ],
+          "operator": "-",
+          "new_col": "Luminosity_Range"
+        }
+      },
+      "Step: create_binning": {
+        "reasoning": "Add a quantile-binned size feature to capture nonlinear effects of defect area while limiting the influence of heavy-tailed raw area values.",
+        "params": {
+          "column": "Pixels_Areas",
+          "n_bins": 10,
+          "new_col": "Pixels_Areas_Bin",
+          "strategy": "quantile"
+        }
+      }
+    },
+    "feature_importance_summary": {
+      "num__LogOfAreas": 0.062753,
+      "num__Length_of_Conveyer": 0.059658,
+      "num__Steel_Plate_Thickness": 0.057896,
+      "num__Outside_X_Index": 0.055879,
+      "num__X_Perimeter": 0.054005,
+      "num__Pixels_Areas": 0.05257,
+      "num__Orientation_Index": 0.05244,
+      "num__Log_X_Index": 0.039421,
+      "num__Sum_of_Luminosity": 0.036037,
+      "num__Y_Perimeter": 0.035802
+    },
+    "leakage_checks": [
+      "PASS: target columns excluded from selected_features",
+      "PASS: id columns excluded from selected_features",
+      "PASS: train/test feature schema aligned"
+    ]
+  },
+  "model_state": {
+    "candidate_models": [
+      "MultiOutput_LogisticRegression",
+      "MultiOutput_RandomForest",
+      "MultiOutput_ExtraTrees"
+    ],
+    "best_model_name": "MultiOutput_RandomForest",
+    "best_params": {
+      "max_depth": 8,
+      "min_samples_leaf": 1,
+      "n_estimators": 400
+    },
+    "validation_metrics": {
+      "MultiOutput_LogisticRegression": {
+        "val_roc_auc_macro_ovr": 0.8632,
+        "val_per_target_auc_mean": 0.8632,
+        "_selection": "holdout"
+      },
+      "MultiOutput_RandomForest": {
+        "val_roc_auc_macro_ovr": 0.8829,
+        "val_per_target_auc_mean": 0.8829,
+        "_selection": "holdout"
+      },
+      "MultiOutput_ExtraTrees": {
+        "val_roc_auc_macro_ovr": 0.8787,
+        "val_per_target_auc_mean": 0.8787,
+        "_selection": "holdout"
+      },
+      "_meta": {
+        "task_family": "multilabel_classification",
+        "target_mode": "multi_label",
+        "prediction_kind": "probability",
+        "primary_metric": "roc_auc_macro_ovr",
+        "metric_direction": "maximize",
+        "plan_name": "model_building_tool_plan",
+        "plan_applied": true,
+        "n_samples_train": 19219,
+        "n_features_train": 33
+      }
+    },
+    "cv_results": {
+      "MultiOutput_LogisticRegression": {
+        "best_params": {
+          "C": 1.0,
+          "penalty": "l2"
+        },
+        "val_roc_auc_macro_ovr": 0.8632,
+        "val_per_target_auc_mean": 0.8632,
+        "_selection": "holdout"
+      },
+      "MultiOutput_RandomForest": {
+        "best_params": {
+          "max_depth": 8,
+          "min_samples_leaf": 1,
+          "n_estimators": 400
+        },
+        "val_roc_auc_macro_ovr": 0.8829,
+        "val_per_target_auc_mean": 0.8829,
+        "_selection": "holdout"
+      },
+      "MultiOutput_ExtraTrees": {
+        "best_params": {
+          "max_features": "sqrt",
+          "min_samples_leaf": 2,
+          "n_estimators": 300
+        },
+        "val_roc_auc_macro_ovr": 0.8787,
+        "val_per_target_auc_mean": 0.8787,
+        "_selection": "holdout"
+      }
+    },
+    "prediction_path": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/predictions/submission.csv",
+    "model_explanations": {
+      "importance_method": "multioutput_mean_importance",
+      "task_family": "multilabel_classification",
+      "target_mode": "multi_label",
+      "top_features": [
+        {
+          "feature": "num__LogOfAreas",
+          "score": 0.062753
+        },
+        {
+          "feature": "num__Length_of_Conveyer",
+          "score": 0.059658
+        },
+        {
+          "feature": "num__Steel_Plate_Thickness",
+          "score": 0.057896
+        },
+        {
+          "feature": "num__Outside_X_Index",
+          "score": 0.055879
+        },
+        {
+          "feature": "num__X_Perimeter",
+          "score": 0.054005
+        }
+      ]
+    },
+    "baseline_metrics": {
+      "hamming_loss": 0.1369,
+      "f1_micro": 0.0,
+      "f1_macro": 0.0,
+      "f1_weighted": 0.0,
+      "subset_accuracy": 0.0426,
+      "roc_auc_macro_ovr": 0.5,
+      "_meta": {
+        "source": "out_of_fold_dummy_baseline",
+        "strategy": "most_frequent"
+      }
+    }
+  },
+  "review_state": {
+    "latest_review_status": "approved",
+    "review_history": [
+      {
+        "phase": "reader",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [],
+        "checked_state_fields": [
+          "problem_understanding.task_summary",
+          "problem_understanding.candidate_metrics",
+          "problem_understanding.data_overview",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.submission.submission_columns",
+          "data_state.current_train_path",
+          "data_state.current_test_path"
+        ],
+        "comment": "Reader approved: output is complete and ready for planning.",
+        "details": {
+          "train_columns": [
+            "id",
+            "X_Minimum",
+            "X_Maximum",
+            "Y_Minimum",
+            "Y_Maximum",
+            "Pixels_Areas",
+            "X_Perimeter",
+            "Y_Perimeter",
+            "Sum_of_Luminosity",
+            "Minimum_of_Luminosity",
+            "Maximum_of_Luminosity",
+            "Length_of_Conveyer",
+            "TypeOfSteel_A300",
+            "TypeOfSteel_A400",
+            "Steel_Plate_Thickness",
+            "Edges_Index",
+            "Empty_Index",
+            "Square_Index",
+            "Outside_X_Index",
+            "Edges_X_Index",
+            "Edges_Y_Index",
+            "Outside_Global_Index",
+            "LogOfAreas",
+            "Log_X_Index",
+            "Log_Y_Index",
+            "Orientation_Index",
+            "Luminosity_Index",
+            "SigmoidOfAreas",
+            "Pastry",
+            "Z_Scratch",
+            "K_Scatch",
+            "Stains",
+            "Dirtiness",
+            "Bumps",
+            "Other_Faults"
+          ],
+          "test_columns": [
+            "id",
+            "X_Minimum",
+            "X_Maximum",
+            "Y_Minimum",
+            "Y_Maximum",
+            "Pixels_Areas",
+            "X_Perimeter",
+            "Y_Perimeter",
+            "Sum_of_Luminosity",
+            "Minimum_of_Luminosity",
+            "Maximum_of_Luminosity",
+            "Length_of_Conveyer",
+            "TypeOfSteel_A300",
+            "TypeOfSteel_A400",
+            "Steel_Plate_Thickness",
+            "Edges_Index",
+            "Empty_Index",
+            "Square_Index",
+            "Outside_X_Index",
+            "Edges_X_Index",
+            "Edges_Y_Index",
+            "Outside_Global_Index",
+            "LogOfAreas",
+            "Log_X_Index",
+            "Log_Y_Index",
+            "Orientation_Index",
+            "Luminosity_Index",
+            "SigmoidOfAreas"
+          ],
+          "sample_submission_columns": [
+            "id",
+            "Pastry",
+            "Z_Scratch",
+            "K_Scatch",
+            "Stains",
+            "Dirtiness",
+            "Bumps",
+            "Other_Faults"
+          ],
+          "target_spec": {
+            "status": "resolved",
+            "target_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "target_mode": "multi_label",
+            "task_family": "multilabel_classification",
+            "prediction_kind": "probability",
+            "user_target_hint": "Pastry,Z_Scratch,K_Scatch,Stains,Dirtiness,Bumps,Other_Faults",
+            "user_task_family_hint": "",
+            "submission": {
+              "id_columns": [
+                "id"
+              ],
+              "output_columns": [
+                "Pastry",
+                "Z_Scratch",
+                "K_Scatch",
+                "Stains",
+                "Dirtiness",
+                "Bumps",
+                "Other_Faults"
+              ],
+              "submission_columns": [
+                "id",
+                "Pastry",
+                "Z_Scratch",
+                "K_Scatch",
+                "Stains",
+                "Dirtiness",
+                "Bumps",
+                "Other_Faults"
+              ],
+              "sample_submission_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/base/data/plate_defect/sample_submission.csv"
+            },
+            "evaluation": {
+              "metric_hint": "roc_auc_macro_ovr",
+              "primary_metric": "roc_auc_macro_ovr",
+              "candidate_metrics": [
+                "roc_auc_macro_ovr"
+              ]
+            },
+            "evidence": [
+              {
+                "source": "train_test_diff",
+                "detail": "Columns present in train.csv but missing from test.csv suggest candidate targets.",
+                "columns": [
+                  "Pastry",
+                  "Z_Scratch",
+                  "K_Scatch",
+                  "Stains",
+                  "Dirtiness",
+                  "Bumps",
+                  "Other_Faults"
+                ]
+              },
+              {
+                "source": "sample_submission",
+                "detail": "Sample submission output columns align with train/test target diff.",
+                "columns": [
+                  "Pastry",
+                  "Z_Scratch",
+                  "K_Scatch",
+                  "Stains",
+                  "Dirtiness",
+                  "Bumps",
+                  "Other_Faults"
+                ]
+              }
+            ]
+          },
+          "target_columns": [
+            "Pastry",
+            "Z_Scratch",
+            "K_Scatch",
+            "Stains",
+            "Dirtiness",
+            "Bumps",
+            "Other_Faults"
+          ]
+        }
+      },
+      {
+        "phase": "preliminary_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [
+          "artifacts.figures is empty; EDA still passes if structured findings exist"
+        ],
+        "checked_artifacts": [
+          "preliminary_eda_report"
+        ],
+        "checked_state_fields": [
+          "data_state.schema_summary",
+          "data_state.eda_findings",
+          "artifacts.figures"
+        ],
+        "comment": "- Preliminary EDA approved: no blocking failures.\n- `preliminary_eda_report` is present and supported by populated `data_state.schema_summary` and `data_state.eda_findings`.\n- Structured EDA findings satisfy the phase requirement despite `artifacts.figures` being empty.\n- Non-blocking improvement: add key EDA figures in a later phase if visual evidence would improve interpretability.\n- No retry action needed.",
+        "details": {
+          "current_train_path_shape": [
+            19219,
+            35
+          ]
+        }
+      },
+      {
+        "phase": "data_cleaning",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [
+          "data_state.data_quality_flags is empty; no quality notes were recorded"
+        ],
+        "checked_artifacts": [
+          "cleaned_train_data",
+          "phase_plan_records.data_cleaning",
+          "cleaned_test_data",
+          "cleaning_report"
+        ],
+        "checked_state_fields": [
+          "data_state.current_train_path",
+          "data_state.current_test_path",
+          "data_state.cleaning_summary",
+          "data_state.data_quality_flags",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "## Review: data_cleaning — Approved\n\n- Artifacts verified: `cleaned_train_data`, `cleaned_test_data`, and `cleaning_report` are all present and consistent with `data_state.current_train_path` / `current_test_path` and the recorded `cleaning_summary`.\n- Target handling is coherent: `target_spec.status`, `target_columns`, `target_mode`, and `task_family` are set and align with the cleaned datasets and the submission spec (`id_columns`, `output_columns`, `submission_columns`).\n- Phase plan records for `data_cleaning` are present and match the executed cleaning steps.\n- Warning (non-blocking): `data_state.data_quality_flags` is empty, so no quality notes (e.g., outlier handling, dropped rows, null imputation, dtype coercions) were captured.\n- Recommendation for next phase: record quality flags/judgment calls as the cleaning summary is elaborated, so downstream feature engineering and modeling can trace any data caveats. No re-run required.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "submission_columns": [
+              "id",
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "target_mode": "multi_label",
+            "task_family": "multilabel_classification",
+            "prediction_kind": "probability"
+          },
+          "cleaned_train_data_shape": [
+            19219,
+            35
+          ],
+          "cleaned_test_data_shape": [
+            12814,
+            28
+          ]
+        }
+      },
+      {
+        "phase": "indepth_eda",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "indepth_eda_report",
+          "phase_plan_records.indepth_eda"
+        ],
+        "checked_state_fields": [
+          "data_state.indepth_eda_summary",
+          "artifacts.indepth_eda_report",
+          "artifacts.figures"
+        ],
+        "comment": "- Approved: `indepth_eda_report` and `phase_plan_records.indepth_eda` are present and support completion of this phase.\n- `data_state.indepth_eda_summary` and `artifacts.indepth_eda_report` are populated consistently with the approved EDA report.\n- `artifacts.figures` is recorded, confirming EDA visual outputs are tracked in state.\n- No blocking failures or warnings were found. No further action is required; proceed to the next phase.",
+        "details": {
+          "current_train_path_shape": [
+            19219,
+            35
+          ]
+        }
+      },
+      {
+        "phase": "feature_engineering",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "feature_summary",
+          "phase_plan_records.feature_engineering"
+        ],
+        "checked_state_fields": [
+          "feature_state.engineered_train_path",
+          "feature_state.engineered_test_path",
+          "feature_state.selected_features",
+          "feature_state.feature_transform_summary",
+          "feature_state.leakage_checks",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns"
+        ],
+        "comment": "- `feature_summary` and `phase_plan_records.feature_engineering` are present and aligned with the engineered outputs.\n- Engineered train/test paths are recorded in `feature_state`, and `selected_features` plus `feature_transform_summary` are populated.\n- `leakage_checks` show no blocking concerns.\n- `target_spec` is consistent across `status`, `target_columns`, `target_mode`, `task_family`, and `submission.id_columns`.\n- Approved for this phase; no changes requested.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "submission_columns": [
+              "id",
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "target_mode": "multi_label",
+            "task_family": "multilabel_classification",
+            "prediction_kind": "probability"
+          },
+          "engineered_train_path_shape": [
+            19219,
+            40
+          ],
+          "engineered_test_path_shape": [
+            12814,
+            33
+          ]
+        }
+      },
+      {
+        "phase": "model_building",
+        "status": "approved",
+        "attempt": 1,
+        "blocking_failures": [],
+        "warnings": [],
+        "checked_artifacts": [
+          "model_results",
+          "phase_plan_records.model_building",
+          "best_model",
+          "prediction_file"
+        ],
+        "checked_state_fields": [
+          "model_state.candidate_models",
+          "model_state.best_model_name",
+          "model_state.validation_metrics",
+          "model_state.cv_results",
+          "model_state.prediction_path",
+          "model_state.baseline_metrics",
+          "target_spec.status",
+          "target_spec.target_columns",
+          "target_spec.target_mode",
+          "target_spec.task_family",
+          "target_spec.submission.id_columns",
+          "target_spec.submission.output_columns",
+          "target_spec.submission.submission_columns"
+        ],
+        "comment": "- Approved for `model_building`: no blocking failures or warnings were identified.\n- Checked artifacts are present: `model_results`, `phase_plan_records.model_building`, `best_model`, and `prediction_file`.\n- Model state is complete for review: candidate models, selected best model, validation metrics, CV results, prediction path, and baseline metrics were checked.\n- Target specification is consistent across task family/mode, target columns, and submission ID/output/submission columns.\n- Proceed to the next phase; no retry action is required.",
+        "details": {
+          "target_contract": {
+            "target_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "id_columns": [
+              "id"
+            ],
+            "output_columns": [
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "submission_columns": [
+              "id",
+              "Pastry",
+              "Z_Scratch",
+              "K_Scatch",
+              "Stains",
+              "Dirtiness",
+              "Bumps",
+              "Other_Faults"
+            ],
+            "target_mode": "multi_label",
+            "task_family": "multilabel_classification",
+            "prediction_kind": "probability"
+          },
+          "prediction_file_shape": [
+            12814,
+            8
+          ],
+          "prediction_columns": [
+            "id",
+            "Pastry",
+            "Z_Scratch",
+            "K_Scatch",
+            "Stains",
+            "Dirtiness",
+            "Bumps",
+            "Other_Faults"
+          ],
+          "expected_submission_columns": [
+            "id",
+            "Pastry",
+            "Z_Scratch",
+            "K_Scatch",
+            "Stains",
+            "Dirtiness",
+            "Bumps",
+            "Other_Faults"
+          ]
+        }
+      }
+    ],
+    "retry_count_by_phase": {},
+    "fatal_errors": [],
+    "last_review_comment": "- Approved for `model_building`: no blocking failures or warnings were identified.\n- Checked artifacts are present: `model_results`, `phase_plan_records.model_building`, `best_model`, and `prediction_file`.\n- Model state is complete for review: candidate models, selected best model, validation metrics, CV results, prediction path, and baseline metrics were checked.\n- Target specification is consistent across task family/mode, target columns, and submission ID/output/submission columns.\n- Proceed to the next phase; no retry action is required.",
+    "pending_review_phase": "model_building"
+  },
+  "report_state": {
+    "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/reports/technical_report.md",
+    "business_report_path": "",
+    "executive_summary": "This workflow trained a multilabel_classification solution for 7 targets (`Pastry`, `Z_Scratch`, `K_Scatch`, `Stains`, `Dirtiness`, `Bumps`). The selected model is MultiOutput_RandomForest, evaluated primarily with roc_auc_macro_ovr.",
+    "limitations": [
+      "No major technical limitations were recorded in structured state, but external validation and deployment checks are still recommended."
+    ],
+    "recommended_actions": []
+  },
+  "artifacts": {
+    "preliminary_eda_report": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/eda/preliminary_eda.md",
+    "cleaned_train_data": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/data/cleaned_train.csv",
+    "cleaned_test_data": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/data/cleaned_test.csv",
+    "cleaning_report": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/data/cleaning_report.md",
+    "indepth_eda_report": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/eda/in_depth_eda.md",
+    "feature_summary": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/features/feature_summary.json",
+    "engineered_train_data": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/features/engineered_train.csv",
+    "engineered_test_data": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/features/engineered_test.csv",
+    "model_results": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/models/model_results.json",
+    "best_model": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/models/best_model.pkl",
+    "prediction_file": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/predictions/submission.csv",
+    "technical_report": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/reports/technical_report.md",
+    "business_report": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/reports/business_report.md",
+    "run_manifest": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/reports/run_manifest.json",
+    "figures": [
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Pastry_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Z_Scratch_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_K_Scatch_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Stains_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Dirtiness_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Bumps_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/target_analysis_Other_Faults_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/correlation_matrix_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png",
+      "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/figures/outlier_analysis_A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0.png"
+    ],
+    "phase_review_records": {
+      "preliminary_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_reviews/preliminary_eda.json",
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_reviews/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_reviews/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_reviews/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_reviews/model_building.json"
+    },
+    "phase_plan_records": {
+      "data_cleaning": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_plans/data_cleaning.json",
+      "indepth_eda": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_plans/indepth_eda.json",
+      "feature_engineering": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_plans/feature_engineering.json",
+      "model_building": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/plate_defect_20261019_142731_c0d9d8f0/phase_plans/model_building.json"
+    }
+  },
+  "runtime_state": {
+    "thread_id": "A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3",
+    "run_id": "A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3-run-c0d9d8f0",
+    "artifact_root": "artifacts/runs/plate_defect_20261019_142731_c0d9d8f0",
+    "checkpoint_namespace": "default",
+    "token_usage": {},
+    "llm_calls": 0,
+    "phase_runtime_sec": {
+      "reader": 9.5313,
+      "planner": 13.117,
+      "preliminary_eda": 0.039,
+      "data_cleaning": 0.1889,
+      "indepth_eda": 0.8697,
+      "feature_engineering": 0.2314,
+      "model_building": 254.6737,
+      "summarizer": 0.003
+    },
+    "total_runtime_sec": 278.654,
+    "cost_estimate": null,
+    "workspace_root": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-ML-STEEL__C00__F0_ORIGINAL__sb1101__r3",
+    "interrupted": false,
+    "last_reviewed_phase": "model_building"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "name": "reader",
+      "content": "Initialized problem understanding and dataset paths."
+    },
+    {
+      "role": "system",
+      "name": "technical_summarizer",
+      "content": "Generated final technical report."
+    }
+  ]
+}

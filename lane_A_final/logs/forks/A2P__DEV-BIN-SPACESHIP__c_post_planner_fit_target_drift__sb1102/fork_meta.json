@@ -1,0 +1,34 @@
+{
+  "candidate_hash": "1da1088e52b5cce1781e60033ae2c45e924767ee87bf715d1422b46ff41d00bc",
+  "contract_digest": "a7f08697b42dc6434c2fc9fd88005ce0549e37221dc23d87dce5486d149345d8",
+  "fit_seconds_prefix": 19.739,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_sha256": "ffda537102a417cd4d69f9aa9c9f76403d94000763a050196d5fc7d92474cbda",
+      "after_target_columns": [
+        "CryoSleep"
+      ],
+      "before_sha256": "c308ef413d2c9de9e3480343f4aa6b9883407a4499fb23ea3a72f5c06ebbbbbf",
+      "before_target_columns": [
+        "Transported"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-BIN-SPACESHIP__c_post_planner_fit_target_drift__sb1102",
+  "prefix_run_id": "A2P__DEV-BIN-SPACESHIP__c_post_planner_fit_target_drift__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "80551957fda4fc05a54982c4b1011371b8f887dabdc63969e1246e09891d6bab",
+  "state_hash": "c4e03d2694dd5dc3ade351a00498dcad3cb9adce6ac2b18276ba739ca9ff99cc",
+  "visible_evidence_hash": "2f8ddfa44e8023b6d69acff3cfa5bd8892de19ae69313b07c554c4b612333d77"
+}

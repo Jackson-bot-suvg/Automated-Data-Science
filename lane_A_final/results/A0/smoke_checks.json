@@ -1,0 +1,14 @@
+{
+  "hook_and_method_equivalence_llm_off": {
+    "pass": true,
+    "runs_compared": 8
+  },
+  "mutations_verified": {
+    "pass": true,
+    "cases": 23
+  },
+  "oracle_unit_tests": {
+    "pass": true,
+    "tail": ".................                                                        [100%]\n17 passed in 0.73s\n"
+  }
+}

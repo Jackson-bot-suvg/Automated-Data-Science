@@ -1,0 +1,76 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 18.467,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "373ea0d150691e68779c1d2ad695b18e0f1e6d6ccbd30a9f93fba515a9043231",
+      "before_pairing_digest": "e83b78d2516ded9be051594c8c31eebaecee1b70916d6257f6f83c9b6059c1f6",
+      "fixed_points": 0,
+      "id_columns": [
+        "PassengerId"
+      ],
+      "n_rows": 1739,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "Transported"
+      ]
+    }
+  ],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/c00_20261019_141435_96299d62/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-BIN-SPACESHIP__F10__F0_ORIGINAL__sb1101/artifacts/runs/c00_20261019_141435_96299d62/predictions/submission.csv",
+  "prediction_sha256": "7189ab9b04b2a95acec757fc3b484790baa3eb1f850ddab165df6dc4c44bd36f",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A1__DEV-BIN-SPACESHIP__F10__F0_ORIGINAL__sb1101",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-BIN-SPACESHIP__F10__F0_ORIGINAL__sb1101/artifacts/runs/c00_20261019_141435_96299d62/reports/technical_report.md",
+  "wall_seconds": 58.805,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

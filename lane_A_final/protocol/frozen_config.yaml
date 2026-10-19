@@ -1,0 +1,35 @@
+# Lane-A DEV pilot configuration (frozen 2026-10-19 before LLM-live runs).
+# CONF-level fields remain [待填] until FREEZE_SIGNOFF.yaml is signed (protocol §11 item 4).
+status: DEV_PILOT_FROZEN__CONF_UNSIGNED
+base_repo: https://github.com/Jackson-bot-suvg/Automated-Data-Science.git
+base_commit: b9dbebed269f62767e149b93a02f71051efc1027
+workflow_mode: technical_only   # build_workflow(stop_after_technical_summary=True), as manuscript Table 2
+recursion_limit: 80             # run_multiagent.py default
+llm:
+  provider: deepseek (OpenAI-compatible, https://api.deepseek.com)
+  model_id: deepseek/deepseek-flash   # API name; provider display name "DeepSeek-V4.1-Flash"; no dated snapshot id is exposed
+  agents: [reader, bg_reviewer, planner, reviewer, summarizer]
+  temperature: {reader: 0, bg_reviewer: 0, planner: 0, reviewer: 0, summarizer: 0, base_planner_data_cleaning_feature_engineering: 1.0}
+  max_tokens: {reader: 65536, planner: 65536, bg_reviewer: 2048, reviewer: 512, summarizer: 65536}
+  tracing: LangSmith disabled (LANGSMITH_TRACING=false); raw prompts/responses logged locally per run (llm_calls.jsonl)
+  manuscript_backend: MiniMax-M2.7-compatible endpoint -> end-of-life (HTTP 410 on 2026-10-19); old LLM config NOT reproducible
+budgets_per_trajectory:
+  llm_calls: 60                  # observed clean run ~10-12 calls
+  wall_seconds: 1800
+  hard_kill_seconds: 2100
+  retry_attempts_per_phase: 3    # unchanged F0 setting (2 retries)
+compute:
+  host_id: host-macA-14c-24g
+  os: macOS 26.5 (Darwin 25.5.0, arm64), 14 cores, 24 GB
+  concurrency: 3 runs in parallel
+  OMP_NUM_THREADS: 2
+  MODEL_BUILDING_MAX_PARALLEL_CANDIDATES: unset (F0 default)
+python_env: env/environment.lock (pip freeze of the run interpreter); Python 3.13.1
+seeds:
+  split_seed: 1729
+  dev_seed_blocks: [1101, 1102]
+  conf_seed_blocks: [2101, 2102, 2103]   # not used (G0 FAIL)
+  transfer_seed_blocks: [3101, 3102, 3103]
+  run_order_shuffle_seed: 20261019
+  process seeds: random.seed(seed_block), numpy.random.seed(seed_block), PYTHONHASHSEED=seed_block
+conf_fields_pending: "[待填] CONF/TRANSFER task identities, machine budget sign-off, tolerance approval"

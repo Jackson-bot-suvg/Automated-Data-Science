@@ -1,0 +1,34 @@
+{
+  "candidate_hash": "44f9363db6348efeeec78bbab08669ee46ef7ecbc7f7a510a2ca03a7a32b6460",
+  "contract_digest": "77851636ec7513bd8ac37aa39f1d3bc5e07211a85eaf98b2f5dd01fcf24d75fb",
+  "fit_seconds_prefix": 22.698,
+  "gate_node": "reviewer",
+  "gate_phase": "model_building",
+  "injections_applied": [
+    {
+      "after_sha256": "550dcda4ddf69f8c627ef8d579fb68c6711d241cd1e473e982174c2444cf7121",
+      "after_target_columns": [
+        "GrLivArea"
+      ],
+      "before_sha256": "54d1dfedb7b588acd080a5bbeb0721bc067a03a4f0915fb834f93261d974471f",
+      "before_target_columns": [
+        "SalePrice"
+      ],
+      "node": "planner->model_building",
+      "template_id": "F05"
+    }
+  ],
+  "llm_calls_prefix": 8,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102",
+  "prefix_run_id": "A2P__DEV-REG-HOUSE__c_post_planner_fit_target_drift__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 8,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "80551957fda4fc05a54982c4b1011371b8f887dabdc63969e1246e09891d6bab",
+  "state_hash": "bdf541304e2a748acddbf4727cc33823b30b8a0b1a8af022a3d01896da872314",
+  "visible_evidence_hash": "3e54f5574563891a8cfed352cd597e3447be49456d31c28690af80cd19d5d1e9"
+}

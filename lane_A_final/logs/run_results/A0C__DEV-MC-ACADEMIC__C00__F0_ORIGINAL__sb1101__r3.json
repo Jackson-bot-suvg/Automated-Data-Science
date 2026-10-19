@@ -1,0 +1,60 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 18.305,
+  "injections_applied": [],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/classification_with_an_academic_success_dataset_20261019_142439_8a92528d/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/classification_with_an_academic_success_dataset_20261019_142439_8a92528d/predictions/submission.csv",
+  "prediction_sha256": "ddfb48194ce41748b1368e587dbac9621fc9664a4ed0902cd90f7c9b7cb0c4df",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r3",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-ACADEMIC__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/classification_with_an_academic_success_dataset_20261019_142439_8a92528d/reports/technical_report.md",
+  "wall_seconds": 64.137,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

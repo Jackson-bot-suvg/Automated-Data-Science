@@ -1,0 +1,39 @@
+{
+  "base_commit": "b9dbebed269f62767e149b93a02f71051efc1027",
+  "budget": {
+    "llm_calls": 60,
+    "recursion_limit": 80,
+    "wall_seconds": 1800
+  },
+  "case_id": "DEV-MC-GHOULS:F01",
+  "condition": "b_unrecoverable_missing_target",
+  "fork": {
+    "fork_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/forks/A2P__DEV-MC-GHOULS__b_unrecoverable_missing_target__sb1102",
+    "gate_node": "background_reviewer",
+    "gate_phase": "reader",
+    "mode": "continue"
+  },
+  "host_id": "host-macA-14c-24g",
+  "injection": {},
+  "lane": "A",
+  "llm_mode": "live",
+  "method_id": "M4_END_ONLY",
+  "mode": "continue",
+  "model_id": "deepseek/deepseek-flash",
+  "observers": true,
+  "pair_id": "A2P__DEV-MC-GHOULS__b_unrecoverable_missing_target__sb1102",
+  "plan_cell_id": "A2__DEV-MC-GHOULS__b_unrecoverable_missing_target__sb1102__M4_END_ONLY",
+  "run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-MC-GHOULS__b_unrecoverable_missing_target__sb1102__M4_END_ONLY",
+  "run_id": "A2__DEV-MC-GHOULS__b_unrecoverable_missing_target__sb1102__M4_END_ONLY",
+  "seed_block": 1102,
+  "stage": "A2-PILOT",
+  "task": {
+    "dataset": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/packages/DEV-MC-GHOULS/F01",
+    "metric_hint": "f1_macro",
+    "target": "type",
+    "task": "classify creature type"
+  },
+  "task_id": "DEV-MC-GHOULS",
+  "technical_only": true,
+  "template_id": "F01"
+}

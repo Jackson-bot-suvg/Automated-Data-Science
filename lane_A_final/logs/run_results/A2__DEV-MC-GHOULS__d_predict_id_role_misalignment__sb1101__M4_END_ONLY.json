@@ -1,0 +1,76 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 0.0,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "1e08705c41a378b3ba943fa49f8518cff8a1a1bcacaacff1d26c7dca13adbfc3",
+      "before_pairing_digest": "ae76c39a6187f2d0c32b4cb13987c690e21151353ca0a748ad14f4be7e360e7b",
+      "fixed_points": 0,
+      "id_columns": [
+        "id"
+      ],
+      "n_rows": 75,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "type"
+      ]
+    }
+  ],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/c00_20261019_143602_5591d27f/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101__M4_END_ONLY/artifacts/runs/c00_20261019_143602_5591d27f/predictions/submission.csv",
+  "prediction_sha256": "142fe5dd499afce5c4fd8ec87afdd864d289f4f758e3ad600dd65e3e08c1202e",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A2__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101__M4_END_ONLY",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2__DEV-MC-GHOULS__d_predict_id_role_misalignment__sb1101__M4_END_ONLY/artifacts/runs/c00_20261019_143602_5591d27f/reports/technical_report.md",
+  "wall_seconds": 2.726,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

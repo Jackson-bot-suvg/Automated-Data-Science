@@ -1,0 +1,60 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 102.744,
+  "injections_applied": [],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/obesity_risks_20261019_142810_4cc89e93/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-OBESITY__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/obesity_risks_20261019_142810_4cc89e93/predictions/submission.csv",
+  "prediction_sha256": "5078d584b8d4a7497c4262a20fa927f87ba518b84520e530711a154dfcd96762",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A0C__DEV-MC-OBESITY__C00__F0_ORIGINAL__sb1101__r3",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A0C__DEV-MC-OBESITY__C00__F0_ORIGINAL__sb1101__r3/artifacts/runs/obesity_risks_20261019_142810_4cc89e93/reports/technical_report.md",
+  "wall_seconds": 144.143,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

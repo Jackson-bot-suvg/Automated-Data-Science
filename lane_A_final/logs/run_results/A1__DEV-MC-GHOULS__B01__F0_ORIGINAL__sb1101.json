@@ -1,0 +1,60 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 6.435,
+  "injections_applied": [],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/b01_20261019_141323_846567bd/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-MC-GHOULS__B01__F0_ORIGINAL__sb1101/artifacts/runs/b01_20261019_141323_846567bd/predictions/submission.csv",
+  "prediction_sha256": "ffd981a6f5da78ed252154d0b9d9e7f8421089b5a055cf8de32399fff7dfc49d",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A1__DEV-MC-GHOULS__B01__F0_ORIGINAL__sb1101",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-MC-GHOULS__B01__F0_ORIGINAL__sb1101/artifacts/runs/b01_20261019_141323_846567bd/reports/technical_report.md",
+  "wall_seconds": 35.324,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

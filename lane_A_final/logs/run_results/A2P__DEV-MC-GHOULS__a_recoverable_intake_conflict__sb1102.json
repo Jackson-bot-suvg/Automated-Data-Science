@@ -1,0 +1,12 @@
+{
+  "error": {
+    "message": "fork point reached before background_reviewer@reader"
+  },
+  "fit_seconds_total": 0.0,
+  "injections_applied": [],
+  "llm_calls": 1,
+  "llm_errors": 0,
+  "outcome": "forked",
+  "run_id": "A2P__DEV-MC-GHOULS__a_recoverable_intake_conflict__sb1102",
+  "wall_seconds": 7.991
+}

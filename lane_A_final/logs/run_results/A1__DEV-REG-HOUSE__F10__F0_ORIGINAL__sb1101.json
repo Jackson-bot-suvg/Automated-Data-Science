@@ -1,0 +1,76 @@
+{
+  "error": {},
+  "fatal_errors": [],
+  "final_phase": "technical_summary",
+  "fit_seconds_total": 23.534,
+  "injections_applied": [
+    {
+      "after_pairing_digest": "143990689df6655e6bfd04bef177c8b58b8adc1b2e2391bc3eb1ca4a7c7d5c29",
+      "before_pairing_digest": "28495306f8213bc5b407d213153eb4e4504b03e66a1309dec95d186508efbcbf",
+      "fixed_points": 0,
+      "id_columns": [
+        "Id"
+      ],
+      "n_rows": 292,
+      "node": "model_building.build_submission",
+      "permutation_seed": 1101,
+      "template_id": "F10",
+      "value_columns": [
+        "SalePrice"
+      ]
+    }
+  ],
+  "latest_review_status": "approved",
+  "llm_calls": 9,
+  "llm_errors": 0,
+  "model_state_prediction_path": "artifacts/runs/c00_20261019_141915_62b11dbc/predictions/submission.csv",
+  "outcome": "completed_graph",
+  "pending_review_phase": "model_building",
+  "prediction_exists": true,
+  "prediction_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-REG-HOUSE__F10__F0_ORIGINAL__sb1101/artifacts/runs/c00_20261019_141915_62b11dbc/predictions/submission.csv",
+  "prediction_sha256": "2e0b3931985c2aab93ba714a71fcc946082c66c29f3987d62e476564a73a8afc",
+  "retry_count_by_phase": {},
+  "review_history": [
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "reader",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "preliminary_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "data_cleaning",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "indepth_eda",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "feature_engineering",
+      "status": "approved"
+    },
+    {
+      "attempt": 1,
+      "blocking_failures": [],
+      "phase": "model_building",
+      "status": "approved"
+    }
+  ],
+  "run_id": "A1__DEV-REG-HOUSE__F10__F0_ORIGINAL__sb1101",
+  "technical_report_path": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A1__DEV-REG-HOUSE__F10__F0_ORIGINAL__sb1101/artifacts/runs/c00_20261019_141915_62b11dbc/reports/technical_report.md",
+  "wall_seconds": 56.766,
+  "workflow_aborted": false,
+  "workflow_completed": true
+}

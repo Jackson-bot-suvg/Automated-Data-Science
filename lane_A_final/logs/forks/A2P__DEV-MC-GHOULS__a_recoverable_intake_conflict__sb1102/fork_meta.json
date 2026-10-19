@@ -1,0 +1,21 @@
+{
+  "candidate_hash": "99ab551a9f5547502532be5c54a78b40b998785576449504958fea9228111f9d",
+  "contract_digest": "24683f19be41ec4599908b205de5c1323aee9b406cc67af8328109626423dbdf",
+  "fit_seconds_prefix": 0.0,
+  "gate_node": "background_reviewer",
+  "gate_phase": "reader",
+  "injections_applied": [],
+  "llm_calls_prefix": 1,
+  "occurrence": 1,
+  "prefix_run_dir": "/Users/jacksonzhang/Desktop/26S1_CS33-2/lane_A/work/runs/A2P__DEV-MC-GHOULS__a_recoverable_intake_conflict__sb1102",
+  "prefix_run_id": "A2P__DEV-MC-GHOULS__a_recoverable_intake_conflict__sb1102",
+  "remaining_budget": {
+    "llm_call_budget": 60,
+    "llm_calls_used": 1,
+    "max_attempts_per_phase": 3,
+    "retry_count_by_phase": {}
+  },
+  "rng_state_sha256": "20c630e87ab0e081a31a10e9fabaa28300ca7346e7a57451138f5ec81ec6d06f",
+  "state_hash": "728050013e55b37220e4a2a8f149909a0bae695f4cfa3764ce0da486093cbc77",
+  "visible_evidence_hash": "85656caeb4644d8d422d0dde8888f40e315a385b3d14aa1142db49761cf7549f"
+}
