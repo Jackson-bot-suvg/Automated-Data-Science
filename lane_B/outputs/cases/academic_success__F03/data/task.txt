@@ -1,0 +1,1 @@
+predict the value of column 'Marital status'

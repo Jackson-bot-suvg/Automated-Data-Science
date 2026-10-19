@@ -1,0 +1,29 @@
+case_id,dataset_key,template_id,condition,truth_status,target_fault_fields,expected_safe_action,injection_stage
+spaceship_titanic__C00,spaceship_titanic,C00,original clean task (no mutation),clean,,pass,intake
+spaceship_titanic__B02,spaceship_titanic,B02,legal variation: sample-submission column order changed,legal,,pass,intake
+spaceship_titanic__F01,spaceship_titanic,F01,fault: target column(s) removed from train.csv,fault,target_columns,block,intake
+spaceship_titanic__F02,spaceship_titanic,F02,fault: target column(s) leaked into test.csv,fault,target_columns,block,intake
+spaceship_titanic__F03,spaceship_titanic,F03,fault: task text points to the wrong target column,fault,target_columns,block,intake
+spaceship_titanic__F04,spaceship_titanic,F04,fault: sample-submission output column renamed to a wrong name,fault,output_columns,block,intake
+spaceship_titanic__F05,spaceship_titanic,F05,fault: post-intake drift (prediction output columns no longer match the contract),fault,"target_columns,output_columns",block,post_intake
+academic_success__C00,academic_success,C00,original clean task (no mutation),clean,,pass,intake
+academic_success__B02,academic_success,B02,legal variation: sample-submission column order changed,legal,,pass,intake
+academic_success__F01,academic_success,F01,fault: target column(s) removed from train.csv,fault,target_columns,block,intake
+academic_success__F02,academic_success,F02,fault: target column(s) leaked into test.csv,fault,target_columns,block,intake
+academic_success__F03,academic_success,F03,fault: task text points to the wrong target column,fault,target_columns,block,intake
+academic_success__F04,academic_success,F04,fault: sample-submission output column renamed to a wrong name,fault,output_columns,block,intake
+academic_success__F05,academic_success,F05,fault: post-intake drift (prediction output columns no longer match the contract),fault,"target_columns,output_columns",block,post_intake
+house_prices__C00,house_prices,C00,original clean task (no mutation),clean,,pass,intake
+house_prices__B02,house_prices,B02,legal variation: sample-submission column order changed,legal,,pass,intake
+house_prices__F01,house_prices,F01,fault: target column(s) removed from train.csv,fault,target_columns,block,intake
+house_prices__F02,house_prices,F02,fault: target column(s) leaked into test.csv,fault,target_columns,block,intake
+house_prices__F03,house_prices,F03,fault: task text points to the wrong target column,fault,target_columns,block,intake
+house_prices__F04,house_prices,F04,fault: sample-submission output column renamed to a wrong name,fault,output_columns,block,intake
+house_prices__F05,house_prices,F05,fault: post-intake drift (prediction output columns no longer match the contract),fault,"target_columns,output_columns",block,post_intake
+plate_defect__C00,plate_defect,C00,original clean task (no mutation),clean,,pass,intake
+plate_defect__B02,plate_defect,B02,legal variation: sample-submission column order changed,legal,,pass,intake
+plate_defect__F01,plate_defect,F01,fault: target column(s) removed from train.csv,fault,target_columns,block,intake
+plate_defect__F02,plate_defect,F02,fault: target column(s) leaked into test.csv,fault,target_columns,block,intake
+plate_defect__F03,plate_defect,F03,fault: task text points to the wrong target column,fault,target_columns,block,intake
+plate_defect__F04,plate_defect,F04,fault: sample-submission output column renamed to a wrong name,fault,output_columns,block,intake
+plate_defect__F05,plate_defect,F05,fault: post-intake drift (prediction output columns no longer match the contract),fault,"target_columns,output_columns",block,post_intake
